@@ -41,7 +41,9 @@
                             <RowDefinition Height="157*"/>
                         </Grid.RowDefinitions>
                         <Border Background="#FFB8D8FF" Grid.Row="0" CornerRadius="10 30 0 0">
-                            
+                            <TextBlock  Text="KuratorInterface" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Margin="20"/>
+
+
 
                         </Border>
                         <Border Background="#FFB8D8FF" Grid.Row="2" CornerRadius="0 0 10 30">
