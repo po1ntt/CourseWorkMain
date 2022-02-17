@@ -32,6 +32,24 @@
     </Page.Triggers>
     <Grid>
         <Border Background="#FF591C40" BorderThickness="10,10,10,10"  Padding="5" CornerRadius="15">
+            <Grid Margin="10 10 50 10">
+                <Border Background="White" CornerRadius="10 30 10 30">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="67*"/>
+                            <RowDefinition Height="426*"/>
+                            <RowDefinition Height="157*"/>
+                        </Grid.RowDefinitions>
+                        <Border Background="#FFB8D8FF" Grid.Row="0" CornerRadius="10 30 0 0">
+                            
+
+                        </Border>
+                        <Border Background="#FFB8D8FF" Grid.Row="2" CornerRadius="0 0 10 30">
+                            
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
 
 
         </Border>
@@ -67,7 +85,7 @@
                         </StackPanel>
                     </ListViewItem>
                 </ListView >
-   
+
                 <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="White" PreviewMouseLeftButtonDown="Logout">
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
@@ -86,7 +104,7 @@
                 </ListView>
             </StackPanel>
         </Grid>
-        
+
     </Grid>
-    
+
 </Page>
