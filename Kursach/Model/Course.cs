@@ -7,27 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kursach
+namespace Kursach.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Question
+    public partial class Course
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Question()
+        public Course()
         {
-            this.Answers = new HashSet<Answers>();
+            this.CathegoryTests = new HashSet<CathegoryTests>();
+            this.Results = new HashSet<Results>();
         }
     
-        public int id_quest { get; set; }
-        public string text_quest { get; set; }
-        public int id_rightanswer { get; set; }
-        public int id_test { get; set; }
+        public int id_cour { get; set; }
+        public string name_course { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Answers> Answers { get; set; }
-        public virtual Answers Answers1 { get; set; }
-        public virtual Tests Tests { get; set; }
+        public virtual ICollection<CathegoryTests> CathegoryTests { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Results> Results { get; set; }
     }
 }

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Kursach.ObjClas;
 using Kursach.ViewModel;
+using Kursach.Model;
 
 namespace Kursach
 {

@@ -16,6 +16,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using Kursach.ObjClas;
+using Kursach.Model;
 
 
 

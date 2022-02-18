@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using Kursach.ObjClas;
 using Kursach.ViewModel;
+using Kursach.Model;
 
 namespace Kursach.ViewModel
 {

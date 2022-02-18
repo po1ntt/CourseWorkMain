@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
+using Kursach.Model;
 namespace Kursach.ViewModel
 {
      public class User : INotifyPropertyChanged

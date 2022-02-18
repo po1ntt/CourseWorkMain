@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kursach
+namespace Kursach.Model
 {
     using System;
     using System.Data.Entity;
@@ -25,14 +25,14 @@ namespace Kursach
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Results> Results { get; set; }
-        public virtual DbSet<Role> Role { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Answers> Answers { get; set; }
         public virtual DbSet<CathegoryTests> CathegoryTests { get; set; }
         public virtual DbSet<Course> Course { get; set; }
         public virtual DbSet<Question> Question { get; set; }
+        public virtual DbSet<Results> Results { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tests> Tests { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

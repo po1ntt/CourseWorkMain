@@ -16,6 +16,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using Kursach.ObjClas;
+using Kursach.Model;
 
 namespace Kursach
 {
@@ -38,7 +39,7 @@ namespace Kursach
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ObjClas.Frame.FrameOBJ.Navigate(new UserInterface());
+            ObjClas.Frame.FrameOBJ.Navigate(new AuthorizationPage());
         }
 
 

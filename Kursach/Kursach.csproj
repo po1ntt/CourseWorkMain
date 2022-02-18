@@ -74,33 +74,51 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Answers.cs">
+    <Compile Include="Model\Answers.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CathegoryTests.cs">
+    <Compile Include="Model\BaseModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BaseModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Course.cs">
+    <Compile Include="Model\BaseModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CathegoryTests.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Course.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Question.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Results.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Role.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sysdiagrams.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Tests.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Users.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ObjClas\CommandsSqlClass.cs" />
     <Compile Include="Pages\AdminInterface.xaml.cs">
       <DependentUpon>AdminInterface.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="BaseModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BaseModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BaseModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BaseModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BaseModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="ObjClas\DataBaseEntity.cs" />
     <Compile Include="Pages\KuratorInteface.xaml.cs">
@@ -113,32 +131,14 @@
     <Compile Include="Pages\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Question.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Results.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Role.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Pages\SharpTests.xaml.cs">
       <DependentUpon>SharpTests.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Pages\TestForm.xaml.cs">
       <DependentUpon>TestForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\UserInterface.xaml.cs">
       <DependentUpon>UserInterface.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tests.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Users.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AdminViewModel.cs" />
     <Compile Include="ViewModel\User.cs" />
@@ -210,11 +210,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="BaseModel.edmx">
+    <EntityDeploy Include="Model\BaseModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BaseModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="BaseModel.edmx.diagram">
+    <None Include="Model\BaseModel.edmx.diagram">
       <DependentUpon>BaseModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -233,22 +233,23 @@
     <None Include="Resources\ISSLEDOVANIE.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BaseModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BaseModel.Context.cs</LastGenOutput>
-      <DependentUpon>BaseModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="BaseModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BaseModel.edmx</DependentUpon>
-      <LastGenOutput>BaseModel.cs</LastGenOutput>
-    </Content>
     <None Include="Resources\tolstov.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Model\BaseModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BaseModel.edmx</DependentUpon>
+      <LastGenOutput>BaseModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\BaseModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BaseModel.edmx</DependentUpon>
+      <LastGenOutput>BaseModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.3.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.3.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
