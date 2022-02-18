@@ -11,6 +11,20 @@
         <EntityTypeShape EntityType="VictrovinaModel.Users" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="VictrovinaModel.FK_Results_Users1" ManuallyRouted="false" />
         <AssociationConnector Association="VictrovinaModel.FK_Users_Role1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="VictrovinaModel.Answers" Width="1.5" PointX="12.875" PointY="12.75" />
+        <EntityTypeShape EntityType="VictrovinaModel.CathegoryTests" Width="1.5" PointX="11.375" PointY="9.125" />
+        <EntityTypeShape EntityType="VictrovinaModel.Course" Width="1.5" PointX="6.125" PointY="7.375" />
+        <EntityTypeShape EntityType="VictrovinaModel.Question" Width="1.5" PointX="10.625" PointY="1" />
+        <EntityTypeShape EntityType="VictrovinaModel.Tests" Width="1.5" PointX="8.375" PointY="2.125" />
+        <AssociationConnector Association="VictrovinaModel.FK_Answers_Question" />
+        <AssociationConnector Association="VictrovinaModel.FK_Question_Answers" />
+        <AssociationConnector Association="VictrovinaModel.FK_CathegoryTests_Course" />
+        <AssociationConnector Association="VictrovinaModel.FK_Results_CathegoryTests" />
+        <AssociationConnector Association="VictrovinaModel.FK_Tests_CathegoryTests" />
+        <AssociationConnector Association="VictrovinaModel.FK_Results_Course" />
+        <AssociationConnector Association="VictrovinaModel.FK_Question_Tests" />
+        <AssociationConnector Association="VictrovinaModel.FK_Results_Tests" />
+        <AssociationConnector Association="VictrovinaModel.FK_Results_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

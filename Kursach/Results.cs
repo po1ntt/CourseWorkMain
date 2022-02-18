@@ -19,7 +19,16 @@ namespace Kursach
         public Nullable<int> percent_true { get; set; }
         public string NameTest { get; set; }
         public string Cathegory { get; set; }
+        public int user_id { get; set; }
+        public int id_course { get; set; }
+        public int id_cathergory { get; set; }
+        public int id_test { get; set; }
+        public Nullable<int> percent_right_answers { get; set; }
     
         public virtual Users Users { get; set; }
+        public virtual CathegoryTests CathegoryTests { get; set; }
+        public virtual Course Course { get; set; }
+        public virtual Tests Tests { get; set; }
+        public virtual Users Users1 { get; set; }
     }
 }

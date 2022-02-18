@@ -29,5 +29,10 @@ namespace Kursach
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Answers> Answers { get; set; }
+        public virtual DbSet<CathegoryTests> CathegoryTests { get; set; }
+        public virtual DbSet<Course> Course { get; set; }
+        public virtual DbSet<Question> Question { get; set; }
+        public virtual DbSet<Tests> Tests { get; set; }
     }
 }

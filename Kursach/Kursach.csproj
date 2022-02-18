@@ -74,6 +74,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Answers.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CathegoryTests.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Course.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ObjClas\CommandsSqlClass.cs" />
     <Compile Include="Pages\AdminInterface.xaml.cs">
       <DependentUpon>AdminInterface.xaml</DependentUpon>
@@ -104,6 +113,9 @@
     <Compile Include="Pages\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Question.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Results.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
@@ -121,6 +133,9 @@
     </Compile>
     <Compile Include="Pages\UserInterface.xaml.cs">
       <DependentUpon>UserInterface.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tests.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Users.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>

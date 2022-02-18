@@ -4,16 +4,49 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище VictrovinaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище VictrovinaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Answers">
+          <Key>
+            <PropertyRef Name="id_ans" />
+          </Key>
+          <Property Name="id_ans" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="text_ans" Type="nvarchar" MaxLength="50" />
+          <Property Name="quest_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CathegoryTests">
+          <Key>
+            <PropertyRef Name="id_cat" />
+          </Key>
+          <Property Name="id_cat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_cathegory" Type="nvarchar" MaxLength="50" />
+          <Property Name="id_course" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="id_cour" />
+          </Key>
+          <Property Name="id_cour" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_course" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="id_quest" />
+          </Key>
+          <Property Name="id_quest" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="text_quest" Type="nvarchar" MaxLength="50" />
+          <Property Name="id_rightanswer" Type="int" Nullable="false" />
+          <Property Name="id_test" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Results">
           <Key>
             <PropertyRef Name="id_res" />
           </Key>
           <Property Name="id_res" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="users_surname" Type="int" Nullable="false" />
-          <Property Name="percent_true" Type="int" />
-          <Property Name="NameTest" Type="nvarchar" MaxLength="50" />
-          <Property Name="Cathegory" Type="nvarchar" MaxLength="50" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="id_course" Type="int" Nullable="false" />
+          <Property Name="id_cathergory" Type="int" Nullable="false" />
+          <Property Name="id_test" Type="int" Nullable="false" />
+          <Property Name="percent_right_answers" Type="int" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -32,6 +65,14 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="Tests">
+          <Key>
+            <PropertyRef Name="id_t" />
+          </Key>
+          <Property Name="id_t" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_test" Type="nvarchar" MaxLength="50" />
+          <Property Name="id_cathegory" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="id_u" />
@@ -47,7 +88,91 @@
           <Property Name="image" Type="nvarchar" MaxLength="50" />
           <Property Name="id_role" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Results_Users1">
+        <Association Name="FK_Answers_Question">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="id_quest" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="quest_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CathegoryTests_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="CathegoryTests" Type="Self.CathegoryTests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="id_cour" />
+            </Principal>
+            <Dependent Role="CathegoryTests">
+              <PropertyRef Name="id_course" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Question_Answers">
+          <End Role="Answers" Type="Self.Answers" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Answers">
+              <PropertyRef Name="id_ans" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="id_rightanswer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Question_Tests">
+          <End Role="Tests" Type="Self.Tests" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tests">
+              <PropertyRef Name="id_t" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="id_test" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_CathegoryTests">
+          <End Role="CathegoryTests" Type="Self.CathegoryTests" Multiplicity="1" />
+          <End Role="Results" Type="Self.Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CathegoryTests">
+              <PropertyRef Name="id_cat" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="id_cathergory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Results" Type="Self.Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="id_cour" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="id_course" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_Tests">
+          <End Role="Tests" Type="Self.Tests" Multiplicity="1" />
+          <End Role="Results" Type="Self.Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tests">
+              <PropertyRef Name="id_t" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="id_test" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Results" Type="Self.Results" Multiplicity="*" />
           <ReferentialConstraint>
@@ -55,7 +180,19 @@
               <PropertyRef Name="id_u" />
             </Principal>
             <Dependent Role="Results">
-              <PropertyRef Name="users_surname" />
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tests_CathegoryTests">
+          <End Role="CathegoryTests" Type="Self.CathegoryTests" Multiplicity="1" />
+          <End Role="Tests" Type="Self.Tests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CathegoryTests">
+              <PropertyRef Name="id_cat" />
+            </Principal>
+            <Dependent Role="Tests">
+              <PropertyRef Name="id_cathegory" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -72,21 +209,57 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище VictrovinaModelContainer">
+          <EntitySet Name="Answers" EntityType="Self.Answers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CathegoryTests" EntityType="Self.CathegoryTests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Results" EntityType="Self.Results" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tests" EntityType="Self.Tests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Results_Users1" Association="Self.FK_Results_Users1">
+          <AssociationSet Name="FK_Answers_Question" Association="Self.FK_Answers_Question">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CathegoryTests_Course" Association="Self.FK_CathegoryTests_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CathegoryTests" EntitySet="CathegoryTests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_Answers" Association="Self.FK_Question_Answers">
+            <End Role="Answers" EntitySet="Answers" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_Tests" Association="Self.FK_Question_Tests">
+            <End Role="Tests" EntitySet="Tests" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_CathegoryTests" Association="Self.FK_Results_CathegoryTests">
+            <End Role="CathegoryTests" EntitySet="CathegoryTests" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_Course" Association="Self.FK_Results_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_Tests" Association="Self.FK_Results_Tests">
+            <End Role="Tests" EntitySet="Tests" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_Users" Association="Self.FK_Results_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tests_CathegoryTests" Association="Self.FK_Tests_CathegoryTests">
+            <End Role="CathegoryTests" EntitySet="CathegoryTests" />
+            <End Role="Tests" EntitySet="Tests" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_Role1" Association="Self.FK_Users_Role1">
             <End Role="Role" EntitySet="Role" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="VictrovinaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -100,6 +273,15 @@
           <Property Name="NameTest" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Cathegory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Results_Users1" FromRole="Results" ToRole="Users" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="id_course" Type="Int32" Nullable="false" />
+          <Property Name="id_cathergory" Type="Int32" Nullable="false" />
+          <Property Name="id_test" Type="Int32" Nullable="false" />
+          <Property Name="percent_right_answers" Type="Int32" />
+          <NavigationProperty Name="CathegoryTests" Relationship="VictrovinaModel.FK_Results_CathegoryTests" FromRole="Results" ToRole="CathegoryTests" />
+          <NavigationProperty Name="Course" Relationship="VictrovinaModel.FK_Results_Course" FromRole="Results" ToRole="Course" />
+          <NavigationProperty Name="Tests" Relationship="VictrovinaModel.FK_Results_Tests" FromRole="Results" ToRole="Tests" />
+          <NavigationProperty Name="Users1" Relationship="VictrovinaModel.FK_Results_Users" FromRole="Results" ToRole="Users" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -135,6 +317,7 @@
           <Property Name="id_role" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Results" Relationship="Self.FK_Results_Users1" FromRole="Users" ToRole="Results" />
           <NavigationProperty Name="Role" Relationship="Self.FK_Users_Role1" FromRole="Users" ToRole="Role" />
+          <NavigationProperty Name="Results1" Relationship="VictrovinaModel.FK_Results_Users" FromRole="Users" ToRole="Results" />
         </EntityType>
         <Association Name="FK_Results_Users1">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
@@ -173,7 +356,209 @@
             <End Role="Role" EntitySet="Role" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="Answers" EntityType="VictrovinaModel.Answers" />
+          <EntitySet Name="CathegoryTests" EntityType="VictrovinaModel.CathegoryTests" />
+          <EntitySet Name="Course" EntityType="VictrovinaModel.Course" />
+          <EntitySet Name="Question" EntityType="VictrovinaModel.Question" />
+          <EntitySet Name="Tests" EntityType="VictrovinaModel.Tests" />
+          <AssociationSet Name="FK_Answers_Question" Association="VictrovinaModel.FK_Answers_Question">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_Answers" Association="VictrovinaModel.FK_Question_Answers">
+            <End Role="Answers" EntitySet="Answers" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CathegoryTests_Course" Association="VictrovinaModel.FK_CathegoryTests_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CathegoryTests" EntitySet="CathegoryTests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_CathegoryTests" Association="VictrovinaModel.FK_Results_CathegoryTests">
+            <End Role="CathegoryTests" EntitySet="CathegoryTests" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tests_CathegoryTests" Association="VictrovinaModel.FK_Tests_CathegoryTests">
+            <End Role="CathegoryTests" EntitySet="CathegoryTests" />
+            <End Role="Tests" EntitySet="Tests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_Course" Association="VictrovinaModel.FK_Results_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_Tests" Association="VictrovinaModel.FK_Question_Tests">
+            <End Role="Tests" EntitySet="Tests" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_Tests" Association="VictrovinaModel.FK_Results_Tests">
+            <End Role="Tests" EntitySet="Tests" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_Users" Association="VictrovinaModel.FK_Results_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Answers">
+          <Key>
+            <PropertyRef Name="id_ans" />
+          </Key>
+          <Property Name="id_ans" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="text_ans" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="quest_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="VictrovinaModel.FK_Answers_Question" FromRole="Answers" ToRole="Question" />
+          <NavigationProperty Name="Question1" Relationship="VictrovinaModel.FK_Question_Answers" FromRole="Answers" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="CathegoryTests">
+          <Key>
+            <PropertyRef Name="id_cat" />
+          </Key>
+          <Property Name="id_cat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_cathegory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="id_course" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="VictrovinaModel.FK_CathegoryTests_Course" FromRole="CathegoryTests" ToRole="Course" />
+          <NavigationProperty Name="Results" Relationship="VictrovinaModel.FK_Results_CathegoryTests" FromRole="CathegoryTests" ToRole="Results" />
+          <NavigationProperty Name="Tests" Relationship="VictrovinaModel.FK_Tests_CathegoryTests" FromRole="CathegoryTests" ToRole="Tests" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="id_cour" />
+          </Key>
+          <Property Name="id_cour" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_course" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CathegoryTests" Relationship="VictrovinaModel.FK_CathegoryTests_Course" FromRole="Course" ToRole="CathegoryTests" />
+          <NavigationProperty Name="Results" Relationship="VictrovinaModel.FK_Results_Course" FromRole="Course" ToRole="Results" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="id_quest" />
+          </Key>
+          <Property Name="id_quest" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="text_quest" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="id_rightanswer" Type="Int32" Nullable="false" />
+          <Property Name="id_test" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Answers" Relationship="VictrovinaModel.FK_Answers_Question" FromRole="Question" ToRole="Answers" />
+          <NavigationProperty Name="Answers1" Relationship="VictrovinaModel.FK_Question_Answers" FromRole="Question" ToRole="Answers" />
+          <NavigationProperty Name="Tests" Relationship="VictrovinaModel.FK_Question_Tests" FromRole="Question" ToRole="Tests" />
+        </EntityType>
+        <EntityType Name="Tests">
+          <Key>
+            <PropertyRef Name="id_t" />
+          </Key>
+          <Property Name="id_t" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_test" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="id_cathegory" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CathegoryTests" Relationship="VictrovinaModel.FK_Tests_CathegoryTests" FromRole="Tests" ToRole="CathegoryTests" />
+          <NavigationProperty Name="Question" Relationship="VictrovinaModel.FK_Question_Tests" FromRole="Tests" ToRole="Question" />
+          <NavigationProperty Name="Results" Relationship="VictrovinaModel.FK_Results_Tests" FromRole="Tests" ToRole="Results" />
+        </EntityType>
+        <Association Name="FK_Answers_Question">
+          <End Type="VictrovinaModel.Question" Role="Question" Multiplicity="1" />
+          <End Type="VictrovinaModel.Answers" Role="Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="id_quest" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="quest_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Question_Answers">
+          <End Type="VictrovinaModel.Answers" Role="Answers" Multiplicity="1" />
+          <End Type="VictrovinaModel.Question" Role="Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Answers">
+              <PropertyRef Name="id_ans" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="id_rightanswer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CathegoryTests_Course">
+          <End Type="VictrovinaModel.Course" Role="Course" Multiplicity="1" />
+          <End Type="VictrovinaModel.CathegoryTests" Role="CathegoryTests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="id_cour" />
+            </Principal>
+            <Dependent Role="CathegoryTests">
+              <PropertyRef Name="id_course" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_CathegoryTests">
+          <End Type="VictrovinaModel.CathegoryTests" Role="CathegoryTests" Multiplicity="1" />
+          <End Type="VictrovinaModel.Results" Role="Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CathegoryTests">
+              <PropertyRef Name="id_cat" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="id_cathergory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tests_CathegoryTests">
+          <End Type="VictrovinaModel.CathegoryTests" Role="CathegoryTests" Multiplicity="1" />
+          <End Type="VictrovinaModel.Tests" Role="Tests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CathegoryTests">
+              <PropertyRef Name="id_cat" />
+            </Principal>
+            <Dependent Role="Tests">
+              <PropertyRef Name="id_cathegory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_Course">
+          <End Type="VictrovinaModel.Course" Role="Course" Multiplicity="1" />
+          <End Type="VictrovinaModel.Results" Role="Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="id_cour" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="id_course" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Question_Tests">
+          <End Type="VictrovinaModel.Tests" Role="Tests" Multiplicity="1" />
+          <End Type="VictrovinaModel.Question" Role="Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tests">
+              <PropertyRef Name="id_t" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="id_test" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_Tests">
+          <End Type="VictrovinaModel.Tests" Role="Tests" Multiplicity="1" />
+          <End Type="VictrovinaModel.Results" Role="Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tests">
+              <PropertyRef Name="id_t" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="id_test" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_Users">
+          <End Type="VictrovinaModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="VictrovinaModel.Results" Role="Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_u" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -183,12 +568,13 @@
           <EntitySetMapping Name="Results">
             <EntityTypeMapping TypeName="VictrovinaModel.Results">
               <MappingFragment StoreEntitySet="Results">
+                <ScalarProperty Name="percent_right_answers" ColumnName="percent_right_answers" />
+                <ScalarProperty Name="id_test" ColumnName="id_test" />
+                <ScalarProperty Name="id_cathergory" ColumnName="id_cathergory" />
+                <ScalarProperty Name="id_course" ColumnName="id_course" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="id_res" ColumnName="id_res" />
-                <ScalarProperty Name="users_surname" ColumnName="users_surname" />
-                <ScalarProperty Name="percent_true" ColumnName="percent_true" />
-                <ScalarProperty Name="NameTest" ColumnName="NameTest" />
-                <ScalarProperty Name="Cathegory" ColumnName="Cathegory" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
@@ -223,6 +609,51 @@
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="id_role" ColumnName="id_role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Answers">
+            <EntityTypeMapping TypeName="VictrovinaModel.Answers">
+              <MappingFragment StoreEntitySet="Answers">
+                <ScalarProperty Name="quest_id" ColumnName="quest_id" />
+                <ScalarProperty Name="text_ans" ColumnName="text_ans" />
+                <ScalarProperty Name="id_ans" ColumnName="id_ans" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CathegoryTests">
+            <EntityTypeMapping TypeName="VictrovinaModel.CathegoryTests">
+              <MappingFragment StoreEntitySet="CathegoryTests">
+                <ScalarProperty Name="id_course" ColumnName="id_course" />
+                <ScalarProperty Name="name_cathegory" ColumnName="name_cathegory" />
+                <ScalarProperty Name="id_cat" ColumnName="id_cat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Course">
+            <EntityTypeMapping TypeName="VictrovinaModel.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="name_course" ColumnName="name_course" />
+                <ScalarProperty Name="id_cour" ColumnName="id_cour" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Question">
+            <EntityTypeMapping TypeName="VictrovinaModel.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="id_test" ColumnName="id_test" />
+                <ScalarProperty Name="id_rightanswer" ColumnName="id_rightanswer" />
+                <ScalarProperty Name="text_quest" ColumnName="text_quest" />
+                <ScalarProperty Name="id_quest" ColumnName="id_quest" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tests">
+            <EntityTypeMapping TypeName="VictrovinaModel.Tests">
+              <MappingFragment StoreEntitySet="Tests">
+                <ScalarProperty Name="id_cathegory" ColumnName="id_cathegory" />
+                <ScalarProperty Name="name_test" ColumnName="name_test" />
+                <ScalarProperty Name="id_t" ColumnName="id_t" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

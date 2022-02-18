@@ -30,8 +30,25 @@ namespace Kursach
         {
             InitializeComponent();
             log_info = log1_info;
+            customizeDesign();
+
         }
-    
+        private void customizeDesign()
+        {
+            first.Visibility= Visibility.Collapsed;
+            second.Visibility = Visibility.Collapsed;
+            third.Visibility = Visibility.Collapsed;
+        }
+
+        private void showStack(StackPanel name)
+        {
+            if (name.Visibility == Visibility.Collapsed)
+            {
+                name.Visibility = Visibility.Visible;
+            }
+            else
+                name.Visibility = Visibility.Collapsed;
+        }
 
 
 
@@ -100,12 +117,27 @@ namespace Kursach
 
         private void MoveToXamarin(object sender, RoutedEventArgs e)
         {
-            scroll.ScrollToRightEnd();
+            
         }
 
         private void MoveToWpf(object sender, RoutedEventArgs e)
         {
-            scroll.ScrollToLeftEnd();
+            
+        }
+
+        private void vvedenie(object sender, RoutedEventArgs e)
+        {
+            showStack(first);
+        }
+
+        private void test(object sender, RoutedEventArgs e)
+        {
+            showStack(second);
+        }
+
+        private void mvvm(object sender, RoutedEventArgs e)
+        {
+            showStack(third);
         }
     }
 }

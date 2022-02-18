@@ -42,8 +42,8 @@
         <Border  Background="#FF591C40" BorderThickness="10,10,10,10"  Padding="5" CornerRadius="15">
 
             <Grid Margin="22,14,56,20">
-                <ScrollViewer x:Name="scroll" Visibility="Visible" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" Grid.ColumnSpan="2" >
-                    <Border Width="1400" Background="White" CornerRadius="25">
+               
+                    <Border Width="1400" Height="auto" Background="White" CornerRadius="25">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="695*"/>
@@ -52,26 +52,55 @@
 
 
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="107*"/>
-                                <RowDefinition Height="429*"/>
+                                <RowDefinition Height="127*"/>
+                                <RowDefinition Height="419*"/>
+                                <RowDefinition Height="90*"/>
                             </Grid.RowDefinitions>
-                            <Button Click="MoveToXamarin"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="0"  Margin="0 0 20 15" Background="Transparent" Foreground="Black" Width="240" >
+                            <Button Click="MoveToXamarin"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="0"  Margin="0 0 20 15" Background="Transparent" Foreground="Black" Width="240" >
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Переход к xamarin.forms" Margin="5"/>
                                     <materialDesign:PackIcon Kind="ArrowRight" Height="25" Width="25" Margin="10 1 0 0" />
                                 </StackPanel>
                             </Button>
-                            <Button Click="MoveToWpf" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="1"  Margin="20,0,0,15" Background="Transparent" Foreground="Black" Width="173" >
+                            <Button Click="MoveToWpf" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="2"  Margin="20,0,0,15" Background="Transparent" Foreground="Black" Width="173" >
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="ArrowLeft" Height="25" Width="25" Margin="0 1 10 0" />
                                     <TextBlock Text="Переход к wpf" Margin="5"/>
                                 </StackPanel>
                             </Button>
-                            <TextBlock HorizontalAlignment="Left" Grid.Column="0" VerticalAlignment="Center" Text="WPF(C#)" Margin="20,41,0,30" FontSize="30" FontWeight="Bold" Height="36" Width="123" />
-                            <TextBlock HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Center" Text="Xamarin.forms(c#)" Margin="20,41,0,30" FontSize="30" FontWeight="Bold" Height="36" Width="263"  />
+                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" >
+                                <StackPanel Grid.Row="1">
+                                    <Button Click="vvedenie" Content="Введение" FontSize="20" Height="80" Background="Transparent" Foreground="Black" FontWeight="DemiBold">
+
+                                    </Button>
+                                    <StackPanel x:Name="first" Margin="20 0 0 0">
+                                        <Button />
+                                        <Button />
+                                        <Button />
+                                    </StackPanel>
+                                    <Button Click="test" Content="Test" FontSize="20" Height="80" Background="Transparent" Foreground="Black" FontWeight="DemiBold">
+
+                                    </Button>
+                                    <StackPanel x:Name="second" Margin="20 0 0 0">
+                                        <Button />
+                                        <Button />
+                                        <Button />
+                                    </StackPanel>
+                                    <Button Click="mvvm" Content="MVVM" FontSize="20" Height="80" Background="Transparent" Foreground="Black" FontWeight="DemiBold">
+
+                                    </Button>
+                                    <StackPanel x:Name="third" Margin="20 0 0 0">
+                                        <Button />
+                                        <Button />
+                                        <Button />
+                                    </StackPanel>
+                                </StackPanel>
+                            </ScrollViewer>
+                            <TextBlock HorizontalAlignment="Left" Grid.Column="0" VerticalAlignment="Center" Text="WPF(C#)" Margin="20,51,0,40" FontSize="30" FontWeight="Bold" Height="36" Width="123" />
+                            <TextBlock HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Center" Text="Xamarin.forms(c#)" Margin="20,51,0,40" FontSize="30" FontWeight="Bold" Height="36" Width="263"  />
                         </Grid>
                     </Border>
-                </ScrollViewer>
+               
             </Grid>
 
 
