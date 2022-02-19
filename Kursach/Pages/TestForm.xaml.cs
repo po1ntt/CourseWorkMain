@@ -26,5 +26,10 @@ namespace Kursach
         {
             InitializeComponent();
         }
+
+        private void goback(object sender, RoutedEventArgs e)
+        {
+            ObjClas.Frame.FrameOBJ.GoBack();
+        }
     }
 }

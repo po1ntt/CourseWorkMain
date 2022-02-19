@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Kursach"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:Kursach.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AdminViewModel}"
       mc:Ignorable="d" 
       Height="700" Width="800"
       Title="UserInterface" FontFamily="Dosis"
@@ -69,32 +69,9 @@
                                 </StackPanel>
                             </Button>
                             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" >
-                                <StackPanel Grid.Row="1">
-                                    <Button Click="vvedenie" Content="Введение" FontSize="20" Height="80" Background="Transparent" Foreground="Black" FontWeight="DemiBold">
-
-                                    </Button>
-                                    <StackPanel x:Name="first" Margin="20 0 0 0">
-                                        <Button />
-                                        <Button />
-                                        <Button />
-                                    </StackPanel>
-                                    <Button Click="test" Content="Test" FontSize="20" Height="80" Background="Transparent" Foreground="Black" FontWeight="DemiBold">
-
-                                    </Button>
-                                    <StackPanel x:Name="second" Margin="20 0 0 0">
-                                        <Button />
-                                        <Button />
-                                        <Button />
-                                    </StackPanel>
-                                    <Button Click="mvvm" Content="MVVM" FontSize="20" Height="80" Background="Transparent" Foreground="Black" FontWeight="DemiBold">
-
-                                    </Button>
-                                    <StackPanel x:Name="third" Margin="20 0 0 0">
-                                        <Button />
-                                        <Button />
-                                        <Button />
-                                    </StackPanel>
-                                </StackPanel>
+                            <StackPanel Grid.Row="1" x:Name="stack">
+                                
+                            </StackPanel>
                             </ScrollViewer>
                             <TextBlock HorizontalAlignment="Left" Grid.Column="0" VerticalAlignment="Center" Text="WPF(C#)" Margin="20,51,0,40" FontSize="30" FontWeight="Bold" Height="36" Width="123" />
                             <TextBlock HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Center" Text="Xamarin.forms(c#)" Margin="20,51,0,40" FontSize="30" FontWeight="Bold" Height="36" Width="263"  />

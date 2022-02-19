@@ -43,5 +43,21 @@ namespace Kursach.ViewModel
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+
+        protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
+        {
+            if (!Equals(field, newValue))
+            {
+                field = newValue;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                return true;
+            }
+
+            return false;
+        }
+
+        private object userInterfaceViewModelcs;
+
+        public object UserInterfaceViewModelcs { get => userInterfaceViewModelcs; set => SetProperty(ref userInterfaceViewModelcs, value); }
     }
 }
