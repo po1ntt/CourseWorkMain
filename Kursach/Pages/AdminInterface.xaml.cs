@@ -68,8 +68,8 @@ namespace Kursach
             if (txbLogin.Text == "")
                 MessageBox.Show("Выберите пользователя!");
             VictrovinaEntities context = new VictrovinaEntities();
-            var user =  context.Users.Where(x => x.login == txbLogin.Text).FirstOrDefault();
-            if(user.id_role == 2)
+            var user = context.Users.Where(x => x.login == txbLogin.Text).FirstOrDefault();
+            if (user.id_role == 2 && user != null)
             {
                 MessageBox.Show("У пользователя уже роль куратора");
             }

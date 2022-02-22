@@ -93,26 +93,26 @@
                             <TextBlock Text="AdminInterface" Grid.Row="0" Foreground="Black" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 10 25 0" FontSize="30" FontWeight="Medium"/>
                         </StackPanel>
                         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-                            <DataGrid x:Name="dgdata" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" IsReadOnly="True" AutoGenerateColumns="False">
+                            <DataGrid x:Name="dgdata" ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedUser, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Login" Width="150*"
-                                                        Binding="{Binding Path=login}">
+                                                        Binding="{Binding Path=login, UpdateSourceTrigger=PropertyChanged}">
                                         
                                     </DataGridTextColumn>
                                     <DataGridTextColumn Header="Name" Width="170*"
-                                                        Binding="{Binding Path=name}">
+                                                        Binding="{Binding Path=name, UpdateSourceTrigger=PropertyChanged}">
 
                                     </DataGridTextColumn>
                                     <DataGridTextColumn Header="Surname" Width="170*"
-                                                        Binding="{Binding Path=surname}">
+                                                        Binding="{Binding Path=surname, UpdateSourceTrigger=PropertyChanged}">
 
                                     </DataGridTextColumn>
                                     <DataGridTextColumn Header="Role" Width="170*"
-                                                        Binding="{Binding Path=id_role}">
+                                                        Binding="{Binding Path=id_role, UpdateSourceTrigger=PropertyChanged}">
 
                                     </DataGridTextColumn>
                                     <DataGridTextColumn Header="Email" Width="170*"
-                                                        Binding="{Binding Path=mail}">
+                                                        Binding="{Binding Path=mail, UpdateSourceTrigger=PropertyChanged}">
 
                                     </DataGridTextColumn>
                                 </DataGrid.Columns>

@@ -8,14 +8,17 @@
       Height="312"
       Width="530" 
       Title="AuthorizationPage" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      
+      ShowsNavigationUI="False"
+      Background="Transparent"
+     
+    
       
       >
 
 
-    <Grid>
+    <Grid >
 
-        <Border Background="#FF591C40" BorderBrush="White" BorderThickness="3"  Padding="5" CornerRadius="15" Margin="90,0,0,0">
+        <Border Background="#FF591C40" BorderBrush="White" BorderThickness="3"  Padding="5" CornerRadius="15" Margin="0,0,0,0">
 
             <Grid>
                 <Grid.RowDefinitions>
