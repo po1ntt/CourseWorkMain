@@ -32,7 +32,7 @@
         </EventTrigger>
     </Page.Triggers>
     <Grid >
-        <Border Background="#FF591C40" BorderThickness="10,10,10,10"  Padding="5" CornerRadius="15">
+        <Border  Background="#FF591C40" BorderBrush="Transparent" CornerRadius="10 0 0 10">
             <Grid x:Name="allgrid" Margin="20 20 50 20">
                 <Border Background="FloralWhite" CornerRadius="10 30 10 30">
                     <Grid>

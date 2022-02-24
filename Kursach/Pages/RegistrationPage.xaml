@@ -14,9 +14,9 @@
             <RowDefinition Height="617*"/>
             <RowDefinition Height="83*"/>
         </Grid.RowDefinitions>
-        <Border Background="#FF591C40" BorderThickness="10,10,10,10"  Padding="5" CornerRadius="15" Grid.RowSpan="2">
+        <Border  Background="#FF591C40" BorderBrush="Transparent" CornerRadius="10 10 10 10">
 
-            <Grid Margin="10 10 10 10">
+            <Grid Margin="10,10,0,10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="9*"/>
                     <RowDefinition/>
@@ -33,7 +33,7 @@
                             </Grid.RowDefinitions>
                            
                             <Grid Grid.Row="0">
-                                <Border Background="#FFB8D8FF" CornerRadius="10 30 0 0">
+                                <Border Background="#FFFFE8BA" CornerRadius="10 30 0 0">
                                     <Grid>
                                         <TextBlock  Text="Registration" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" TextDecorations="Underline"  Height="40" Width="159" />
                                         <Button HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Black" Content="Назад" Background="Transparent" Margin="0 10 10 0" Click="BACK_BUTT" BorderBrush="#FF5200E4"/>
@@ -41,7 +41,7 @@
                                 </Border>
                             </Grid>
                             <Grid Grid.Row="2">
-                                <Border Background="#FFB8D8FF" CornerRadius="0 0 10 30">
+                                <Border Background="#FFFFE8BA" CornerRadius="0 0 10 30">
                                     <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Content="Завершить регистрацию" Background="Transparent" Margin="0 0 0 0" Click="Reg_BUT"/>
                                 </Border>
                             </Grid>

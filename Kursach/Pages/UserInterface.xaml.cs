@@ -32,7 +32,7 @@ namespace Kursach
             VictrovinaEntities context = new VictrovinaEntities();
             InitializeComponent();
             log_info = log1_info;
-            DataContext = new UserInterfaceViewModelcs();
+            DataContext = new  UserInterfaceViewModelcs();
             var cathegory = context.CathegoryTests.ToArray();
             int i = 0;
             int id = 1;

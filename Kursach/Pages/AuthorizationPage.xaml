@@ -18,21 +18,21 @@
 
     <Grid >
 
-        <Border Background="#FF591C40" BorderBrush="White" BorderThickness="3"  Padding="5" CornerRadius="15" Margin="0,0,0,0">
+        <Border Background="#FF591C40" BorderBrush="White" BorderThickness="3"  Padding="5" CornerRadius="15" Margin="0,-66,0,-55">
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="11*"/>
-                    <RowDefinition Height="84*"/>
+                    <RowDefinition Height="124*"/>
+                    <RowDefinition Height="293*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Foreground="FloralWhite" Text="Викторина" FontSize="30" FontWeight="Medium" Margin="0 0 0 10" Height="45" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0"/>
-                <Button HorizontalAlignment="Right" VerticalAlignment="Center" Style="{DynamicResource MaterialDesignIconButton}" Click="exit">
+                <TextBlock Foreground="FloralWhite" Text="Викторина" FontSize="30" FontWeight="Medium"  Height="44" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="0" Width="152"/>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Top" Style="{DynamicResource MaterialDesignIconButton}" Click="exit" >
                     <materialDesign:PackIcon Kind="ExitToApp" Foreground="FloralWhite"/>
                 </Button>
-                <Button HorizontalAlignment="Right" Margin="10 0 30 0" VerticalAlignment="Center" Style="{DynamicResource MaterialDesignIconButton}" Click="svernut">
+                <Button HorizontalAlignment="Right" Margin="0 0 40 0"  VerticalAlignment="Top" Style="{DynamicResource MaterialDesignIconButton}" Click="svernut">
                     <materialDesign:PackIcon Kind="Minus" Foreground="FloralWhite"/>
                 </Button>
-                <StackPanel Orientation="Horizontal" Grid.Row="1" Width="300" Height="50" VerticalAlignment="Top" >
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Height="50" VerticalAlignment="Top" Margin="107,0" >
                     <TextBox x:Name="txbLogin" BorderBrush="FloralWhite" Foreground="FloralWhite" Opacity="1" materialDesign:HintAssist.Hint="Логин" Style="{DynamicResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Center"  VerticalAlignment="top" Width="235" Height="38" Margin="20 0 0 0"/>
                     <materialDesign:PackIcon Kind="Account"
                                              Foreground="FloralWhite"
@@ -42,7 +42,7 @@
                                              Width="35"
                                              Margin="7 8 0 0"/>
                 </StackPanel>
-                <StackPanel  Orientation="Horizontal" Grid.Row="1" Width="300" Height="50" VerticalAlignment="Top" Margin="50" >
+                <StackPanel  Orientation="Horizontal" Grid.Row="1" Height="50" VerticalAlignment="Top" Margin="107,50,107,0" >
                     <PasswordBox x:Name="psbPassword" BorderBrush="FloralWhite" Foreground="White" materialDesign:HintAssist.Hint="Пароль" Style="{DynamicResource MaterialDesignFloatingHintPasswordBox}" HorizontalAlignment="Center"  VerticalAlignment="top" Width="235" Height="38" Margin="20 0 0 0" />
                     <materialDesign:PackIcon Kind="FormTextboxPassword"
                                              Foreground="FloralWhite"
@@ -52,7 +52,7 @@
                                              Width="35"
                                              Margin="7 8 0 0"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Grid.Row="1" Width="300" Height="50" VerticalAlignment="Top" Margin="0 100 0 0">
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Height="50" VerticalAlignment="Top" Margin="107,100,107,0">
                     <Button BorderBrush="FloralWhite" Background="Transparent" Content="Войти" HorizontalAlignment="Left" Margin="22 0 0 0" VerticalAlignment="Center" Width="74"  Click="Log_Click" />
                     <Button  BorderBrush="FloralWhite" Content="Регистрация" HorizontalAlignment="Center" Margin="90 0 0 0" VerticalAlignment="Center" Width="113" Background="Transparent" Click="reg_click"/>
                 </StackPanel>
