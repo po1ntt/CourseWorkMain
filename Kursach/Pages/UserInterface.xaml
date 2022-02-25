@@ -41,7 +41,7 @@
 
         <Border  Background="#FF591C40" BorderBrush="Transparent" CornerRadius="10 0 0 10">
 
-            <Grid Margin="22,14,56,20">
+            <Grid Margin="10 10 60 10" Width="700" >
 
                 <Border Height="auto" Background="White" CornerRadius="25" Margin="0 0 0 0">
                     <Grid>
@@ -49,26 +49,25 @@
 
 
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="127*"/>
-                            <RowDefinition Height="419*"/>
-                            <RowDefinition Height="90*"/>
+                            <RowDefinition Height="55*"/>
+                            <RowDefinition Height="611*"/>
                         </Grid.RowDefinitions>
 
 
 
 
-                        <StackPanel Grid.Row="1" x:Name="stack">
+                        <StackPanel Grid.Row="1" x:Name="stack" DataContext="{Binding }">
 
                         </StackPanel>
                         <StackPanel Grid.Row="0">
-                            <TextBlock HorizontalAlignment="Center"  VerticalAlignment="Center" Text="WPF(C#)" Margin="0" FontSize="30" FontWeight="Bold" Height="36" Width="123" />
-                            <DockPanel VerticalAlignment="Bottom"  Width="750" Margin="0 65 0 0" >
-                                <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="375" Content="WPF(C#)" Background="Transparent" BorderBrush="Black" Foreground="#FF6A72C5" FontWeight="DemiBold"  BorderThickness="0 4 4 0"/>
-                                <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="375" Content="Xamarin.Forms" Background="Transparent" BorderBrush="Black" Foreground="Black" FontWeight="DemiBold"  BorderThickness="0 4 4 0" />
+
+                            <DockPanel VerticalAlignment="Top" >
+                                <Button VerticalAlignment="Top" Height="55" HorizontalAlignment="Left" Width="350" Content="WPF(C#)" Background="Transparent" BorderBrush="Black" Foreground="#FF6A72C5" FontWeight="DemiBold" Margin="0"  BorderThickness="0 0 0 4"/>
+                                <Button VerticalAlignment="Top" Height="55" HorizontalAlignment="Right" Width="350" Content="Xamarin.Forms" Background="Transparent" BorderBrush="Black" Foreground="Black" FontWeight="DemiBold"   BorderThickness="0 0 0 4" />
                             </DockPanel>
-                            
+
                         </StackPanel>
-                      
+
                     </Grid>
                 </Border>
 

@@ -46,7 +46,7 @@ namespace Kursach
             if(user != null)
             {
                 if (user.id_role == 1)
-                    ObjClas.Frame.FrameOBJ.Navigate(new UserInterface(txbLogin.Text));
+                     ObjClas.Frame.FrameOBJ.Navigate(new UserInterface(txbLogin.Text));
                 if (user.id_role == 2)
                     ObjClas.Frame.FrameOBJ.Navigate(new KuratorInteface(txbLogin.Text));
                 if (user.id_role == 3)
@@ -61,7 +61,7 @@ namespace Kursach
             }
 
         }
-
+       
         private void exit(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();

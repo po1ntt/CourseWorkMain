@@ -1,22 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Collections.ObjectModel;
-using Kursach.ObjClas;
-using Kursach.ViewModel;
 using Kursach.Model;
+using System.Windows;
+using System;
 
 namespace Kursach.ViewModel
 {
-    public class AdminViewModel : INotifyPropertyChanged
+    public class AdminViewModel : DependencyObject
     {
-        private Users selecteduser;
+        VictrovinaEntities context = new VictrovinaEntities();
 
-        public List<Users> Users { get; set; }
+        private Users selecteduser;
+        private static string filtertext;
+        
+
+        public static Users[] GetUsers()
+        {
+            VictrovinaEntities context = new VictrovinaEntities();
+            var result = context.Users.ToArray();
+            return result;
+        }
 
         public Users SelectedUser
         {
@@ -33,10 +38,62 @@ namespace Kursach.ViewModel
         {
 
             VictrovinaEntities context = new VictrovinaEntities();
-            Users = context.Users.Where(x=> x.id_role !=3).ToList();
-            
+            UsersList = GetUsers().ToList();
+            UsersList.FindAll(FilterUsers);
         }
-     
+
+
+        public  string FilterText
+        {
+            get { return filtertext; }
+            set
+            {
+                filtertext = value;
+                OnPropertyChanged("FilterText");
+            }
+        }
+
+        // Using a DependencyProperty as the backing store for FilterText.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FilterTextProperty =
+            DependencyProperty.Register("FilterText", typeof(string), typeof(AdminViewModel), new PropertyMetadata("", Filtertext_changed));
+
+
+        private static void Filtertext_changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var current = d as AdminViewModel;
+            if (current != null)
+            {
+                current.UsersList.FindAll(null);
+                current.UsersList.FindAll(FilterUsers);
+            }
+        }
+
+
+        public List<Users> UsersList
+        {
+            get { return (List<Users>)GetValue(MyPropertyProperty); }
+            set { SetValue(MyPropertyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MyPropertyProperty =
+            DependencyProperty.Register("UsersList", typeof(List<Users>), typeof(AdminViewModel), new PropertyMetadata(null));
+
+
+        private static bool FilterUsers(object obj)
+        {
+            bool result = true;
+            Users current = obj as Users;
+            if(!string.IsNullOrWhiteSpace(filtertext) && current!=null && !current.login.Contains(filtertext))
+            {
+               result = false;
+            }
+            return result;
+        }
+
+
+
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
@@ -44,20 +101,9 @@ namespace Kursach.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
-        protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
-        {
-            if (!Equals(field, newValue))
-            {
-                field = newValue;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-                return true;
-            }
+     
 
-            return false;
-        }
+       
 
-        private object userInterfaceViewModelcs;
-
-        public object UserInterfaceViewModelcs { get => userInterfaceViewModelcs; set => SetProperty(ref userInterfaceViewModelcs, value); }
     }
 }

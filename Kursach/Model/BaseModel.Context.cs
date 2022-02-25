@@ -16,7 +16,7 @@ namespace Kursach.Model
     public partial class VictrovinaEntities : DbContext
     {
         public VictrovinaEntities()
-            : base("name=VictrovinaEntities")
+            : base("VictrovinaEntities")
         {
         }
     

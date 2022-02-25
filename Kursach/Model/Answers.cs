@@ -22,7 +22,7 @@ namespace Kursach.Model
     
         public int id_ans { get; set; }
         public string text_ans { get; set; }
-        public int quest_id { get; set; }
+        public Nullable<int> quest_id { get; set; }
     
         public virtual Question Question { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

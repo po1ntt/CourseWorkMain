@@ -4,11 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Kursach"
+      xmlns:vm="clr-namespace:Kursach.ViewModel"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Kursach.AdminInterface"
       mc:Ignorable="d" 
       Height="700" 
       Width="1000"
       Title="AdminInterface">
+   
     <Page.Resources>
         <Storyboard x:Key="MenuOpen">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
@@ -31,6 +33,7 @@
             <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
         </EventTrigger>
     </Page.Triggers>
+
     <Grid >
         <Border  Background="#FF591C40" BorderBrush="Transparent" CornerRadius="10 0 0 10">
             <Grid x:Name="allgrid" Margin="20 20 50 20">
@@ -66,7 +69,7 @@
                                     <TextBox materialDesign:HintAssist.Hint="Номер телефона" Width="200" materialDesign:HintAssist.IsFloating="True" FontSize="18" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Margin="20 30 0 0" BorderThickness="2 2 2 2" IsEnabled="False" Text="{Binding phone, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                                 <StackPanel Grid.Column = "1" Grid.Row="1">
-                                    <Button x:Name="btnKurator" Margin="0 20 0 10" Click="RoleKurator_Click">
+                                    <Button x:Name="btnKurator" Margin="0 20 0 10" Command="{Binding Updatecommand}">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock  Text="Выдать роль куратора" FontSize="16"/>
                                             <materialDesign:PackIcon Kind="Teaching" Width="30" Height="30" Margin="10 0 0 0"/>
@@ -89,11 +92,13 @@
 
                             </Grid>
                         </Border>
-                        <StackPanel Grid.Row="0">
-                            <TextBlock Text="AdminInterface" Grid.Row="0" Foreground="Black" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 10 25 0" FontSize="30" FontWeight="Medium"/>
-                        </StackPanel>
+
+                        <TextBox Margin="30 0 0 0" Text="{Binding FilterText}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Width="300" materialDesign:HintAssist.Hint="Ввидете фильтр" FontSize="20"/>
+                            <TextBlock Text="AdminInterface" Grid.Row="0" HorizontalAlignment="Right" Foreground="Black"  VerticalAlignment="Center" Margin="0 10 25 0" FontSize="30" FontWeight="Medium"/>
+                            
+                 
                         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-                            <DataGrid x:Name="dgdata" ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedUser, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False">
+                            <DataGrid x:Name="dgdata" ItemsSource="{Binding UsersList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedUser, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Login" Width="150*"
                                                         Binding="{Binding Path=login, UpdateSourceTrigger=PropertyChanged}">

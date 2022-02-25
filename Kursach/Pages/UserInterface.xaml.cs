@@ -26,6 +26,7 @@ namespace Kursach
     /// </summary>
     public partial class UserInterface : Page
     {
+        
         public static string log_info { get; set; }
         public UserInterface(string log1_info = "")
         {
@@ -37,6 +38,7 @@ namespace Kursach
             int i = 0;
             int id = 1;
             int d = 0;
+            
            
           
             while (i < cathegory.Length) 
@@ -45,9 +47,11 @@ namespace Kursach
                 var cathegory1 = context.CathegoryTests.Where(x => x.id_cat == id).FirstOrDefault();
                 Button NameTest = new Button();
                 NameTest.Background = Brushes.Transparent;
-               
+                NameTest.Name = $"button{id}";
+              
                 NameTest.Content = $"{cathegory1.name_cathegory}";
                 NameTest.Foreground = Brushes.Black;
+                NameTest.Click += new RoutedEventHandler(this.submenycloseandop);
                 stack.Children.Add(NameTest);
                 var tests = context.Tests.Where(x => x.id_cathegory == id).FirstOrDefault();
                 if (tests != null)
@@ -56,6 +60,7 @@ namespace Kursach
                     var test2 = context.Tests.Where(x => x.id_cathegory == id).ToArray();
                     while (d < test2.Length)
                     {
+                       
                         var tests3 = context.Tests.Where(x => x.id_t == k).FirstOrDefault();
                         submenu.Margin = new Thickness(20, 0, 0, 0);
                         submenu.Name = $"submenu{id}";
@@ -84,7 +89,18 @@ namespace Kursach
         {
             ObjClas.Frame.FrameOBJ.Navigate(new TestForm());
         }
+        private void submenycloseandop(object sender, RoutedEventArgs e)
+        {
+            
+            string sourceName = ((FrameworkElement)e.Source).Name;
+            if(sourceName == "button1")
+            {
+              
+            }
+        }
       
+
+
         private void showStack(StackPanel name)
         {
             if (name.Visibility == Visibility.Collapsed)

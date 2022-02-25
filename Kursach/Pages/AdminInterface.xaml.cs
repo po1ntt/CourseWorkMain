@@ -26,8 +26,9 @@ namespace Kursach
         public static string log_info { get; set; }
         public AdminInterface(string log1_info = "")
         {
-            VictrovinaEntities context = new VictrovinaEntities();
+            
             InitializeComponent();
+            VictrovinaEntities context = new VictrovinaEntities();
             log_info = log1_info;
             DataContext = new AdminViewModel();
             var user = context.Users.Where(x => x.login == txbLogin.Text).FirstOrDefault();
@@ -63,24 +64,7 @@ namespace Kursach
 
         }
 
-        private void RoleKurator_Click(object sender, RoutedEventArgs e)
-        {
-            if (txbLogin.Text == "")
-                MessageBox.Show("Выберите пользователя!");
-            VictrovinaEntities context = new VictrovinaEntities();
-            var user = context.Users.Where(x => x.login == txbLogin.Text).FirstOrDefault();
-            if (user.id_role == 2 && user != null)
-            {
-                MessageBox.Show("У пользователя уже роль куратора");
-            }
-            else
-            {
-                user.id_role = 2;
-                context.SaveChanges();
-                
-                MessageBox.Show("успех!");
-            }
-        }
+
 
         private void btnStud_Click(object sender, RoutedEventArgs e)
         {

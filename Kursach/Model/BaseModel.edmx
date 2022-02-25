@@ -11,7 +11,7 @@
           </Key>
           <Property Name="id_ans" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="text_ans" Type="nvarchar" MaxLength="50" />
-          <Property Name="quest_id" Type="int" Nullable="false" />
+          <Property Name="quest_id" Type="int" />
         </EntityType>
         <EntityType Name="CathegoryTests">
           <Key>
@@ -32,7 +32,7 @@
           <Key>
             <PropertyRef Name="id_quest" />
           </Key>
-          <Property Name="id_quest" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_quest" Type="int" Nullable="false" />
           <Property Name="text_quest" Type="nvarchar" MaxLength="50" />
           <Property Name="id_rightanswer" Type="int" Nullable="false" />
           <Property Name="id_test" Type="int" Nullable="false" />
@@ -69,7 +69,7 @@
           <Key>
             <PropertyRef Name="id_t" />
           </Key>
-          <Property Name="id_t" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_t" Type="int" Nullable="false" />
           <Property Name="name_test" Type="nvarchar" MaxLength="50" />
           <Property Name="id_cathegory" Type="int" Nullable="false" />
         </EntityType>
@@ -89,7 +89,7 @@
           <Property Name="id_role" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Answers_Question">
-          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="0..1" />
           <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Question">
@@ -270,7 +270,7 @@
           </Key>
           <Property Name="id_ans" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="text_ans" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="quest_id" Type="Int32" Nullable="false" />
+          <Property Name="quest_id" Type="Int32" />
           <NavigationProperty Name="Question" Relationship="Self.FK_Answers_Question" FromRole="Answers" ToRole="Question" />
           <NavigationProperty Name="Question1" Relationship="Self.FK_Question_Answers" FromRole="Answers" ToRole="Question" />
         </EntityType>
@@ -298,7 +298,7 @@
           <Key>
             <PropertyRef Name="id_quest" />
           </Key>
-          <Property Name="id_quest" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_quest" Type="Int32" Nullable="false" />
           <Property Name="text_quest" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="id_rightanswer" Type="Int32" Nullable="false" />
           <Property Name="id_test" Type="Int32" Nullable="false" />
@@ -343,7 +343,7 @@
           <Key>
             <PropertyRef Name="id_t" />
           </Key>
-          <Property Name="id_t" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_t" Type="Int32" Nullable="false" />
           <Property Name="name_test" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="id_cathegory" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CathegoryTests" Relationship="Self.FK_Tests_CathegoryTests" FromRole="Tests" ToRole="CathegoryTests" />
@@ -368,7 +368,7 @@
           <NavigationProperty Name="Role" Relationship="Self.FK_Users_Role1" FromRole="Users" ToRole="Role" />
         </EntityType>
         <Association Name="FK_Answers_Question">
-          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="0..1" />
           <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Question">

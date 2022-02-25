@@ -64,6 +64,16 @@ namespace Kursach.ViewModel
 
             }
         }
+        public int id_role
+        {
+            get { return UserSel.id_role; }
+            set
+            {
+                UserSel.id_role = value;
+                OnPropertyChanged("Id_role");
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {

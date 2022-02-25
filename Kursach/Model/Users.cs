@@ -30,7 +30,7 @@ namespace Kursach.Model
         public string name { get; set; }
         public string image { get; set; }
         public int id_role { get; set; }
-    
+     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Results> Results { get; set; }
         public virtual Role Role { get; set; }
