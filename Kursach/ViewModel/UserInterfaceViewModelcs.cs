@@ -22,14 +22,7 @@ namespace Kursach.ViewModel
         
         public UserInterfaceViewModelcs()
         {
-            Button NameTest = new Button();
-            NameTest.Background = System.Windows.Media.Brushes.Transparent;
-            NameTest.Content = "Введение";
-            NameTest.Foreground = System.Windows.Media.Brushes.Black;
-            StackPanel submenu = new StackPanel();
-            submenu.Margin = new Thickness(20,0,0,0);
-            Button Chose = new Button();
-            submenu.Children.Add(Chose);
+           
         }
         protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
         {

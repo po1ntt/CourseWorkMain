@@ -121,6 +121,9 @@
       <DependentUpon>AdminInterface.xaml</DependentUpon>
     </Compile>
     <Compile Include="ObjClas\DataBaseEntity.cs" />
+    <Compile Include="Pages\EditUserWindowForAdmin.xaml.cs">
+      <DependentUpon>EditUserWindowForAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\KuratorInteface.xaml.cs">
       <DependentUpon>KuratorInteface.xaml</DependentUpon>
     </Compile>
@@ -150,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AuthorizationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EditUserWindowForAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

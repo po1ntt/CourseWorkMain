@@ -10,26 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Kursach.ObjClas;
-using Kursach.Model;
 
 namespace Kursach.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для TestForm.xaml
+    /// Логика взаимодействия для EditUserWindowForAdmin.xaml
     /// </summary>
-    public partial class TestForm : Page
+    public partial class EditUserWindowForAdmin : Window
     {
-        public TestForm()
+        public EditUserWindowForAdmin()
         {
             InitializeComponent();
-        }
-
-        private void goback(object sender, RoutedEventArgs e)
-        {
-            ObjClas.Frame.FrameOBJ.GoBack();
         }
     }
 }

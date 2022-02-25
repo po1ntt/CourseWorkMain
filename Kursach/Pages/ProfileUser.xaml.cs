@@ -20,7 +20,7 @@ using Kursach.Model;
 
 
 
-namespace Kursach
+namespace Kursach.Pages
 {
     /// <summary>
     /// Логика взаимодействия для ProfileUser.xaml

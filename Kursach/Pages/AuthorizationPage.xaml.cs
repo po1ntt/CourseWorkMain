@@ -19,7 +19,7 @@ using Kursach.ObjClas;
 using System.Configuration;
 using Kursach.Model;
 
-namespace Kursach
+namespace Kursach.Pages
 {
     /// <summary>
     /// Логика взаимодействия для AuthorizationPage.xaml

@@ -19,7 +19,7 @@ using Kursach.ViewModel;
 
 
 
-namespace Kursach
+namespace Kursach.Pages
 {
     /// <summary>
     /// Логика взаимодействия для UserInterface.xaml

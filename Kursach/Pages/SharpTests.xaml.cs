@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using Kursach.ObjClas;
 using Kursach.Model;
 
-namespace Kursach
+namespace Kursach.Pages
 {
     /// <summary>
     /// Логика взаимодействия для SharpTests.xaml

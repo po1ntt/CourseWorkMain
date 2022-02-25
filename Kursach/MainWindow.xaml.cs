@@ -17,6 +17,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using Kursach.ObjClas;
 using Kursach.Model;
+using Kursach.Pages;
 
 namespace Kursach
 {

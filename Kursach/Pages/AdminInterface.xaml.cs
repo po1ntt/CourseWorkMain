@@ -16,13 +16,14 @@ using Kursach.ObjClas;
 using Kursach.ViewModel;
 using Kursach.Model;
 
-namespace Kursach
+namespace Kursach.Pages
 {
     /// <summary>
     /// Логика взаимодействия для AdminInterface.xaml
     /// </summary>
     public partial class AdminInterface : Page
     {
+        public static ListView UserListst;
         public static string log_info { get; set; }
         public AdminInterface(string log1_info = "")
         {
@@ -31,6 +32,7 @@ namespace Kursach
             VictrovinaEntities context = new VictrovinaEntities();
             log_info = log1_info;
             DataContext = new AdminViewModel();
+            UserListst = dgdata;
             var user = context.Users.Where(x => x.login == txbLogin.Text).FirstOrDefault();
           
         }

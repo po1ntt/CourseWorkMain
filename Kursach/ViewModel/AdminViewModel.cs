@@ -5,31 +5,45 @@ using System.Runtime.CompilerServices;
 using Kursach.Model;
 using System.Windows;
 using System;
+using System.Windows.Input;
+using Kursach.ObjClas;
+using Kursach.Pages;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Kursach.ViewModel
 {
-    public class AdminViewModel : DependencyObject
+    public class AdminViewModel :INotifyPropertyChanged
     {
-        VictrovinaEntities context = new VictrovinaEntities();
+
+        // свойства для пользователя
+
+        public string Phone { get; set; }
+        public string Mail { get; set; }
+        public Nullable<System.DateTime> Birthday { get; set; }
+        public string Surname { get; set; }
+        public string Name { get; set; }
+        public int Id_role { get; set; }
 
         private Users selecteduser;
-        private static string filtertext;
-        
 
-        public static Users[] GetUsers()
+        public List<Users> userList = CommandsSqlClass.getallusers();
+        public List<Users> UserList
         {
-            VictrovinaEntities context = new VictrovinaEntities();
-            var result = context.Users.ToArray();
-            return result;
+            get { return userList; }
+            set
+            {
+                userList = value;
+                NotifyPropertyChanged("UserList");
+            }
         }
-
         public Users SelectedUser
         {
             get { return selecteduser; }
             set
             {
                 selecteduser = value;
-                OnPropertyChanged("SelectedUser");
+                NotifyPropertyChanged("SelectedUser");
 
             }
 
@@ -37,73 +51,77 @@ namespace Kursach.ViewModel
         public AdminViewModel()
         {
 
-            VictrovinaEntities context = new VictrovinaEntities();
-            UsersList = GetUsers().ToList();
-            UsersList.FindAll(FilterUsers);
+            
+            
+          
         }
-
-
-        public  string FilterText
+        private RelayCommand openDeleteUser;
+        public RelayCommand OpenDeleteUser
         {
-            get { return filtertext; }
-            set
+            get
             {
-                filtertext = value;
-                OnPropertyChanged("FilterText");
+                return openDeleteUser ?? new RelayCommand(obj =>
+                {
+                    OpenDeletePosWindow();
+                }
+                );
+
             }
         }
-
-        // Using a DependencyProperty as the backing store for FilterText.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty FilterTextProperty =
-            DependencyProperty.Register("FilterText", typeof(string), typeof(AdminViewModel), new PropertyMetadata("", Filtertext_changed));
-
-
-        private static void Filtertext_changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private RelayCommand openEditRole;
+        public RelayCommand OpenEditRole
         {
-            var current = d as AdminViewModel;
-            if (current != null)
+            get
             {
-                current.UsersList.FindAll(null);
-                current.UsersList.FindAll(FilterUsers);
+                return openDeleteUser ?? new RelayCommand(obj =>
+                {
+                   OpenEditRolePosWindow();
+                }
+                );
+
             }
         }
-
-
-        public List<Users> UsersList
+        private void SetRedBlockControll(Window wnd, string blockname)
         {
-            get { return (List<Users>)GetValue(MyPropertyProperty); }
-            set { SetValue(MyPropertyProperty, value); }
+            Control block = wnd.FindName(blockname) as Control;
+            block.BorderBrush = Brushes.Red;
         }
-
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MyPropertyProperty =
-            DependencyProperty.Register("UsersList", typeof(List<Users>), typeof(AdminViewModel), new PropertyMetadata(null));
-
-
-        private static bool FilterUsers(object obj)
+        private void SetNullValuesToProperties()
         {
-            bool result = true;
-            Users current = obj as Users;
-            if(!string.IsNullOrWhiteSpace(filtertext) && current!=null && !current.login.Contains(filtertext))
-            {
-               result = false;
-            }
-            return result;
+            
         }
-
-
-
+        private void UpdateAllDatagrid()
+        {
+            UserList = CommandsSqlClass.getallusers();
+            AdminInterface.UserListst.ItemsSource = null;
+            AdminInterface.UserListst.Items.Clear();
+            AdminInterface.UserListst.ItemsSource = UserList;
+            AdminInterface.UserListst.Items.Refresh();
+        }
+        public void OpenDeletePosWindow()
+        {
+            Window newwindow = new Window();
+            OpenCenterPosAndOpen(newwindow);
+        }
+        public void OpenEditRolePosWindow()
+        {
+            EditUserWindowForAdmin neweditwindow = new EditUserWindowForAdmin();
+            OpenCenterPosAndOpen(neweditwindow);
+        }
+        private void OpenCenterPosAndOpen(Window window)
+        {
+            window.Owner = Application.Current.MainWindow;
+            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            window.ShowDialog();
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        private void NotifyPropertyChanged(string propertyname)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            if(PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
+            }
         }
-
-     
-
-       
-
     }
 }

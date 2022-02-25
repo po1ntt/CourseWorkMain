@@ -1,0 +1,37 @@
+﻿<Window x:Class="Kursach.Pages.EditUserWindowForAdmin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kursach.Pages"
+        mc:Ignorable="d"
+        Title="EditUserWindowForAdmin" Height="700" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="47*"/>
+            <RowDefinition Height="564*"/>
+            <RowDefinition Height="58*"/>
+        </Grid.RowDefinitions>
+        <StackPanel VerticalAlignment="Center" Margin="46,47,46,87" Grid.Row="1" Height="430" >
+            <TextBlock Text="Имя" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBox  Margin="3"/>
+            <TextBlock Text="Фамилия" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBox  Margin="3" FontSize="18"/>
+            <TextBlock Text="Почта" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBox  Margin="3" FontSize="18"/>
+            <TextBlock Text="Дата рождения" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBox  Margin="3" FontSize="18"/>
+            <TextBlock Text="Номер Телефона" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBox  Margin="3" FontSize="18"/>
+            
+            <TextBlock Text="Роль" HorizontalAlignment="Center" FontSize="18"/>
+            <ComboBox Margin="3" FontSize="18">
+                <ComboBoxItem Content="Студент" HorizontalAlignment="Left" Width="292"/>
+                <ComboBoxItem Content="Куратор" HorizontalAlignment="Left" Width="292"/>
+                <ComboBoxItem Content="Админ" HorizontalAlignment="Left" Width="292"/>
+            </ComboBox>
+        </StackPanel>
+        <Button Grid.Row="2" Content="Потвердить редактирование" Margin="0,13" Height="Auto"/>
+        <TextBlock Grid.Row="0" Text="Редактирование пользователя" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" />
+    </Grid>
+</Window>

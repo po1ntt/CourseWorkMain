@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Kursach"
       xmlns:vm="clr-namespace:Kursach.ViewModel"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Kursach.AdminInterface"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DataContext="{d:DesignInstance Type=vm:User}" x:Class="Kursach.Pages.AdminInterface"
       mc:Ignorable="d" 
       Height="700" 
       Width="1000"
@@ -61,15 +61,15 @@
                                     <TextBox materialDesign:HintAssist.Hint="Email" Width="200" materialDesign:HintAssist.IsFloating="True" FontSize="18" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Margin="20 30 0 0" BorderThickness="2 2 2 2" IsEnabled="False" Text="{Binding mail, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                                 <StackPanel DataContext="{Binding SelectedUser}" Grid.Row="1" HorizontalAlignment="Center" Width="220" >
-                                    <TextBox materialDesign:HintAssist.Hint="имя" Width="200" materialDesign:HintAssist.IsFloating="True" FontSize="18" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Margin="20 10 0 0" BorderThickness="2 2 2 2" IsEnabled="False" Text="{Binding name, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBox materialDesign:HintAssist.Hint="имя" Width="200" materialDesign:HintAssist.IsFloating="True" FontSize="18" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Margin="20 10 0 0" BorderThickness="2 2 2 2" IsEnabled="False" Text="{Binding  name, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBox materialDesign:HintAssist.Hint="Фамилия" Width="200" materialDesign:HintAssist.IsFloating="True" FontSize="18" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Margin="20 30 0 0" BorderThickness="2 2 2 2" IsEnabled="False" Text="{Binding surname, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                                 <StackPanel DataContext="{Binding SelectedUser}" Grid.Row="1" HorizontalAlignment="Right"  Width="220">
-                                    <TextBox materialDesign:HintAssist.Hint="Дата рождения" Width="200" materialDesign:HintAssist.IsFloating="True" FontSize="18" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Margin="20 10 0 0" BorderThickness="2 2 2 2" IsEnabled="False" Text="{Binding birthday, StringFormat=dd/MM/yyyy, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBox materialDesign:HintAssist.Hint="Дата рождения" Width="200" materialDesign:HintAssist.IsFloating="True" FontSize="18" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Margin="20 10 0 0" BorderThickness="2 2 2 2" IsEnabled="False" Text="{Binding  birthday, StringFormat=dd/MM/yyyy, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBox materialDesign:HintAssist.Hint="Номер телефона" Width="200" materialDesign:HintAssist.IsFloating="True" FontSize="18" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Margin="20 30 0 0" BorderThickness="2 2 2 2" IsEnabled="False" Text="{Binding phone, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                                 <StackPanel Grid.Column = "1" Grid.Row="1">
-                                    <Button x:Name="btnKurator" Margin="0 20 0 10" Command="{Binding Updatecommand}">
+                                    <Button x:Name="btnKurator" Margin="0 20 0 10" Command="{Binding OpenEditRole}">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock  Text="Выдать роль куратора" FontSize="16"/>
                                             <materialDesign:PackIcon Kind="Teaching" Width="30" Height="30" Margin="10 0 0 0"/>
@@ -98,31 +98,18 @@
                             
                  
                         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-                            <DataGrid x:Name="dgdata" ItemsSource="{Binding UsersList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedUser, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Login" Width="150*"
-                                                        Binding="{Binding Path=login, UpdateSourceTrigger=PropertyChanged}">
-                                        
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Name" Width="170*"
-                                                        Binding="{Binding Path=name, UpdateSourceTrigger=PropertyChanged}">
-
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Surname" Width="170*"
-                                                        Binding="{Binding Path=surname, UpdateSourceTrigger=PropertyChanged}">
-
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Role" Width="170*"
-                                                        Binding="{Binding Path=id_role, UpdateSourceTrigger=PropertyChanged}">
-
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Email" Width="170*"
-                                                        Binding="{Binding Path=mail, UpdateSourceTrigger=PropertyChanged}">
-
-                                    </DataGridTextColumn>
-                                </DataGrid.Columns>
-                                
-                            </DataGrid>
+                            <ListView x:Name="dgdata" ItemsSource="{Binding UserList}" SelectedItem="{Binding SelectedUser}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn TextOptions.TextFormattingMode="Ideal" Header="Login" HeaderContainerStyle="{DynamicResource MaterialDesignFlatButton}" Width="180" DisplayMemberBinding="{Binding Path=login}"  />
+                                        <GridViewColumn  TextOptions.TextFormattingMode="Ideal" Header="Email" HeaderContainerStyle="{DynamicResource MaterialDesignFlatButton}" Width="180" DisplayMemberBinding="{Binding Path=mail}"/>
+                                        <GridViewColumn  TextOptions.TextFormattingMode="Ideal" Header="Role" HeaderContainerStyle="{DynamicResource MaterialDesignFlatButton}" Width="180" DisplayMemberBinding="{Binding Path=Role.NameRole}"/>
+                                        <GridViewColumn  TextOptions.TextFormattingMode="Ideal" Header="Phone" HeaderContainerStyle="{DynamicResource MaterialDesignFlatButton}" Width="180" DisplayMemberBinding="{Binding Path=phone}" />
+                                        <GridViewColumn  TextOptions.TextFormattingMode="Ideal" Header="Surname" HeaderContainerStyle="{DynamicResource MaterialDesignFlatButton}" Width="180"  DisplayMemberBinding="{Binding Path=surname}" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            
                         </ScrollViewer>
                     </Grid>
                 </Border>
