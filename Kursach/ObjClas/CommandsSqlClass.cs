@@ -54,7 +54,29 @@ namespace Kursach.ObjClas
             }
             return result;
         }
-        public static string EditUserInfo(Users olduser, string newname,string newsurname,string newbirthday,string newphone, string newemail)
+        public static string Create_user(string name, string surname, string birtday, string email, string password, string login)
+        {
+            string result = "ошибка";
+            using(VictrovinaEntities context = new VictrovinaEntities())
+            {
+                context.Users.Add(new Users
+                {
+                    name = name,
+                    surname = surname,
+                    birthday = DateTime.Parse(birtday),
+                    mail = email,
+                    password = password,
+                    login = login,
+                    id_role = 1
+                    
+                });
+                context.SaveChangesAsync();
+                result = "Регистрация успешно завершена";
+                return result;
+            }
+                
+        }
+        public static string EditUserInfo(Users olduser, string newname,string newsurname, string birthday,string newphone, string newemail, int userrole)
         {
             string result = "информация не измена";
             using(VictrovinaEntities context = new VictrovinaEntities())
@@ -62,18 +84,36 @@ namespace Kursach.ObjClas
                 Users user = context.Users.FirstOrDefault(p => p.login == olduser.login);
                 if(user!=null)
                 {
+                   
                     user.name = newname;
                     user.surname = newsurname;
                     user.mail = newemail;
                     user.phone = newphone;
-                    user.birthday = DateTime.Parse(newbirthday);
+                    user.birthday = DateTime.Parse(birthday);
+                    user.id_role = userrole;
                     context.SaveChanges();
                     result = "данные пользователя с логином " + user.login + " обновлены";
                 }
             }
             return result;
         }
-        
+        // получение роли пользователя по id роли
+        public static Role GetRolebyId(int id)
+        {
+            using (VictrovinaEntities context = new VictrovinaEntities())
+            {
+                Role role = context.Role.FirstOrDefault(p => p.id_r == id);
+                return role;
+            }
+        }
 
+        public static List<Role> GetRoles()
+        {
+            using(VictrovinaEntities context = new VictrovinaEntities())
+            {
+                var result = context.Role.ToList();
+                return result;
+            }
+        }
     }
 }

@@ -65,18 +65,8 @@ namespace Kursach.Pages
             }
             if(errors.Length == 0)
             {
-                DataBaseEntity.db.Users.Add(new Users
-                {
-                    login = txbLogin.Text,
-                    password = psbPassSecond.Password,
-                    mail = txbEmail.Text,
-                    phone = txbPhone.Text,
-                    birthday = DateTime.Parse(txbData.Text),
-                    id_role = 1,
-                    name = txbName.Text,
-                    surname = txbSurname.Text
-                });
-                DataBaseEntity.db.SaveChangesAsync();
+                ObjClas.CommandsSqlClass.Create_user(txbName.Text, txbSurname.Text, txbData.Text, txbEmail.Text, txbPassFirst.Text, txbLogin.Text);
+                MessageBox.Show("Регистрация прошла успешно!");
                 ObjClas.Frame.FrameOBJ.Navigate(new AuthorizationPage());
             }
         }

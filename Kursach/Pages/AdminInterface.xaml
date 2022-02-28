@@ -10,7 +10,7 @@
       Height="700" 
       Width="1000"
       Title="AdminInterface">
-   
+
     <Page.Resources>
         <Storyboard x:Key="MenuOpen">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
@@ -40,76 +40,42 @@
                 <Border Background="FloralWhite" CornerRadius="10 30 10 30">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="7*"/>
-                            <RowDefinition Height="38*"/>
-                            <RowDefinition Height="25*"/>
+                            <RowDefinition Height="33*"/>
+                            <RowDefinition Height="268*"/>
+                            <RowDefinition Height="29*"/>
                         </Grid.RowDefinitions>
                         <Border Grid.Row="2" CornerRadius="0 0 10 30" Background="#FFB8D8FF">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="109*"/>
-                                    <ColumnDefinition Width="41*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="19*"/>
-                                    <RowDefinition Height="80*"/>
-                                </Grid.RowDefinitions>
-                                <TextBlock Text="информация о выбранном пользователе:" FontSize="18" HorizontalAlignment="Center" FontWeight="Medium" VerticalAlignment="Center" Grid.Column="0" Height="23" Margin="147,10,149,10" Width="358"/>
-                                <TextBlock Text="Действия:" FontSize="18" HorizontalAlignment="Center" FontWeight="Medium" VerticalAlignment="Center" Height="24"  Width="84" Grid.Column="1"/>
-                                <StackPanel DataContext="{Binding SelectedUser}" Grid.Row="1" HorizontalAlignment="Left" Width="220">
-                                    <TextBox x:Name="txbLogin" materialDesign:HintAssist.Hint="Логин" Width="200" materialDesign:HintAssist.IsFloating="True" FontSize="18" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Margin="20 10 0 0" BorderThickness="2 2 2 2" IsEnabled="False" Text="{Binding login, UpdateSourceTrigger=PropertyChanged}"/>
-                                    <TextBox materialDesign:HintAssist.Hint="Email" Width="200" materialDesign:HintAssist.IsFloating="True" FontSize="18" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Margin="20 30 0 0" BorderThickness="2 2 2 2" IsEnabled="False" Text="{Binding mail, UpdateSourceTrigger=PropertyChanged}" />
-                                </StackPanel>
-                                <StackPanel DataContext="{Binding SelectedUser}" Grid.Row="1" HorizontalAlignment="Center" Width="220" >
-                                    <TextBox materialDesign:HintAssist.Hint="имя" Width="200" materialDesign:HintAssist.IsFloating="True" FontSize="18" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Margin="20 10 0 0" BorderThickness="2 2 2 2" IsEnabled="False" Text="{Binding  name, UpdateSourceTrigger=PropertyChanged}" />
-                                    <TextBox materialDesign:HintAssist.Hint="Фамилия" Width="200" materialDesign:HintAssist.IsFloating="True" FontSize="18" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Margin="20 30 0 0" BorderThickness="2 2 2 2" IsEnabled="False" Text="{Binding surname, UpdateSourceTrigger=PropertyChanged}" />
-                                </StackPanel>
-                                <StackPanel DataContext="{Binding SelectedUser}" Grid.Row="1" HorizontalAlignment="Right"  Width="220">
-                                    <TextBox materialDesign:HintAssist.Hint="Дата рождения" Width="200" materialDesign:HintAssist.IsFloating="True" FontSize="18" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Margin="20 10 0 0" BorderThickness="2 2 2 2" IsEnabled="False" Text="{Binding  birthday, StringFormat=dd/MM/yyyy, UpdateSourceTrigger=PropertyChanged}" />
-                                    <TextBox materialDesign:HintAssist.Hint="Номер телефона" Width="200" materialDesign:HintAssist.IsFloating="True" FontSize="18" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Margin="20 30 0 0" BorderThickness="2 2 2 2" IsEnabled="False" Text="{Binding phone, UpdateSourceTrigger=PropertyChanged}" />
-                                </StackPanel>
-                                <StackPanel Grid.Column = "1" Grid.Row="1">
-                                    <Button x:Name="btnKurator" Margin="0 20 0 10" Command="{Binding OpenEditRole}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock  Text="Выдать роль куратора" FontSize="16"/>
-                                            <materialDesign:PackIcon Kind="Teaching" Width="30" Height="30" Margin="10 0 0 0"/>
-                                        </StackPanel>
-                                    </Button>
-                                    <Button x:Name="btnStud" Margin="0 12 0 10" Background="#FF3178BF" Click="btnStud_Click">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock  Text="Выдать роль студента" FontSize="16"/>
-                                            <materialDesign:PackIcon Kind="User" Width="30" Height="30" Margin="10 -5 0 0"/>
-                                        </StackPanel>
-                                    </Button >
-                                    <Button x:Name="btnDelete" Background="#FFE67541" Margin="0 12 0 10" Click="btnDelete_Click">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock  Text="Удалить аккаунт" FontSize="16"/>
-                                            <materialDesign:PackIcon Kind="Warning" Width="30" Height="30" Margin="10 -5 0 0"/>
-                                        </StackPanel>
-                                    </Button>
-                                </StackPanel>
-                                
 
-                            </Grid>
+
+
+
                         </Border>
 
-                        <TextBox Margin="30 0 0 0" Text="{Binding FilterText}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Width="300" materialDesign:HintAssist.Hint="Ввидете фильтр" FontSize="20"/>
-                            <TextBlock Text="AdminInterface" Grid.Row="0" HorizontalAlignment="Right" Foreground="Black"  VerticalAlignment="Center" Margin="0 10 25 0" FontSize="30" FontWeight="Medium"/>
-                            
-                 
+                        <TextBox Margin="30,15,0,15" Text="{Binding FilterText}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Width="300" materialDesign:HintAssist.Hint="Ввидете фильтр" FontSize="20" Height="36"/>
+                        <TextBlock Text="AdminInterface" Grid.Row="0" HorizontalAlignment="Right" Foreground="Black"  VerticalAlignment="Center" Margin="0,18,25,8" FontSize="30" FontWeight="Medium" Height="40" Width="211"/>
+
+
                         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-                            <ListView x:Name="dgdata" ItemsSource="{Binding UserList}" SelectedItem="{Binding SelectedUser}">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn TextOptions.TextFormattingMode="Ideal" Header="Login" HeaderContainerStyle="{DynamicResource MaterialDesignFlatButton}" Width="180" DisplayMemberBinding="{Binding Path=login}"  />
-                                        <GridViewColumn  TextOptions.TextFormattingMode="Ideal" Header="Email" HeaderContainerStyle="{DynamicResource MaterialDesignFlatButton}" Width="180" DisplayMemberBinding="{Binding Path=mail}"/>
-                                        <GridViewColumn  TextOptions.TextFormattingMode="Ideal" Header="Role" HeaderContainerStyle="{DynamicResource MaterialDesignFlatButton}" Width="180" DisplayMemberBinding="{Binding Path=Role.NameRole}"/>
-                                        <GridViewColumn  TextOptions.TextFormattingMode="Ideal" Header="Phone" HeaderContainerStyle="{DynamicResource MaterialDesignFlatButton}" Width="180" DisplayMemberBinding="{Binding Path=phone}" />
-                                        <GridViewColumn  TextOptions.TextFormattingMode="Ideal" Header="Surname" HeaderContainerStyle="{DynamicResource MaterialDesignFlatButton}" Width="180"  DisplayMemberBinding="{Binding Path=surname}" />
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                            
+                            <DataGrid x:Name="dgdata" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"  ItemsSource="{Binding UserList}" SelectedItem="{Binding SelectedUser}">
+                                <DataGrid.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Добавить нового пользователя" />
+                                        <MenuItem Header="Редактировать" Command="{Binding UpdateUserOpen}" />
+                                        <MenuItem Header="Удалить" Command="{Binding DeleteUser}"/>
+                                    </ContextMenu>
+                                </DataGrid.ContextMenu>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Login" Width="100*" Binding="{Binding login, UpdateSourceTrigger=PropertyChanged}" />
+                                    <DataGridTextColumn Header="Email" Width="100*" Binding="{Binding mail, UpdateSourceTrigger=PropertyChanged}" />
+                                    <DataGridTextColumn Header="Phone" Width="100*" Binding="{Binding phone, UpdateSourceTrigger=PropertyChanged}" />
+                                    <DataGridTextColumn Header="Role" Width="100*" Binding="{Binding UserROLE.NameRole, UpdateSourceTrigger=PropertyChanged}" />
+                                    <DataGridTextColumn Header="Birthday" Width="100*"  Binding="{Binding birthday, StringFormat=dd.MM.yyyy, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <DataGridTextColumn Header="Group(soon)" Width="100*" />
+                                </DataGrid.Columns>
+
+                            </DataGrid>
+
+
                         </ScrollViewer>
                     </Grid>
                 </Border>

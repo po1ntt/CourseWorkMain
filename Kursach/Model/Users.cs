@@ -11,7 +11,9 @@ namespace Kursach.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+    using Kursach.ObjClas;
+
     public partial class Users
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -30,6 +32,15 @@ namespace Kursach.Model
         public string name { get; set; }
         public string image { get; set; }
         public int id_role { get; set; }
+
+        [NotMapped] 
+        public Role UserROLE
+        {
+            get
+            {
+                return ObjClas.CommandsSqlClass.GetRolebyId(id_role);
+            }
+        }
      
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Results> Results { get; set; }

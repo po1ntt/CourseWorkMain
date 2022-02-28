@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Kursach.ViewModel;
+using Kursach.Model;
+using System.Text.RegularExpressions;
 
 namespace Kursach.Pages
 {
@@ -19,9 +22,26 @@ namespace Kursach.Pages
     /// </summary>
     public partial class EditUserWindowForAdmin : Window
     {
-        public EditUserWindowForAdmin()
+        public EditUserWindowForAdmin(Users usertoedit)
         {
+             
+
             InitializeComponent();
+            DataContext = new AdminViewModel();
+            AdminViewModel.SelectedUser = usertoedit;
+            AdminViewModel.Name = usertoedit.name;
+            AdminViewModel.Surname = usertoedit.surname;
+            AdminViewModel.Birthday =DateTime.Parse(usertoedit.birthday.ToString());
+            AdminViewModel.Phone = usertoedit.phone;
+            AdminViewModel.Mail = usertoedit.mail;
+            
+           
+        }
+
+        private void TextBlock_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

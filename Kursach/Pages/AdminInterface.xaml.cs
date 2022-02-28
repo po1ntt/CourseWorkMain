@@ -23,7 +23,7 @@ namespace Kursach.Pages
     /// </summary>
     public partial class AdminInterface : Page
     {
-        public static ListView UserListst;
+        public static DataGrid UserListst;
         public static string log_info { get; set; }
         public AdminInterface(string log1_info = "")
         {
@@ -33,7 +33,7 @@ namespace Kursach.Pages
             log_info = log1_info;
             DataContext = new AdminViewModel();
             UserListst = dgdata;
-            var user = context.Users.Where(x => x.login == txbLogin.Text).FirstOrDefault();
+          
           
         }
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
@@ -68,37 +68,6 @@ namespace Kursach.Pages
 
 
 
-        private void btnStud_Click(object sender, RoutedEventArgs e)
-        {
-            if (txbLogin.Text == "")
-                MessageBox.Show("Выберите пользователя!");
-            VictrovinaEntities context = new VictrovinaEntities();
-            var user = context.Users.Where(x => x.login == txbLogin.Text).FirstOrDefault();
-            if (user.id_role == 1)
-            {
-                MessageBox.Show("У пользователя уже роль студента");
-            }
-            else
-            {
-                user.id_role = 1;
-                context.SaveChanges();
-               
-                MessageBox.Show("успех!");
-            }
-        }
-
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            if (txbLogin.Text == "")
-                MessageBox.Show("Выберите пользователя!");
-            if (MessageBox.Show("Удалить пользователя?", "Удаление аккаунта", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-            {
-                VictrovinaEntities context = new VictrovinaEntities();
-                context.Users.Remove(context.Users.Where(x => x.login == txbLogin.Text).FirstOrDefault());
-                context.SaveChangesAsync();
-                
-               
-            }
-        }
+       
     }
 }

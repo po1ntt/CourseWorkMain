@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kursach.Pages"
         mc:Ignorable="d"
-        Title="EditUserWindowForAdmin" Height="700" Width="400">
+        Title="EditUserWindowForAdmin" Height="700" Width="400"
+        Name="EditUserWnd">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="47*"/>
@@ -14,24 +15,25 @@
         </Grid.RowDefinitions>
         <StackPanel VerticalAlignment="Center" Margin="46,47,46,87" Grid.Row="1" Height="430" >
             <TextBlock Text="Имя" HorizontalAlignment="Center" FontSize="18"/>
-            <TextBox  Margin="3"/>
+            <TextBox  Margin="3" Text="{Binding Name}"/>
             <TextBlock Text="Фамилия" HorizontalAlignment="Center" FontSize="18"/>
-            <TextBox  Margin="3" FontSize="18"/>
+            <TextBox  Margin="3" FontSize="18" Text="{Binding Surname}"/>
             <TextBlock Text="Почта" HorizontalAlignment="Center" FontSize="18"/>
-            <TextBox  Margin="3" FontSize="18"/>
+            <TextBox  Margin="3" Text="{Binding Mail}" FontSize="18"/>
             <TextBlock Text="Дата рождения" HorizontalAlignment="Center" FontSize="18"/>
-            <TextBox  Margin="3" FontSize="18"/>
-            <TextBlock Text="Номер Телефона" HorizontalAlignment="Center" FontSize="18"/>
-            <TextBox  Margin="3" FontSize="18"/>
+            <DatePicker Margin="3" FontSize="18" SelectedDate="{Binding Birthday, StringFormat=dd/MM/yyyy}"/>
+            <TextBlock Text="Номер Телефона" HorizontalAlignment="Center" FontSize="18" />
+            <TextBox  Margin="3" FontSize="18" Text="{Binding Phone}" PreviewTextInput="TextBlock_PreviewTextInput"/>
             
             <TextBlock Text="Роль" HorizontalAlignment="Center" FontSize="18"/>
-            <ComboBox Margin="3" FontSize="18">
-                <ComboBoxItem Content="Студент" HorizontalAlignment="Left" Width="292"/>
-                <ComboBoxItem Content="Куратор" HorizontalAlignment="Left" Width="292"/>
-                <ComboBoxItem Content="Админ" HorizontalAlignment="Left" Width="292"/>
+            <ComboBox Margin="3" FontSize="18" ItemsSource="{Binding RoleList}"
+                      SelectedItem="{Binding Id_role}"
+                      DisplayMemberPath="NameRole">
+
             </ComboBox>
         </StackPanel>
-        <Button Grid.Row="2" Content="Потвердить редактирование" Margin="0,13" Height="Auto"/>
+        <Button Grid.Row="2" Content="Потвердить редактирование" Margin="0,13" Height="Auto" Command="{Binding EditUser}"
+                CommandParameter="{Binding ElementName=EditUserWnd}"/>
         <TextBlock Grid.Row="0" Text="Редактирование пользователя" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" />
     </Grid>
 </Window>
