@@ -17,6 +17,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using Kursach.ObjClas;
 using Kursach.Model;
+using Kursach.ViewModel;
 
 
 
@@ -34,13 +35,13 @@ namespace Kursach.Pages
         public string surname { get; set; }
 
         public static string log_info { get; set; }
-        public ProfileUser(string Login ="")
+        public ProfileUser()
         {
            
             InitializeComponent();
-            log_info = Login;
-            
-   
+            log_info = AuthorizationViewModel.Login;
+
+
 
         }
         private void CloseApp(object sender, MouseButtonEventArgs e)
@@ -56,7 +57,7 @@ namespace Kursach.Pages
 
         private void Teaching(object sender, MouseButtonEventArgs e)
         {
-            ObjClas.Frame.FrameOBJ.Navigate(new UserInterface(log_info));
+            ObjClas.Frame.FrameOBJ.Navigate(new UserInterface());
         }
 
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)

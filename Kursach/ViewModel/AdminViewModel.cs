@@ -15,7 +15,7 @@ namespace Kursach.ViewModel
 {
     public class AdminViewModel :INotifyPropertyChanged
     {
-
+        #region propertiesusers
         // свойства для пользователя
 
         public static string Phone { get; set; }
@@ -23,9 +23,11 @@ namespace Kursach.ViewModel
         public static DateTime Birthday { get; set; }
         public static string Surname { get; set; }
         public static string Name { get; set; }
+        public static string Password { get; set; }
+        public static string Login { get; set; }
         public static Role Id_role { get; set; }
 
-        
+        #endregion
 
         public List<Users> userList = CommandsSqlClass.getallusers();
 
@@ -49,17 +51,10 @@ namespace Kursach.ViewModel
             }
         }
         public static Users SelectedUser { get; set; }
-      
-        
-        public AdminViewModel()
-        {
+     
 
-            
-            
-          
-        }
-      
-       
+        #region commands
+
         private RelayCommand deleteuser;
         public RelayCommand DeleteUser
         {
@@ -67,7 +62,8 @@ namespace Kursach.ViewModel
             {
                 return deleteuser ?? new RelayCommand(obj =>
                 {
-                    string result = "nothing";
+                    
+
                     if(SelectedUser != null)
                     {
                         VictrovinaEntities context = new VictrovinaEntities();
@@ -94,7 +90,7 @@ namespace Kursach.ViewModel
             {
                 return updateuserOpen ?? new RelayCommand(obj =>
                 {
-                    string result = "nothing";
+                    
                     if (SelectedUser != null)
                     {
                         OpenEditRolePosWindow(SelectedUser);
@@ -117,7 +113,7 @@ namespace Kursach.ViewModel
                 {
                     Window window = obj as Window;
                     string result = "не выбран пользователь";
-                    string noRole = "не выбрана роль";
+                    
                     if (SelectedUser != null && Id_role != null)
                     {
                         string date = Birthday.ToString();
@@ -132,7 +128,43 @@ namespace Kursach.ViewModel
                 });
             }
         }
-        #region
+        private RelayCommand addNewUser;
+        public RelayCommand AddNewUser
+        {
+            get
+            {
+               
+                return addNewUser ?? new RelayCommand(obj =>
+                {
+                    
+                    Window window = obj as Window;
+                    string result = "ошибка";
+                    string date = Birthday.ToString();
+                    DateTime.Parse(date);
+                    result = CommandsSqlClass.Create_user(Name, Surname, date, Mail,Password,Login,Id_role.id_r,Phone);
+                    UpdateAllDatagrid();
+                    SetNullValuesToProperties();
+                    MessageBox.Show(result);
+                    window.Close();
+                });
+            }
+        }
+        private RelayCommand openWndCreateuser;
+        public RelayCommand OpenWndCreateUser
+        {
+            get
+            {
+                return openWndCreateuser ?? new RelayCommand(obj =>
+                {
+                    SetNullValuesToProperties();
+                    OpenCreateNewUserWnd();
+                    
+                });
+            }
+        }
+        #endregion
+
+        #region properties
         private void SetRedBlockControll(Window wnd, string blockname)
         {
             Control block = wnd.FindName(blockname) as Control;
@@ -144,7 +176,9 @@ namespace Kursach.ViewModel
             Mail = null;
             Name = null;
             Surname = null;
-            
+            Password = null;
+            Login = null;
+            Birthday = DateTime.Now;
         }
         private void UpdateAllDatagrid()
         {
@@ -158,6 +192,11 @@ namespace Kursach.ViewModel
         public void OpenEditRolePosWindow(Users user)
         {
             EditUserWindowForAdmin neweditwindow = new EditUserWindowForAdmin(user);
+            OpenCenterPosAndOpen(neweditwindow);
+        }
+        public void OpenCreateNewUserWnd()
+        {
+            CreateNewUser neweditwindow = new CreateNewUser();
             OpenCenterPosAndOpen(neweditwindow);
         }
         private void OpenCenterPosAndOpen(Window window)

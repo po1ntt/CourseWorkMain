@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Kursach.Model;
+using Kursach.Pages;
 
 namespace Kursach.ObjClas
 {
@@ -54,7 +55,7 @@ namespace Kursach.ObjClas
             }
             return result;
         }
-        public static string Create_user(string name, string surname, string birtday, string email, string password, string login)
+        public static string Create_user(string name, string surname, string birtday, string email, string password, string login, int newid_role, string newphone)
         {
             string result = "ошибка";
             using(VictrovinaEntities context = new VictrovinaEntities())
@@ -67,14 +68,38 @@ namespace Kursach.ObjClas
                     mail = email,
                     password = password,
                     login = login,
-                    id_role = 1
-                    
-                });
-                context.SaveChangesAsync();
-                result = "Регистрация успешно завершена";
+                    id_role = newid_role,
+                    phone = newphone
+                }); 
+                context.SaveChanges();
+                result = $"Новый пользователь с логином " + login + " добавлен!";
                 return result;
             }
                 
+        }
+        public static string authorization(string login, string password)
+        {
+            string result = "Пользователь не найден";
+            using( VictrovinaEntities context = new VictrovinaEntities())
+            {
+               var user = context.Users.FirstOrDefault(p => p.login == login && p.password == password);
+               if(user != null)
+                {
+                    result = "Авторизация прошла успешно!";
+                    if (user.id_role == 1)
+                        ObjClas.Frame.FrameOBJ.Navigate(new UserInterface());
+                    if (user.id_role == 2)
+                        ObjClas.Frame.FrameOBJ.Navigate(new KuratorInteface());
+                    if (user.id_role == 3)
+                        ObjClas.Frame.FrameOBJ.Navigate(new AdminInterface());
+                    return result;
+                }
+                else
+                {
+                    return result;
+                }
+
+            }
         }
         public static string EditUserInfo(Users olduser, string newname,string newsurname, string birthday,string newphone, string newemail, int userrole)
         {

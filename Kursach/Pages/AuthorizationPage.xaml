@@ -7,7 +7,8 @@
       mc:Ignorable="d" 
       Height="312"
       Width="530" 
-      Title="AuthorizationPage" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      Title="AuthorizationPage" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       ShowsNavigationUI="False"
       Background="Transparent"
      
@@ -22,18 +23,18 @@
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="124*"/>
-                    <RowDefinition Height="293*"/>
+                    <RowDefinition Height="41*"/>
+                    <RowDefinition Height="98*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Foreground="FloralWhite" Text="Викторина" FontSize="30" FontWeight="Medium"  Height="44" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="0" Width="152"/>
+                <TextBlock Foreground="FloralWhite" Text="Викторина" FontSize="30" FontWeight="Medium"  Height="44" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="0" Width="152" Margin="181,0"/>
                 <Button HorizontalAlignment="Right" VerticalAlignment="Top" Style="{DynamicResource MaterialDesignIconButton}" Click="exit" >
                     <materialDesign:PackIcon Kind="ExitToApp" Foreground="FloralWhite"/>
                 </Button>
-                <Button HorizontalAlignment="Right" Margin="0 0 40 0"  VerticalAlignment="Top" Style="{DynamicResource MaterialDesignIconButton}" Click="svernut">
+                <Button  HorizontalAlignment="Right" Margin="0 0 40 0"  VerticalAlignment="Top" Style="{DynamicResource MaterialDesignIconButton}" Click="svernut">
                     <materialDesign:PackIcon Kind="Minus" Foreground="FloralWhite"/>
                 </Button>
                 <StackPanel Orientation="Horizontal" Grid.Row="1" Height="50" VerticalAlignment="Top" Margin="107,0" >
-                    <TextBox x:Name="txbLogin" BorderBrush="FloralWhite" Foreground="FloralWhite" Opacity="1" materialDesign:HintAssist.Hint="Логин" Style="{DynamicResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Center"  VerticalAlignment="top" Width="235" Height="38" Margin="20 0 0 0"/>
+                    <TextBox  Name="txbLogin" BorderBrush="FloralWhite" Text="{Binding Login}" Foreground="FloralWhite" Opacity="1" materialDesign:HintAssist.Hint="Логин" Style="{DynamicResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Center"  VerticalAlignment="top" Width="235" Height="38" Margin="20 0 0 0"/>
                     <materialDesign:PackIcon Kind="Account"
                                              Foreground="FloralWhite"
                                              VerticalAlignment="Top"
@@ -43,7 +44,7 @@
                                              Margin="7 8 0 0"/>
                 </StackPanel>
                 <StackPanel  Orientation="Horizontal" Grid.Row="1" Height="50" VerticalAlignment="Top" Margin="107,50,107,0" >
-                    <PasswordBox x:Name="psbPassword" BorderBrush="FloralWhite" Foreground="White" materialDesign:HintAssist.Hint="Пароль" Style="{DynamicResource MaterialDesignFloatingHintPasswordBox}" HorizontalAlignment="Center"  VerticalAlignment="top" Width="235" Height="38" Margin="20 0 0 0" />
+                    <PasswordBox Name="txbPassword" PasswordBox.PasswordChanged="txbPassword_PasswordChanged" BorderBrush="FloralWhite" Foreground="White" materialDesign:HintAssist.Hint="Пароль" Style="{DynamicResource MaterialDesignFloatingHintPasswordBox}" HorizontalAlignment="Center"  VerticalAlignment="top" Width="235" Height="38" Margin="20 0 0 0" />
                     <materialDesign:PackIcon Kind="FormTextboxPassword"
                                              Foreground="FloralWhite"
                                              VerticalAlignment="Top"
@@ -53,8 +54,8 @@
                                              Margin="7 8 0 0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Grid.Row="1" Height="50" VerticalAlignment="Top" Margin="107,100,107,0">
-                    <Button BorderBrush="FloralWhite" Background="Transparent" Content="Войти" HorizontalAlignment="Left" Margin="22 0 0 0" VerticalAlignment="Center" Width="74"  Click="Log_Click" />
-                    <Button  BorderBrush="FloralWhite" Content="Регистрация" HorizontalAlignment="Center" Margin="90 0 0 0" VerticalAlignment="Center" Width="113" Background="Transparent" Click="reg_click"/>
+                    <Button BorderBrush="FloralWhite" Background="Transparent" Content="Войти" HorizontalAlignment="Left" Margin="22 0 0 0" VerticalAlignment="Center" Width="74"  Command="{Binding  AuthorizationClick}"/>
+                    <Button  BorderBrush="FloralWhite" Content="Регистрация" HorizontalAlignment="Center" Margin="90 0 0 0" VerticalAlignment="Center" Width="113" Background="Transparent" Command="{Binding OpenWndReg}"/>
                 </StackPanel>
 
             </Grid>

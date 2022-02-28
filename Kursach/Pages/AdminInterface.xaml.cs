@@ -25,12 +25,12 @@ namespace Kursach.Pages
     {
         public static DataGrid UserListst;
         public static string log_info { get; set; }
-        public AdminInterface(string log1_info = "")
+        public AdminInterface()
         {
             
             InitializeComponent();
             VictrovinaEntities context = new VictrovinaEntities();
-            log_info = log1_info;
+            log_info = AuthorizationViewModel.Login;
             DataContext = new AdminViewModel();
             UserListst = dgdata;
           
@@ -56,12 +56,11 @@ namespace Kursach.Pages
         private void Logout(object sender, MouseButtonEventArgs e)
         {
 
-
             ObjClas.Frame.FrameOBJ.Navigate(new AuthorizationPage());
         }
         private void Profile(object sender, MouseButtonEventArgs e)
         {
-            ObjClas.Frame.FrameOBJ.Navigate(new ProfileUser(YourLogin.Text));
+            ObjClas.Frame.FrameOBJ.Navigate(new ProfileUser());
 
 
         }

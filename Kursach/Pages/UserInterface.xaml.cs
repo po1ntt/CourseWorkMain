@@ -26,62 +26,17 @@ namespace Kursach.Pages
     /// </summary>
     public partial class UserInterface : Page
     {
-        
+        public static StackPanel stackfortest;
         public static string log_info { get; set; }
-        public UserInterface(string log1_info = "")
+        public UserInterface()
         {
             VictrovinaEntities context = new VictrovinaEntities();
             InitializeComponent();
-            log_info = log1_info;
-            DataContext = new  UserInterfaceViewModelcs();
-            var cathegory = context.CathegoryTests.ToArray();
-            int i = 0;
-            int id = 1;
-            int d = 0;
+            log_info = AuthorizationViewModel.Login;
+            stackfortest = stack;
+            DataContext = new UserInterfaceViewModelcs();
             
-           
-          
-            while (i < cathegory.Length) 
-            {
-                int k = 1;
-                var cathegory1 = context.CathegoryTests.Where(x => x.id_cat == id).FirstOrDefault();
-                Button NameTest = new Button();
-                NameTest.Background = Brushes.Transparent;
-                NameTest.Name = $"button{id}";
-              
-                NameTest.Content = $"{cathegory1.name_cathegory}";
-                NameTest.Foreground = Brushes.Black;
-                NameTest.Click += new RoutedEventHandler(this.submenycloseandop);
-                stack.Children.Add(NameTest);
-                var tests = context.Tests.Where(x => x.id_cathegory == id).FirstOrDefault();
-                if (tests != null)
-                {
-                    StackPanel submenu = new StackPanel();
-                    var test2 = context.Tests.Where(x => x.id_cathegory == id).ToArray();
-                    while (d < test2.Length)
-                    {
-                       
-                        var tests3 = context.Tests.Where(x => x.id_t == k).FirstOrDefault();
-                        submenu.Margin = new Thickness(20, 0, 0, 0);
-                        submenu.Name = $"submenu{id}";
-                        Button Chose = new Button();
-                        Chose.Content = $"{tests3.name_test}";
-                        Chose.Click += new RoutedEventHandler(this.subl_click);
-                        Chose.HorizontalContentAlignment = HorizontalAlignment.Left;
-                        submenu.Children.Add(Chose);
-                        d++;
-                        k++;
-                    }
-                    stack.Children.Add(submenu);
-                }
-
-                id++;
-                i++;
-                d = 0;
-                
-            }
-        
-        
+         
 
         }
 
@@ -124,16 +79,7 @@ namespace Kursach.Pages
             submenu.Children.Add(Chose);
         }
 
-        private void Python_click(object sender, RoutedEventArgs e)
-        {
-          
-        }
-
-        private void Sharp_Click(object sender, RoutedEventArgs e)
-        {
-
-            ObjClas.Frame.FrameOBJ.Navigate(new SharpTests());
-        }
+       
 
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -172,7 +118,7 @@ namespace Kursach.Pages
 
         private void Profile(object sender, MouseButtonEventArgs e)
         {
-            ObjClas.Frame.FrameOBJ.Navigate(new ProfileUser(YourLogin.Text));
+            ObjClas.Frame.FrameOBJ.Navigate(new ProfileUser());
             
           
         }

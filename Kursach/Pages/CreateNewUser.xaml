@@ -1,0 +1,43 @@
+﻿<Window x:Class="Kursach.Pages.CreateNewUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kursach.Pages"
+        mc:Ignorable="d"
+       Title="CreateUser" Height="800" Width="400"
+        Name="CreateUserWnd">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="47*"/>
+            <RowDefinition Height="564*"/>
+            <RowDefinition Height="58*"/>
+        </Grid.RowDefinitions>
+        <StackPanel VerticalAlignment="Center" Margin="46,47,43,10" Grid.Row="1" Height="507" >
+            <TextBlock Text="Login" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBox  Margin="3" Text="{Binding Login}"/>
+            <TextBlock Text="Password" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBox  Margin="3" Text="{Binding Password}"/>
+            <TextBlock Text="Имя" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBox  Margin="3" Text="{Binding Name}"/>
+            <TextBlock Text="Фамилия" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBox  Margin="3" FontSize="18" Text="{Binding Surname}"/>
+            <TextBlock Text="Почта" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBox  Margin="3" Text="{Binding Mail}" FontSize="18"/>
+            <TextBlock Text="Дата рождения" HorizontalAlignment="Center" FontSize="18"/>
+            <DatePicker Margin="3" FontSize="18" SelectedDate="{Binding Birthday, StringFormat=dd/MM/yyyy}"/>
+            <TextBlock Text="Номер Телефона" HorizontalAlignment="Center" FontSize="18" />
+            <TextBox  Margin="3" FontSize="18" Text="{Binding Phone}" PreviewTextInput="TextBlock_PreviewTextInput"/>
+
+            <TextBlock Text="Роль" HorizontalAlignment="Center" FontSize="18"/>
+            <ComboBox Margin="3" FontSize="18" ItemsSource="{Binding RoleList}"
+                      SelectedItem="{Binding Id_role}"
+                      DisplayMemberPath="NameRole">
+
+            </ComboBox>
+        </StackPanel>
+        <Button Grid.Row="2" Content="Потвердить добавление пользователя" Margin="0,13" Height="Auto" Command="{Binding AddNewUser}"
+                CommandParameter="{Binding ElementName=CreateUserWnd}"/>
+        <TextBlock Grid.Row="0" Text="Добавление нового пользователя" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" />
+    </Grid>
+</Window>

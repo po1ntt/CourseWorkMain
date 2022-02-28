@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Kursach.ObjClas;
 using Kursach.Model;
+using Kursach.ViewModel;
 
 namespace Kursach.Pages
 {
@@ -26,7 +27,7 @@ namespace Kursach.Pages
         public KuratorInteface(string log1_info = "")
         {
             InitializeComponent();
-            log_info = log1_info;
+            log_info = AuthorizationViewModel.Login;
         }
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -42,7 +43,7 @@ namespace Kursach.Pages
         }
         private void Profile(object sender, MouseButtonEventArgs e)
         {
-            ObjClas.Frame.FrameOBJ.Navigate(new ProfileUser(YourLogin.Text));
+            ObjClas.Frame.FrameOBJ.Navigate(new ProfileUser());
         }
         private void CloseApp(object sender, MouseButtonEventArgs e)
         {

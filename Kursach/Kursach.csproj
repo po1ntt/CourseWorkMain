@@ -121,6 +121,9 @@
       <DependentUpon>AdminInterface.xaml</DependentUpon>
     </Compile>
     <Compile Include="ObjClas\DataBaseEntity.cs" />
+    <Compile Include="Pages\CreateNewUser.xaml.cs">
+      <DependentUpon>CreateNewUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EditUserWindowForAdmin.xaml.cs">
       <DependentUpon>EditUserWindowForAdmin.xaml</DependentUpon>
     </Compile>
@@ -131,11 +134,8 @@
     <Compile Include="Pages\ProfileUser.xaml.cs">
       <DependentUpon>ProfileUser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\RegistrationPage.xaml.cs">
-      <DependentUpon>RegistrationPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\SharpTests.xaml.cs">
-      <DependentUpon>SharpTests.xaml</DependentUpon>
+    <Compile Include="Pages\RegistrationWindows.xaml.cs">
+      <DependentUpon>RegistrationWindows.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\TestForm.xaml.cs">
       <DependentUpon>TestForm.xaml</DependentUpon>
@@ -146,12 +146,17 @@
     <Compile Include="ViewModel\AdminViewModel.cs" />
     <Compile Include="ViewModel\AuthorizationViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\TestFormVM.cs" />
     <Compile Include="ViewModel\UserInterfaceViewModelcs.cs" />
     <Page Include="Pages\AdminInterface.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AuthorizationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CreateNewUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -183,11 +188,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\RegistrationPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\SharpTests.xaml">
+    <Page Include="Pages\RegistrationWindows.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
