@@ -13,7 +13,7 @@ using System.Windows.Media;
 
 namespace Kursach.ViewModel
 {
-    public class AdminViewModel :INotifyPropertyChanged
+    public class AdminViewModel : INotifyPropertyChanged
     {
         #region propertiesusers
         // свойства для пользователя
@@ -28,7 +28,7 @@ namespace Kursach.ViewModel
         public static Role Id_role { get; set; }
 
         #endregion
-
+        private string filtertext { get; set; }
         public List<Users> userList = CommandsSqlClass.getallusers();
 
         public List<Role> roleList = CommandsSqlClass.GetRoles();
@@ -47,11 +47,40 @@ namespace Kursach.ViewModel
             set
             {
                 roleList = value;
-                NotifyPropertyChanged("RoleList");
+                NotifyPropertyChanged("RoleList");хуй
             }
         }
         public static Users SelectedUser { get; set; }
-     
+
+        public string FilterText
+        {
+            get { return filtertext; }
+            set
+            {
+
+                filtertext = value;
+                NotifyPropertyChanged("FilterText");
+            }
+        }
+        public AdminViewModel()
+        {
+            FilteringText(FilterText);
+        }
+        public void FilteringText(string filter)
+        {
+            VictrovinaEntities context = new VictrovinaEntities();
+            if (filter != null)
+            {
+                if (filter.Length > 0)
+                {
+                    AdminInterface.UserListst.ItemsSource = null;
+                    AdminInterface.UserListst.Items.Clear();
+                    AdminInterface.UserListst.ItemsSource = context.Users.Where(p => p.login.Contains(filter) || p.mail.Contains(filter) || p.surname.Contains(filter)).ToList();
+                    AdminInterface.UserListst.Items.Refresh();
+
+                }
+            }
+        }
 
         #region commands
 
@@ -80,6 +109,17 @@ namespace Kursach.ViewModel
                     }
 
                     
+                });
+            }
+        }
+        private RelayCommand filtering;
+        public RelayCommand Filtering
+        {
+            get
+            {
+                return filtering ?? new RelayCommand(obj =>
+                {
+                    FilteringText(FilterText);
                 });
             }
         }

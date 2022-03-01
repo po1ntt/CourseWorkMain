@@ -50,13 +50,17 @@
 
 
                         </Border>
+                        <StackPanel Orientation="Horizontal" Grid.Row="0">
+                            <Button  Grid.Row="0" HorizontalAlignment="Center" Content="Фильтр" Margin="10" Command="{Binding Filtering}"/>
+                            <TextBox Margin="30,15,0,15"  Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Width="300" materialDesign:HintAssist.Hint="Ввидете фильтр" FontSize="20" Height="36"/>
+                            
+                        </StackPanel>
 
-                        <TextBox Margin="30,15,0,15" Text="{Binding FilterText}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Width="300" materialDesign:HintAssist.Hint="Ввидете фильтр" FontSize="20" Height="36"/>
                         <TextBlock Text="AdminInterface" Grid.Row="0" HorizontalAlignment="Right" Foreground="Black"  VerticalAlignment="Center" Margin="0,18,25,8" FontSize="30" FontWeight="Medium" Height="40" Width="211"/>
 
 
                         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-                            <DataGrid x:Name="dgdata" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"  ItemsSource="{Binding UserList}" SelectedItem="{Binding SelectedUser}">
+                            <DataGrid x:Name="dgdata" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"  ItemsSource="{Binding UserList, Mode=TwoWay, IsAsync=True , UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedUser}">
                                 <DataGrid.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="Добавить нового пользователя" Command="{Binding OpenWndCreateUser}" />
