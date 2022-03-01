@@ -28,6 +28,10 @@ namespace Kursach.ViewModel
         public static Role Id_role { get; set; }
 
         #endregion
+
+     
+
+
         private string filtertext { get; set; }
         public List<Users> userList = CommandsSqlClass.getallusers();
 
@@ -47,7 +51,7 @@ namespace Kursach.ViewModel
             set
             {
                 roleList = value;
-                NotifyPropertyChanged("RoleList");хуй
+                NotifyPropertyChanged("RoleList");
             }
         }
         public static Users SelectedUser { get; set; }
@@ -71,15 +75,15 @@ namespace Kursach.ViewModel
             VictrovinaEntities context = new VictrovinaEntities();
             if (filter != null)
             {
-                if (filter.Length > 0)
-                {
+                
                     AdminInterface.UserListst.ItemsSource = null;
                     AdminInterface.UserListst.Items.Clear();
                     AdminInterface.UserListst.ItemsSource = context.Users.Where(p => p.login.Contains(filter) || p.mail.Contains(filter) || p.surname.Contains(filter)).ToList();
                     AdminInterface.UserListst.Items.Refresh();
 
-                }
+                
             }
+            
         }
 
         #region commands
@@ -120,6 +124,8 @@ namespace Kursach.ViewModel
                 return filtering ?? new RelayCommand(obj =>
                 {
                     FilteringText(FilterText);
+                    if (filtertext == null)
+                        AdminInterface.UserListst.ItemsSource = userList;
                 });
             }
         }
