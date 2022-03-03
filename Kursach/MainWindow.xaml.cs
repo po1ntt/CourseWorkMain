@@ -40,7 +40,7 @@ namespace Kursach
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ObjClas.Frame.FrameOBJ.Navigate(new AuthorizationPage());
+            ObjClas.Frame.FrameOBJ.Navigate(new UserInterface());
         }
 
 

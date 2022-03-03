@@ -131,6 +131,15 @@ namespace Kursach.ObjClas
                 return role;
             }
         }
+        public static Tests GetNameTestByid(int id)
+        {
+            using (VictrovinaEntities context = new VictrovinaEntities())
+            {
+                Tests test = context.Tests.FirstOrDefault(p => p.id_t == id);
+                return test;
+            }
+        }
+
 
         public static List<Role> GetRoles()
         {

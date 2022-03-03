@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Kursach.ObjClas;
 using Kursach.Model;
+using Kursach.ViewModel;
 
 namespace Kursach.Pages
 {
@@ -22,9 +23,15 @@ namespace Kursach.Pages
     /// </summary>
     public partial class TestForm : Page
     {
-        public TestForm()
+        public static StackPanel stack;
+        
+        public static string namebutton { get; set; }
+        public TestForm(string NameButton = "")
         {
             InitializeComponent();
+            DataContext = new TestFormVM();
+            stack = stackTest;
+            namebutton = NameButton;
         }
 
         private void goback(object sender, RoutedEventArgs e)

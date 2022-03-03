@@ -11,7 +11,8 @@ namespace Kursach.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Question
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,7 +25,15 @@ namespace Kursach.Model
         public string text_quest { get; set; }
         public int id_rightanswer { get; set; }
         public int id_test { get; set; }
-    
+        [NotMapped]
+        public Tests NameTest
+        {
+            get
+            {
+                return ObjClas.CommandsSqlClass.GetNameTestByid(id_test);
+            }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Answers> Answers { get; set; }
         public virtual Answers Answers1 { get; set; }

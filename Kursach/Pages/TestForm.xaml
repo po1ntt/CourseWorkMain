@@ -21,12 +21,12 @@
         <ScrollViewer Grid.Row="1">
             <Grid Grid.Row="1">
                 <Border Margin="10 0 0 0" Background="White" BorderThickness="10 10 10 10" CornerRadius="20" >
-                    <StackPanel>
-                        <TextBlock Text="FirstQuestion:" FontSize="20" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
+                    <StackPanel x:Name="stackTest">
+                        <!--<TextBlock Text="FirstQuestion:" FontSize="20" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
                         <RadioButton Content="TestTrue" HorizontalAlignment="Left"  Margin="2" FontSize="18"></RadioButton>
                         <RadioButton Content="TestFalse" HorizontalAlignment="Left" Margin="2" FontSize="18"></RadioButton>
                         <RadioButton Content="TestFalse" HorizontalAlignment="Left"  Margin="2" FontSize="18"></RadioButton>
-                        <RadioButton Content="TestFalse" HorizontalAlignment="Left"  Margin="2" FontSize="18"></RadioButton>
+                        <RadioButton Content="TestFalse" HorizontalAlignment="Left"  Margin="2" FontSize="18"></RadioButton>-->
                        
                     </StackPanel>
                 </Border>
