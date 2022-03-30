@@ -270,6 +270,9 @@
     <Compile Include="Pages\RegistrationWindows.xaml.cs">
       <DependentUpon>RegistrationWindows.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ResultPage.xaml.cs">
+      <DependentUpon>ResultPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TestForm.xaml.cs">
       <DependentUpon>TestForm.xaml</DependentUpon>
     </Compile>
@@ -289,6 +292,7 @@
     <Compile Include="ViewModel\AuthorizationViewModel.cs" />
     <Compile Include="ViewModel\CategoryVm.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\ResultsPageVm.cs" />
     <Compile Include="ViewModel\TestFormVM.cs" />
     <Compile Include="ViewModel\UserInterfaceViewModelcs.cs" />
     <Page Include="Pages\AdminInterface.xaml">
@@ -332,6 +336,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RegistrationWindows.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ResultPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

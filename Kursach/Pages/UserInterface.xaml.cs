@@ -116,6 +116,12 @@ namespace Kursach.Pages
             
           
         }
+        private void Results(object sender, MouseButtonEventArgs e)
+        {
+            ObjClas.Frame.FrameOBJ.Navigate(new ResultPage());
+
+
+        }
 
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

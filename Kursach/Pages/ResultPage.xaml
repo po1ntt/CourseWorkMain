@@ -1,23 +1,16 @@
-﻿<Page x:Class="Kursach.Pages.UserInterface"
+﻿<Page x:Class="Kursach.Pages.ResultPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Kursach.Pages"
+      xmlns:local="clr-namespace:Kursach.Pages" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
       xmlns:vm ="clr-namespace:Kursach.ViewModel"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:Kursach.ViewModel" 
-      Height="700" Width="800"
-      Title="UserInterface" FontFamily="Dosis"
-      KeepAlive="True"
-       Loaded="Page_Loaded"
-      xmlns:properties="clr-namespace:Kursach.Properties"
-      
-
-      >
-    <Page.DataContext>
-        <vm:UserInterfaceViewModelcs />
-    </Page.DataContext>
+       Height="700" Width="800"
+      Title="ResultPage">
+    
     <Page.Resources>
+
         <Storyboard x:Key="MenuOpen">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
                 <EasingDoubleKeyFrame KeyTime="0" Value="60"/>
@@ -31,6 +24,7 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Page.Resources>
+    
     <Page.Triggers>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
             <BeginStoryboard Storyboard="{StaticResource MenuOpen}"/>
@@ -40,68 +34,50 @@
         </EventTrigger>
     </Page.Triggers>
     <Grid>
-
-
-
-
-        <Border  Background="#FF591C40" BorderBrush="Transparent" CornerRadius="10 0 0 10">
-
-            <Grid Margin="10 10 60 10" Width="700" >
-
-                <Border Height="auto" Background="White" CornerRadius="25" Margin="0 0 0 0">
+        <Border  Background="#FF591C40" BorderBrush="Transparent" CornerRadius="10 0 0 10" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  Width="*" />
+                    <ColumnDefinition Width="50" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Margin="20" Background="White" CornerRadius="30
+">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="271*"/>
-                            <ColumnDefinition Width="429*"/>
-                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="55*"/>
-                            <RowDefinition Height="611*"/>
+                            <RowDefinition Height="60" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Главная страница" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold" Grid.ColumnSpan="2" Margin="219,10" Height="36" Width="262" />
-                        <Border Grid.Row="1" Grid.Column="0" Background="#FF591C40" CornerRadius="10,10,0,10"/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="268" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Grid.RowSpan="2" Background="#FF591C40">
+                            <StackPanel Margin="5">
+                                <TextBlock Text="Меню" FontSize="25" Foreground="White" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                                <TextBlock Text="Выберите тему и категорию" Foreground="White" FontWeight="DemiBold" HorizontalAlignment="Center" FontSize="18" />
+                                <ComboBox ItemsSource="{Binding TemaList}" Height="60" Background="White" Foreground="Black" materialDesign:HintAssist.Hint="Тема" FontSize="20" Style="{DynamicResource MaterialDesignFilledComboBox}" />
+                                <ComboBox ItemsSource="{Binding CategoryList}" Height="60" Background="White" Foreground="Black" materialDesign:HintAssist.Hint="Категория" FontSize="20" Style="{DynamicResource MaterialDesignFilledComboBox}" />
 
-
-                        <ListView Grid.Row="1" Grid.Column="0" SelectionMode="Single"  HorizontalAlignment="Center" Background="#FF591C40"  ItemsSource="{Binding TemaColl}" SelectedItem="{Binding SelectedTema}" >
+                            </StackPanel>
+                        </Border>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="Результаты" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold"/>
+                        <ListView Grid.Row="1" Grid.Column="1" ItemsSource="{Binding ListResults}" >
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Margin="-15,10,0,0" Background="White" Width="250" Height="100" >
-                                        <TextBlock Text="{Binding NameTema}" Foreground="Black" FontSize="30" FontWeight="Bold"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{Binding ImageMedal}" />
+                                        <TextBlock Text="{Binding NameTestDone}" />
+                                        <TextBlock Text="{Binding Scorepersentt}" />
+                                    </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                        <Border Grid.Row="1" Grid.Column="1" Background="Transparent" BorderBrush="#FF591C40" BorderThickness="10,5,0,0" CornerRadius="10,0,10,0"/>
-                        <ListView Grid.Row="1" Grid.Column="1" ItemsSource="{Binding categories}" SelectedItem="{Binding SelectedCathegory}" SelectionChanged="ListTests_SelectionChanged" x:Name="ListTests" HorizontalAlignment="Center" SelectionMode="Extended"  >
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Border BorderBrush="Blue" BorderThickness="3" CornerRadius="20" Width="300" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding CathegoryName}" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="25" FontWeight="DemiBold">
-                                                
-                                            </TextBlock>
-                                            <Image Source="{Binding ImageUrl}" Margin="0,-5,0,0" Height="80" Width="80" />
-                                        </StackPanel>
-                                    </Border>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-
-
-
-
-
-
-
                     </Grid>
+
                 </Border>
-
             </Grid>
-
-
         </Border>
-
-        <Grid x:Name="GridMenu" Width="50" HorizontalAlignment="Right" Background="#FF40142E" Grid.Column="1">
+        <Grid x:Name="GridMenu" Width="50" HorizontalAlignment="Right" Background="#FF40142E">
             <StackPanel VerticalAlignment="Top">
                 <Grid Height="150" Background="White">
                     <Grid.ColumnDefinitions>
@@ -118,23 +94,23 @@
                         <materialDesign:PackIcon Foreground="#FF40142E" Kind="Menu" Width="30" Height="32" />
                     </Button>
                 </Grid>
-                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="White" PreviewMouseLeftButtonDown="Profile">
-                    <ListViewItem Height="60" PreviewMouseLeftButtonDown="Profile">
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="White" PreviewMouseLeftButtonDown="Profile"  >
+                    <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Account" Width="25" Height="25" VerticalAlignment="Center" Margin="5"/>
                             <TextBlock Text="Профиль" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>
-                <ListView  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="White" PreviewMouseLeftButtonDown="Teaching">
-                    <ListViewItem Height="60" PreviewMouseLeftButtonDown="Results" >
+                <ListView PreviewMouseLeftButtonDown="Results" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="#FF6A72C5" >
+                    <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Star" Width="25" Height="25" VerticalAlignment="Center" Margin="5" />
+                            <materialDesign:PackIcon Kind="Star" Width="25" Height="25" VerticalAlignment="Center" Margin="5"/>
                             <TextBlock Text="Результаты" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                </ListView >
-                <ListView  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="#FF6A72C5" PreviewMouseLeftButtonDown="Teaching">
+                </ListView>
+                <ListView  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="White" PreviewMouseLeftButtonDown="Teaching">
                     <ListViewItem Height="60" PreviewMouseLeftButtonDown="Teaching" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="ReadMore" Width="25" Height="25" VerticalAlignment="Center" Margin="5" />
@@ -142,6 +118,8 @@
                         </StackPanel>
                     </ListViewItem>
                 </ListView >
+
+
                 <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="White" PreviewMouseLeftButtonDown="Logout">
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
@@ -159,7 +137,7 @@
                     </ListViewItem>
                 </ListView>
             </StackPanel>
-
         </Grid>
     </Grid>
+
 </Page>
