@@ -55,20 +55,47 @@
                             <StackPanel Margin="5">
                                 <TextBlock Text="Меню" FontSize="25" Foreground="White" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"  />
                                 <TextBlock Text="Выберите тему и категорию" Foreground="White" FontWeight="DemiBold" HorizontalAlignment="Center" FontSize="18" />
-                                <ComboBox ItemsSource="{Binding TemaList}" Height="60" Background="White" Foreground="Black" materialDesign:HintAssist.Hint="Тема" FontSize="20" Style="{DynamicResource MaterialDesignFilledComboBox}" />
-                                <ComboBox ItemsSource="{Binding CategoryList}" Height="60" Background="White" Foreground="Black" materialDesign:HintAssist.Hint="Категория" FontSize="20" Style="{DynamicResource MaterialDesignFilledComboBox}" />
+                                <Border Background="White" CornerRadius="10" Margin="-10,10,0,0" Height="130">
+                                    <StackPanel>
+                                        <ComboBox ItemsSource="{Binding TemaList}"  SelectedItem="{Binding SelectedTema}" Height="60" Background="White" Foreground="Black" materialDesign:HintAssist.Hint="Тема" FontSize="20" Style="{DynamicResource MaterialDesignFilledComboBox}" >
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel>
+                                                        <TextBlock Text="{Binding NameTema}" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                        <ComboBox ItemsSource="{Binding Cathegories}"  SelectedItem="{Binding SelectedCathegory}" Height="60" Background="White" Foreground="Black" materialDesign:HintAssist.Hint="Категория" FontSize="20" Style="{DynamicResource MaterialDesignFilledComboBox}" >
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel>
+                                                        <TextBlock Text="{Binding CathegoryName}" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                   
+                                </Border>
+                                
 
                             </StackPanel>
                         </Border>
                         <TextBlock Grid.Row="0" Grid.Column="1" Text="Результаты" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold"/>
-                        <ListView Grid.Row="1" Grid.Column="1" ItemsSource="{Binding ListResults}" >
+                        <ListView Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" ItemsSource="{Binding CathegoriesItems}"  >
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Source="{Binding ImageMedal}" />
-                                        <TextBlock Text="{Binding NameTestDone}" />
-                                        <TextBlock Text="{Binding Scorepersentt}" />
-                                    </StackPanel>
+                                    <Border Margin="10" BorderBrush="GreenYellow" BorderThickness="3" Width="400" CornerRadius="10" Background="GreenYellow">
+                                       
+                                    <StackPanel Orientation="Horizontal"    >
+                                        <Image Source="{Binding MedalImage}" Height="32" Width="32" HorizontalAlignment="Left"   />
+                                        <TextBlock Text="{Binding NameTestDone}" HorizontalAlignment="Left" Margin="5,0,200,0" FontSize="20"  VerticalAlignment="Top" Foreground="Black"/>
+                                        <TextBlock Text="{Binding Scoreprecennt}"  FontSize="20"  VerticalAlignment="Top"   Foreground="DarkBlue" />
+                                        <TextBlock Text="%"  FontSize="20"   Foreground="DarkBlue" />
+
+                                        </StackPanel>
+                                    </Border>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>

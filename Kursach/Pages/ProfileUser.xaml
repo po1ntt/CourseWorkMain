@@ -7,7 +7,9 @@
       xmlns:local="clr-namespace:Kursach.Pages"
       mc:Ignorable="d" 
       Height="700" Width="800"
-      Title="ProfileUser"  >
+      Title="ProfileUser" 
+      xmlns:vm="clr-namespace:Kursach.ViewModel" >
+    
     <Page.Resources>
         
         <Storyboard x:Key="MenuOpen">
@@ -52,8 +54,7 @@
                                     <Button x:Name="unlockbutton"  Foreground="Black" BorderThickness="4" Click="UnlockRed" Background="Transparent" Content="Разрешить редактирование" HorizontalAlignment="Center" Width="250" Margin="20"/>
                                     <Button x:Name="lockButton" Foreground="Black" BorderThickness="4" Click="lockRed"  Content="Запретить редактирование" HorizontalAlignment="Center" Width="250" Margin="20" Visibility="Visible" IsEnabled="False"/>
                                     <Button Background="Transparent" Foreground="Black"  BorderThickness="4" Content="Изменить пароль" HorizontalAlignment="Center" Width="250" Margin="20"/>
-                                    <Button Foreground="Black"  BorderThickness="4" Background="Transparent" Content="Удалить аккаунт" HorizontalAlignment="Center" Width="250" Margin="20"></Button>
-                                    <Button  x:Name="savebtn" BorderThickness="4" Foreground="Black" Content="Сохранить" Background="Transparent" HorizontalAlignment="Center" Margin="20" IsEnabled="False"/>
+                                    <Button  x:Name="savebtn" Click="savebtn_Click" BorderThickness="4" Foreground="Black" Content="Сохранить" Background="Transparent" HorizontalAlignment="Center" Margin="20" IsEnabled="False"/>
                                 </StackPanel>
                             </Border>
                         </Grid>
@@ -61,11 +62,11 @@
 
                         
                         <StackPanel Grid.Column="1" Grid.Row="1" >
-                            <TextBox x:Name="Name" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Width="200" materialDesign:HintAssist.Hint="Имя" FontSize="18"  Margin="15"  Foreground="Black" BorderBrush="#FF591C40" BorderThickness="3" Text="{Binding Path=name}" IsEnabled="False"/>
-                            <TextBox x:Name="Surname" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Width="200" materialDesign:HintAssist.Hint="Фамилия" FontSize="18"  Margin="15"  Foreground="Black" BorderBrush="#FF591C40" BorderThickness="3" Text="{Binding Path=surname}" IsEnabled="False"/>
-                            <TextBox  x:Name="EMail" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Width="200" materialDesign:HintAssist.Hint="E-mail" FontSize="18"  Margin="15"  Foreground="Black" BorderBrush="#FF591C40" BorderThickness="3" Text="{Binding Path=mail}" IsEnabled="False"/>
-                            <TextBox x:Name="Birthday" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Width="200" materialDesign:HintAssist.Hint="Дата рождения" FontSize="18"  Margin="15"  Foreground="Black" BorderBrush="#FF591C40" BorderThickness="3" Text="{Binding Path=birthday, StringFormat=dd/MM/yyyy}" IsEnabled="False" UndoLimit="96" MaxLength="10"/>
-                            <TextBox  x:Name="Phone" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Width="200" materialDesign:HintAssist.Hint="Номер телефона" FontSize="18"  Margin="15"  Foreground="Black" BorderBrush="#FF591C40" BorderThickness="3" Text="{Binding Path=phone}" IsEnabled="False" MaxLength="11"/>
+                            <TextBox x:Name="Name" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Width="200" materialDesign:HintAssist.Hint="Имя" FontSize="18"  Margin="15"  Foreground="Black" BorderBrush="#FF591C40" BorderThickness="3" Text="{Binding User.Name}" IsEnabled="False"/>
+                            <TextBox x:Name="Surname" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Width="200" materialDesign:HintAssist.Hint="Фамилия" FontSize="18"  Margin="15"  Foreground="Black" BorderBrush="#FF591C40" BorderThickness="3" Text="{Binding User.SurName}" IsEnabled="False"/>
+                            <TextBox  x:Name="EMail" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Width="200" materialDesign:HintAssist.Hint="E-mail" FontSize="18"  Margin="15"  Foreground="Black" BorderBrush="#FF591C40" BorderThickness="3" Text="{Binding User.Email}" IsEnabled="False"/>
+                            <TextBox x:Name="Birthday" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Width="200" materialDesign:HintAssist.Hint="Дата рождения" FontSize="18"  Margin="15"  Foreground="Black" BorderBrush="#FF591C40" BorderThickness="3" Text="{Binding User.BirtDay, StringFormat=dd/MM/yyyy}" IsEnabled="False" UndoLimit="96" MaxLength="10"/>
+                            <TextBox  x:Name="Phone" Style="{DynamicResource MaterialDesignOutlinedTextBox}" Width="200" materialDesign:HintAssist.Hint="Номер телефона" FontSize="18"  Margin="15"  Foreground="Black" BorderBrush="#FF591C40" BorderThickness="3" Text="{Binding User.Phone}" IsEnabled="False" MaxLength="11"/>
                         </StackPanel>
 
                     </Grid>
@@ -108,8 +109,16 @@
                             <TextBlock Text="Обучение" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
+                    
                 </ListView >
-                
+                <ListView  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="White" PreviewMouseLeftButtonDown="Teaching">
+                    <ListViewItem Height="60" PreviewMouseLeftButtonDown="Results" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Star" Width="25" Height="25" VerticalAlignment="Center" Margin="5" />
+                            <TextBlock Text="Результаты" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView >
                 
                 <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="White" PreviewMouseLeftButtonDown="Logout">
                     <ListViewItem Height="60">

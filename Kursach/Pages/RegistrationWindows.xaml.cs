@@ -13,6 +13,7 @@ using Kursach.ViewModel;
 using Kursach.ObjClas;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Kursach.services;
 
 namespace Kursach.Pages
 {
@@ -34,6 +35,27 @@ namespace Kursach.Pages
         private void psbPassSecond_PasswordChanged(object sender, RoutedEventArgs e)
         {
             AuthorizationViewModel.Password2 = psbPassSecond.Password;
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            UserService userService = new UserService();
+            if(txbLogin.Text != null || txbPassFirst.Text == psbPassSecond.Password || txbData.Text == null || txbPhone == null || txbEmail.Text == null || txbSurname.Text == null  )
+            {
+                bool result = await userService.RegisterUser(txbLogin.Text, txbPassFirst.Text, txbEmail.Text, txbData.Text, txbName.Text, txbSurname.Text, Convert.ToInt32(txbPhone.Text));
+                if (result)
+                {
+                    MessageBox.Show("Регистрация прошла успешка");
+                }
+                else
+                {
+                    MessageBox.Show("Пользователь с таким логином уже существует");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Введите данные корректно");
+            }
         }
     }
 }

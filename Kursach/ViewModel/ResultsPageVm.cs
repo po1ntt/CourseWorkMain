@@ -21,7 +21,7 @@ namespace Kursach.ViewModel
             set
             {
                 _SelectedCathegory = value;
-                string login = Preferences.Get("Login", string.Empty);
+                string login = AuthorizationViewModel.Login;
                 if (_SelectedCathegory != null)
                 {
                     GetItemsForCathegory(_SelectedCathegory.CathegoryId, login);

@@ -18,8 +18,7 @@ using System.Configuration;
 using Kursach.ObjClas;
 using Kursach.Model;
 using Kursach.ViewModel;
-
-
+using Kursach.services;
 
 namespace Kursach.Pages
 {
@@ -35,14 +34,18 @@ namespace Kursach.Pages
         public string surname { get; set; }
 
         public static string log_info { get; set; }
-        public ProfileUser()
+
+        public static Users thisuser { get; set; }
+        public  ProfileUser()
         {
            
             InitializeComponent();
+            UserService user = new UserService();
             log_info = AuthorizationViewModel.Login;
+            DataContext = new ProfileVM();
+            
 
-
-
+           
         }
         private void CloseApp(object sender, MouseButtonEventArgs e)
         {
@@ -73,8 +76,13 @@ namespace Kursach.Pages
         }
 
 
-     
-      
+        private void Results(object sender, MouseButtonEventArgs e)
+        {
+            ObjClas.Frame.FrameOBJ.Navigate(new ResultPage());
+
+
+        }
+
 
         private void UnlockRed(object sender, RoutedEventArgs e)
         {
@@ -110,6 +118,21 @@ namespace Kursach.Pages
             savebtn.IsEnabled = false;
         }
 
-     
+        private async void savebtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            UserService userService = new UserService();
+            bool result = await userService.UpdateUser(Name.Text, thisuser.RoleId, thisuser.Login, Birthday.Text, Surname.Text,Convert.ToInt32(Phone.Text), EMail.Text, thisuser.Password);
+            if (result)
+            {
+                MessageBox.Show("Данные обновлены");
+            }
+            else
+            {
+                MessageBox.Show("Ошибка");
+            }
+        }
+
+       
     }
 }
