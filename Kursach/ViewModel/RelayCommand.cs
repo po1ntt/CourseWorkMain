@@ -19,6 +19,10 @@ namespace Kursach.ViewModel
             this.canExecute = canExecute;
         }
 
+        public RelayCommand(Action<string> action, object v)
+        {
+        }
+
         public bool CanExecute(object parameter)
         {
             return this.canExecute == null || this.canExecute(parameter);

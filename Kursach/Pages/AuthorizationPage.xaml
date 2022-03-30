@@ -54,7 +54,7 @@
                                              Margin="7 8 0 0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Grid.Row="1" Height="50" VerticalAlignment="Top" Margin="107,100,107,0">
-                    <Button BorderBrush="FloralWhite" Background="Transparent" Content="Войти" HorizontalAlignment="Left" Margin="22 0 0 0" VerticalAlignment="Center" Width="74"  Command="{Binding  AuthorizationClick}"/>
+                    <Button Click="Authorication_Click" BorderBrush="FloralWhite" Background="Transparent" Content="Войти" HorizontalAlignment="Left" Margin="22 0 0 0" VerticalAlignment="Center" Width="74"  Command="{Binding  AuthorizationClick}"/>
                     <Button  BorderBrush="FloralWhite" Content="Регистрация" HorizontalAlignment="Center" Margin="90 0 0 0" VerticalAlignment="Center" Width="113" Background="Transparent" Command="{Binding OpenWndReg}"/>
                 </StackPanel>
 

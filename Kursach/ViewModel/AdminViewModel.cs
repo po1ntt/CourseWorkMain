@@ -32,103 +32,19 @@ namespace Kursach.ViewModel
      
 
 
-        private string filtertext { get; set; }
-        public List<Users> userList = CommandsSqlClass.getallusers();
-
-        public List<Role> roleList = CommandsSqlClass.GetRoles();
-        public List<Users> UserList
-        {
-            get { return userList; }
-            set
-            {
-                userList = value;
-                NotifyPropertyChanged("UserList");
-            }
-        }
-        public List<Role> RoleList
-        {
-            get { return roleList; }
-            set
-            {
-                roleList = value;
-                NotifyPropertyChanged("RoleList");
-            }
-        }
+       
+   
         public static Users SelectedUser { get; set; }
 
-        public string FilterText
-        {
-            get { return filtertext; }
-            set
-            {
-
-                filtertext = value;
-                NotifyPropertyChanged("FilterText");
-            }
-        }
+      
         public AdminViewModel()
         {
-            FilteringText(FilterText);
         }
-        public void FilteringText(string filter)
-        {
-            VictrovinaEntities context = new VictrovinaEntities();
-            if (filter != null)
-            {
-                
-                    AdminInterface.UserListst.ItemsSource = null;
-                    AdminInterface.UserListst.Items.Clear();
-                    AdminInterface.UserListst.ItemsSource = context.Users.Where(p => p.login.Contains(filter) || p.mail.Contains(filter) || p.surname.Contains(filter)).ToList();
-                    AdminInterface.UserListst.Items.Refresh();
-
-                
-            }
-            
-        }
-
+      
         #region commands
 
-        private RelayCommand deleteuser;
-        public RelayCommand DeleteUser
-        {
-            get
-            {
-                return deleteuser ?? new RelayCommand(obj =>
-                {
-                    
-
-                    if(SelectedUser != null)
-                    {
-                        VictrovinaEntities context = new VictrovinaEntities();
-                        var user = context.Users.Where(p => p.login == SelectedUser.login).FirstOrDefault();
-                        context.Users.Remove(user);
-                        context.SaveChangesAsync();
-                        MessageBox.Show("Пользователь успешно удален!");
-                        UpdateAllDatagrid();
-                        
-                    }
-                    else
-                    {
-                        MessageBox.Show("Пользователь не выбран!");
-                    }
-
-                    
-                });
-            }
-        }
-        private RelayCommand filtering;
-        public RelayCommand Filtering
-        {
-            get
-            {
-                return filtering ?? new RelayCommand(obj =>
-                {
-                    FilteringText(FilterText);
-                    if (filtertext == null)
-                        AdminInterface.UserListst.ItemsSource = userList;
-                });
-            }
-        }
+       
+     
         private RelayCommand updateuserOpen;
         public RelayCommand UpdateUserOpen
         {
@@ -150,51 +66,8 @@ namespace Kursach.ViewModel
                 });
             }
         }
-        private RelayCommand edituser;
-        public RelayCommand EditUser
-        {
-            get
-            {
-                return edituser ?? new RelayCommand(obj =>
-                {
-                    Window window = obj as Window;
-                    string result = "не выбран пользователь";
-                    
-                    if (SelectedUser != null && Id_role != null)
-                    {
-                        string date = Birthday.ToString();
-                        DateTime.Parse(date);
-                        result = CommandsSqlClass.EditUserInfo(SelectedUser, Name, Surname, date, Phone, Mail, Id_role.id_r);
-                        UpdateAllDatagrid();
-                        SetNullValuesToProperties();
-                        MessageBox.Show(result);
-                        window.Close();
-                    }
-
-                });
-            }
-        }
-        private RelayCommand addNewUser;
-        public RelayCommand AddNewUser
-        {
-            get
-            {
-               
-                return addNewUser ?? new RelayCommand(obj =>
-                {
-                    
-                    Window window = obj as Window;
-                    string result = "ошибка";
-                    string date = Birthday.ToString();
-                    DateTime.Parse(date);
-                    result = CommandsSqlClass.Create_user(Name, Surname, date, Mail,Password,Login,Id_role.id_r,Phone);
-                    UpdateAllDatagrid();
-                    SetNullValuesToProperties();
-                    MessageBox.Show(result);
-                    window.Close();
-                });
-            }
-        }
+      
+        
         private RelayCommand openWndCreateuser;
         public RelayCommand OpenWndCreateUser
         {
@@ -228,10 +101,10 @@ namespace Kursach.ViewModel
         }
         private void UpdateAllDatagrid()
         {
-            UserList = CommandsSqlClass.getallusers();
+           // UserList = CommandsSqlClass.getallusers();
             AdminInterface.UserListst.ItemsSource = null;
             AdminInterface.UserListst.Items.Clear();
-            AdminInterface.UserListst.ItemsSource = UserList;
+          //  AdminInterface.UserListst.ItemsSource = UserList;
             AdminInterface.UserListst.Items.Refresh();
         }
 

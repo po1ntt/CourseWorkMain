@@ -29,7 +29,6 @@ namespace Kursach.Pages
         {
             
             InitializeComponent();
-            VictrovinaEntities context = new VictrovinaEntities();
             log_info = AuthorizationViewModel.Login;
             DataContext = new AdminViewModel();
             UserListst = dgdata;

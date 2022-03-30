@@ -73,24 +73,8 @@ namespace Kursach.Pages
         }
 
 
-        private void Page_Initialized(object sender, EventArgs e)
-        {
-
-            YourLogin.Text = log_info;
-            gridprofile.DataContext = CommandsSqlClass.GetUsersBylogin(log_info);
-        }
-
-        private void DeleteAccount(object sender, RoutedEventArgs e)
-        {
-          if( MessageBox.Show("Удалить аккаунт?","Удаление аккаунта", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-            {
-                VictrovinaEntities context = new VictrovinaEntities();
-                context.Users.Remove(context.Users.Where(x => x.login == log_info).FirstOrDefault());
-                context.SaveChangesAsync();
-                ObjClas.Frame.FrameOBJ.Navigate(new AuthorizationPage());
-            }
-         
-        }
+     
+      
 
         private void UnlockRed(object sender, RoutedEventArgs e)
         {
@@ -126,27 +110,6 @@ namespace Kursach.Pages
             savebtn.IsEnabled = false;
         }
 
-        private void SaveData(object sender, RoutedEventArgs e)
-        {
-            VictrovinaEntities context = new VictrovinaEntities();
-            var user = context.Users
-                .Where(c => c.login == log_info)
-                .FirstOrDefault();
-            user.phone = Phone.Text;
-            user.mail = EMail.Text;
-            user.birthday = DateTime.Parse(Birthday.Text);
-            user.name = Name.Text;
-            user.surname = Surname.Text;
-            context.SaveChangesAsync();
-            Name.IsEnabled = false;
-            Surname.IsEnabled = false;
-            EMail.IsEnabled = false;
-            Phone.IsEnabled = false;
-            lockButton.IsEnabled = false;
-            unlockbutton.IsEnabled = true;
-            savebtn.IsEnabled = false;
-            gridprofile.DataContext = CommandsSqlClass.GetUsersBylogin(log_info);
-            MessageBox.Show("успех");
-        }
+     
     }
 }

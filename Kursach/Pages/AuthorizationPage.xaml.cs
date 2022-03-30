@@ -15,6 +15,9 @@ using System.Windows.Shapes;
 using Kursach.ObjClas;
 using Kursach.ViewModel;
 using Kursach.Model;
+using Kursach.services;
+using Kursach.Properties;
+using System.IO;
 
 namespace Kursach.Pages
 {
@@ -23,6 +26,8 @@ namespace Kursach.Pages
     /// </summary>
     public partial class AuthorizationPage : Page
     {
+        private static readonly string appData =
+    System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MyLoginSaver");
         public AuthorizationPage()
         {
             InitializeComponent();
@@ -48,6 +53,22 @@ namespace Kursach.Pages
         private void txbPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
             AuthorizationViewModel.Password = txbPassword.Password;
+        }
+
+        private async void Authorication_Click(object sender, RoutedEventArgs e)
+        {
+            var UserServices = new UserService();
+            bool exists = await UserServices.LoginUser(txbLogin.Text, txbPassword.Password);
+            if (exists == false)
+            {
+                MessageBox.Show("Данные не верны");
+            }
+            else
+            {
+                
+                ObjClas.Frame.FrameOBJ.Navigate(new UserInterface());
+            }
+            
         }
     }
 }

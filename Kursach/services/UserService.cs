@@ -1,51 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using FireSharp;
-using FireSharp.Config;
 using Kursach.Model;
+
+using System;
+using Firebase.Database;
 
 namespace Kursach.services
 {
-    class UserService
-    {
-        public class UserServices
+  
+        public class UserService
         {
-            FirebaseConfig config = new FirebaseConfig
-            {
-                BasePath = "https://victorinaproject-default-rtdb.firebaseio.com/"
-            };
             FirebaseClient client;
-            public UserServices()
+            public UserService()
             {
-                client = new FirebaseClient(config);
+                client = new FirebaseClient("https://victorinaproject-default-rtdb.firebaseio.com/");
             }
             public async Task<bool> IsUserExists(string login)
             {
-                bool Exists = false;
-                var users = await client.GetAsync("Users");
-                List<Users> p = users.ResultAs<List<Users>>();
-                foreach(var item in p)
-                {
-                    
-                    if(item.Login == login)
-                    {
-                        Exists = true;
-                        break;
-                    }
-                    
-                }
-                return Exists;
-            
-               
+                var user = (await client.Child("Users").OnceAsync<Users>()).Where(u => u.Object.Login == login).FirstOrDefault();
+                return (user != null);
             }
             public async Task<bool> RegisterUser(string login, string password, string email)
             {
                 if (await IsUserExists(login) == false)
                 {
-                    await client.Child("Users").PostAsync(new UserModel()
+                    await client.Child("Users").PostAsync(new Users()
                     {
                         Login = login,
                         Password = password,
@@ -61,14 +41,14 @@ namespace Kursach.services
             }
             public async Task<bool> LoginUser(string login, string password)
             {
-                var user = (await client.Child("Users").OnceAsync<UserModel>()).Where(u => u.Object.Login == login)
+                var user = (await client.Child("Users").OnceAsync<Users>()).Where(u => u.Object.Login == login)
                     .Where(u => u.Object.Password == password).FirstOrDefault();
                 return (user != null);
             }
-            public async Task<List<UserModel>> SelectUsers()
+            public async Task<List<Users>> SelectUsers()
             {
-                var users = (await client.Child("Users").OnceAsync<UserModel>())
-                    .Select(c => new UserModel
+                var users = (await client.Child("Users").OnceAsync<Users>())
+                    .Select(c => new Users
                     {
                         Login = c.Object.Login,
                         SurName = c.Object.SurName,
@@ -80,5 +60,7 @@ namespace Kursach.services
                 return users;
 
             }
+
+
         }
-}
+    } 

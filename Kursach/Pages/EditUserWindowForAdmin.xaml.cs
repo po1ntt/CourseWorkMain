@@ -28,12 +28,7 @@ namespace Kursach.Pages
 
             InitializeComponent();
             DataContext = new AdminViewModel();
-            AdminViewModel.SelectedUser = usertoedit;
-            AdminViewModel.Name = usertoedit.name;
-            AdminViewModel.Surname = usertoedit.surname;
-            AdminViewModel.Birthday =DateTime.Parse(usertoedit.birthday.ToString());
-            AdminViewModel.Phone = usertoedit.phone;
-            AdminViewModel.Mail = usertoedit.mail;
+           
             
            
         }

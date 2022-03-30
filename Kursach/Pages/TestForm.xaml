@@ -4,36 +4,62 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Kursach.Pages"
+      xmlns:vm ="clr-namespace:Kursach.ViewModel" d:DataContext="{d:DesignInstance Type=vm:TestFormVM}"
       mc:Ignorable="d" 
       Height="700" Width="800"
       Title="TestForm">
 
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="569*"/>
+            <ColumnDefinition Width="231*"/>
+        </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="25*"/>
             <RowDefinition Height="249*"/>
-            <RowDefinition Height="26*"/>
-        </Grid.RowDefinitions>
 
-        <Border  Background="#FF591C40" BorderThickness="10,10,10,10"  Padding="5" CornerRadius="15" Grid.RowSpan="3">
+        </Grid.RowDefinitions>
+        <Border   Background="#FF591C40" BorderThickness="10,10,0,10"  Padding="5" CornerRadius="15,0,0,15" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="39*"/>
+                    <RowDefinition Height="631*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="93*"/>
+                    <ColumnDefinition Width="37*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding SelectedTest.Name}" Foreground="White" TextAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Height="27" FontSize="25" HorizontalAlignment="Center" Width="186"/>
+                <Image HorizontalAlignment="Center" Source="https://cdn1.iconfinder.com/data/icons/unigrid-bluetone-multimedia-vol-5/60/020_236_file_document_test_test_exam_examination_pencil_eraser_choice_choose-256.png" Height="114" Width="110"  VerticalAlignment="Top"  Grid.Row="1"/>
+                <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="432"  Height="435" >
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding QestionsBuTest.Count}" FontSize="30" Foreground="White" />
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding CurrentQuestion.TextQuest}" FontSize="25" Foreground="White"/>
+                    <Button Height="50" x:Name="FirstAnswer" Content="{Binding CurrentQuestion.quest_answer1}" Click="Answer_Click" Foreground="Black" HorizontalContentAlignment="Center" Margin="10" Background="White" BorderBrush="DarkBlue" BorderThickness="3"/>
+                    <Button Height="50" x:Name="SecondAnswer" Content="{Binding CurrentQuestion.quest_answer2}" Click="Answer_Click" Foreground="Black" HorizontalContentAlignment="Center" Margin="10" Background="White" BorderBrush="DarkBlue" BorderThickness="3"/>
+                    <Button Height="50" x:Name="ThirdAnswer" Content="{Binding CurrentQuestion.quest_answer3}" Click="Answer_Click" Foreground="Black" HorizontalContentAlignment="Center" Margin="10" Background="White" BorderBrush="DarkBlue" BorderThickness="3"/>
+                    <Button Height="50" x:Name="FourAnswer" Content="{Binding CurrentQuestion.quest_answer4}" Click="Answer_Click" Foreground="Black" HorizontalContentAlignment="Center" Margin="10" Background="White" BorderBrush="DarkBlue" BorderThickness="3"/>
+                    <Button Background="Gray" IsEnabled="False" Click="NextButton_Click" x:Name="NextButton"  Content="Следующий вопрос" Height="50" VerticalContentAlignment="Center" Foreground="Black"/>
+                    <Button Visibility="Collapsed" Click="OverButton_Click"  Background="Gray"  x:Name="OverButton" Content="Завершить тест" Height="50" VerticalContentAlignment="Center" Foreground="Black" />
+                </StackPanel>
+            </Grid>
 
         </Border>
-        <ScrollViewer Grid.Row="1">
-            <Grid Grid.Row="1">
-                <Border Margin="10 0 0 0" Background="White" BorderThickness="10 10 10 10" CornerRadius="20" >
-                    <StackPanel x:Name="stackTest">
-                        <!--<TextBlock Text="FirstQuestion:" FontSize="20" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
-                        <RadioButton Content="TestTrue" HorizontalAlignment="Left"  Margin="2" FontSize="18"></RadioButton>
-                        <RadioButton Content="TestFalse" HorizontalAlignment="Left" Margin="2" FontSize="18"></RadioButton>
-                        <RadioButton Content="TestFalse" HorizontalAlignment="Left"  Margin="2" FontSize="18"></RadioButton>
-                        <RadioButton Content="TestFalse" HorizontalAlignment="Left"  Margin="2" FontSize="18"></RadioButton>-->
-                       
-                    </StackPanel>
-                </Border>
+
+        <Border Background="White" BorderBrush="#FF591C40" BorderThickness="10,0,0,0" CornerRadius="10,0,0,10" Grid.Column="1" Grid.RowSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="17*"/>
+                    <RowDefinition Height="158*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Меню" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="50" FontWeight="DemiBold"/>
+                <StackPanel Grid.Row="1">
+                    <Button Click="SaveButtons_Click"  Height="80" Margin="10" Background="Transparent" BorderBrush="Blue" Content="Завершить тест"  Foreground="Black" FontWeight="DemiBold"  />
+                    <Button Click="SaveButtons_Click" Height="80" Margin="10" Background="Transparent" BorderBrush="Blue" Content="Выйти без сохранения" Foreground="Black" FontWeight="DemiBold"  />
+                    <Image Source="https://cdn3.iconfinder.com/data/icons/artificial-intelligence-ai-glyph/64/digital-brain-ai-machine-learning-artificial-intelligence-256.png" />
+                </StackPanel>
             </Grid>
-        </ScrollViewer>
-        <TextBlock Text="TestExample" FontWeight="Medium" Grid.Row="0" FontSize="20" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" />
-        <Button Grid.Row="2" Content="Завершить" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 25 20" Background="White" Foreground="Black" FontSize="18" BorderThickness="0 0 0 0" Width="125"/>
-        <Button Click="goback" Grid.Row="2" Content="Назад" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25 0 0 20"  Background="White" Foreground="Black" FontSize="18" BorderThickness="0 0 0 0" Width="86"/>
+        </Border>
     </Grid>
 </Page>

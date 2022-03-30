@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Kursach.Model
 {
-    public class Tema
+   public class LearnCategory
     {
+        public int id_learncat { get; set; }
+        public string NameLernCategory { get; set; }
+        public string ImageLearnCat { get; set; }
         public int TemaID { get; set; }
-        public string NameTema
-        {
-            get; set;
-        }
     }
 }

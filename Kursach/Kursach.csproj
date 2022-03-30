@@ -43,6 +43,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Firebase.Database, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Firebase.Database.1.0.0\lib\portable45-net45+win8+wpa81\Firebase.Database.dll</HintPath>
+    </Reference>
     <Reference Include="FirebaseNet, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FirebaseNet.1.0.1\lib\net46\FirebaseNet.dll</HintPath>
     </Reference>
@@ -155,6 +158,18 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
     <Reference Include="System.Reflection, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reflection.4.1.0\lib\net462\System.Reflection.dll</HintPath>
       <Private>True</Private>
@@ -208,6 +223,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mobile" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -226,24 +242,26 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\ItemLearnCategory.cs" />
+    <Compile Include="Model\LearnCategory.cs" />
+    <Compile Include="Model\MySettings.cs" />
     <Compile Include="Model\Questions.cs" />
     <Compile Include="Model\Results.cs" />
+    <Compile Include="Model\Role.cs" />
     <Compile Include="Model\Tema.cs" />
     <Compile Include="Model\Tests.cs" />
     <Compile Include="Model\Users.cs" />
-    <Compile Include="ObjClas\CommandsSqlClass.cs" />
     <Compile Include="Pages\AdminInterface.xaml.cs">
       <DependentUpon>AdminInterface.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ObjClas\DataBaseEntity.cs" />
+    <Compile Include="Pages\CategoryWnd.xaml.cs">
+      <DependentUpon>CategoryWnd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CreateNewUser.xaml.cs">
       <DependentUpon>CreateNewUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\EditUserWindowForAdmin.xaml.cs">
       <DependentUpon>EditUserWindowForAdmin.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\KuratorInteface.xaml.cs">
-      <DependentUpon>KuratorInteface.xaml</DependentUpon>
     </Compile>
     <Compile Include="ObjClas\Frame.cs" />
     <Compile Include="Pages\ProfileUser.xaml.cs">
@@ -258,9 +276,18 @@
     <Compile Include="Pages\UserInterface.xaml.cs">
       <DependentUpon>UserInterface.xaml</DependentUpon>
     </Compile>
+    <Compile Include="services\CathegoryService.cs" />
+    <Compile Include="services\ItemLearningCathegory.cs" />
+    <Compile Include="services\LearningCathegoryService.cs" />
+    <Compile Include="services\QuestionsService.cs" />
+    <Compile Include="services\ResultsService.cs" />
+    <Compile Include="services\TemaService.cs" />
+    <Compile Include="services\TestItemService.cs" />
     <Compile Include="services\UserService.cs" />
     <Compile Include="ViewModel\AdminViewModel.cs" />
+    <Compile Include="ViewModel\AsyncRelayCommand.cs" />
     <Compile Include="ViewModel\AuthorizationViewModel.cs" />
+    <Compile Include="ViewModel\CategoryVm.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\TestFormVM.cs" />
     <Compile Include="ViewModel\UserInterfaceViewModelcs.cs" />
@@ -272,15 +299,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\CategoryWnd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\CreateNewUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\EditUserWindowForAdmin.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\KuratorInteface.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

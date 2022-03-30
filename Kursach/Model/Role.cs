@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Kursach.Model
 {
-    public class Tema
+   public class Role
     {
-        public int TemaID { get; set; }
-        public string NameTema
-        {
-            get; set;
-        }
+        public int id_role { get; set; }
+        public string NameRole { get; set; }
     }
 }

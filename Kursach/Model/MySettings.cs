@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace Kursach.Model
 {
-    public class Tema
+    public class MySettings
     {
-        public int TemaID { get; set; }
-        public string NameTema
-        {
-            get; set;
-        }
+        public string Login { get; set; }
     }
 }

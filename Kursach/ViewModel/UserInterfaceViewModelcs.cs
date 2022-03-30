@@ -16,71 +16,76 @@ using System.Windows.Media;
 using Kursach.Pages;
 using Brushes = System.Windows.Media.Brushes;
 
+using Kursach.services;
 namespace Kursach.ViewModel
 {
-    class UserInterfaceViewModelcs : INotifyPropertyChanged
+    public class UserInterfaceViewModelcs : INotifyPropertyChanged
     {
         
+        private Category _SelectedCathegory;
+
+        public Category SelectedCathegory
+        {
+            get { return _SelectedCathegory; }
+            set {
+                _SelectedCathegory = value;
+                CategoryVm categoryVm = new CategoryVm();
+                if(_SelectedCathegory != null)
+                {
+                    categoryVm.GetTestsItems(_SelectedCathegory.CathegoryId);
+                }
+                OnPropertyChanged();
+            }
+        }
+
+        private Tema _SelectedTema;
+
+        public Tema SelectedTema
+        {
+            get { return _SelectedTema; }
+            set { _SelectedTema = value;
+                if(_SelectedTema != null)
+                {
+                    GetCategories(SelectedTema.TemaID);
+                }
+                OnPropertyChanged();
+            }
+        }
+
+
         public UserInterfaceViewModelcs()
         {
-            VictrovinaEntities context = new VictrovinaEntities();
-            var cathegory = context.CathegoryTests.ToArray();
-            int i = 0;
-            int id = 1;
-            int d = 0;
+            TemaColl = new ObservableCollection<Tema>();
+            categories = new ObservableCollection<Category>();
+            GetTema();
 
-            while (i < cathegory.Length)
-            {
-                int k = 1;
-                var cathegory1 = context.CathegoryTests.Where(x => x.id_cat == id).FirstOrDefault();
-                Button NameTest = new Button();
-                NameTest.Background = Brushes.Transparent;
-                NameTest.Name = $"button{id}";
-
-                NameTest.Content = $"{cathegory1.name_cathegory}";
-                NameTest.Foreground = Brushes.Black;
-                
-                UserInterface.stackfortest.Children.Add(NameTest);
-                var tests = context.Tests.Where(x => x.id_cathegory == id).FirstOrDefault();
-                if (tests != null)
-                {
-                    StackPanel submenu = new StackPanel();
-                    var test2 = context.Tests.Where(x => x.id_cathegory == id).ToArray();
-                    while (d < test2.Length)
-                    {
-
-                        var tests3 = context.Tests.Where(x => x.id_t == k).FirstOrDefault();
-                        submenu.Margin = new Thickness(20, 0, 0, 0);
-                        submenu.Name = $"submenu{id}";
-                        Button Chose = new Button();
-                        Chose.Content = $"{tests3.name_test}";
-                        Chose.Command = NavigateTest;
-                        Chose.HorizontalContentAlignment = HorizontalAlignment.Left;
-                        submenu.Children.Add(Chose);
-                        d++;
-                        k++;
-                    }
-                    UserInterface.stackfortest.Children.Add(submenu);
-                }
-
-                id++;
-                i++;
-                d = 0;
-
-            }
+            
         }
-
-        private RelayCommand navigateTest;
-        public RelayCommand NavigateTest
+        public ObservableCollection<Tema> TemaColl { get; set; }
+        public ObservableCollection<Category> categories { get; set; }
+        public async void GetTema()
         {
-            get
+            var TemaServices = new TemaService();
+            var TemaColl1 = await TemaServices.GetListTemaAsunc();
+
+            foreach (var item in TemaColl1)
             {
-                return navigateTest ?? new RelayCommand(obj =>
-                {
-                    ObjClas.Frame.FrameOBJ.Navigate(new TestForm());
-                });
+                TemaColl.Add(item);
             }
         }
+        public async void GetCategories(int temaid)
+        {
+            var categoriesServices = new services.СathegoryServices();
+            var cathegoriesColl = await categoriesServices.GetCathegoryBuTema(temaid);
+            categories.Clear();
+            foreach(var item in cathegoriesColl)
+            {
+                categories.Add(item);
+            }
+            
+        }
+
+      
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {

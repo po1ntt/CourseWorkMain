@@ -15,9 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Kursach.Model;
 using Kursach.ViewModel;
-
-
-
+using Kursach.Properties;
 
 namespace Kursach.Pages
 {
@@ -30,20 +28,16 @@ namespace Kursach.Pages
         public static string log_info { get; set; }
         public UserInterface()
         {
-            VictrovinaEntities context = new VictrovinaEntities();
             InitializeComponent();
             log_info = AuthorizationViewModel.Login;
-            stackfortest = stack;
+
             DataContext = new UserInterfaceViewModelcs();
             
          
 
         }
 
-        private void subl_click(object sender, RoutedEventArgs e)
-        {
-            ObjClas.Frame.FrameOBJ.Navigate(new TestForm());
-        }
+      
         private void submenycloseandop(object sender, RoutedEventArgs e)
         {
             
@@ -116,34 +110,38 @@ namespace Kursach.Pages
 
         }
 
-        private void Profile(object sender, MouseButtonEventArgs e)
+        private  void Profile(object sender, MouseButtonEventArgs e)
         {
             ObjClas.Frame.FrameOBJ.Navigate(new ProfileUser());
             
           
         }
 
-        private void Page_Initialized(object sender, EventArgs e)
-        {
-            YourLogin.Text = log_info;
-
-        }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            YourLogin.Text = log_info;
+            YourLogin.Text = log_info = AuthorizationViewModel.Login;
+
         }
 
-        private void MoveToXamarin(object sender, RoutedEventArgs e)
+
+        private void OpenCenterPosAndOpen(Window window)
         {
-            
+            window.Owner = Application.Current.MainWindow;
+            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            window.ShowDialog();
         }
 
-        private void MoveToWpf(object sender, RoutedEventArgs e)
+
+        private void ListTests_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-        }
+           if(ListTests.SelectedItem != null)
+            {
+                CategoryWnd categoryWnd = new CategoryWnd();
+                OpenCenterPosAndOpen(categoryWnd);
+            }
+            ListTests.SelectedItem = null;
 
-       
+        }
     }
 }

@@ -4,14 +4,19 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Kursach.Pages"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:Kursach.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AdminViewModel}"
-      mc:Ignorable="d" 
+      xmlns:vm ="clr-namespace:Kursach.ViewModel"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:Kursach.ViewModel" 
       Height="700" Width="800"
       Title="UserInterface" FontFamily="Dosis"
       KeepAlive="True"
-      Initialized="Page_Initialized" Loaded="Page_Loaded"
+       Loaded="Page_Loaded"
+      xmlns:properties="clr-namespace:Kursach.Properties"
+      
 
       >
+    <Page.DataContext>
+        <vm:UserInterfaceViewModelcs />
+    </Page.DataContext>
     <Page.Resources>
         <Storyboard x:Key="MenuOpen">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
@@ -45,28 +50,48 @@
 
                 <Border Height="auto" Background="White" CornerRadius="25" Margin="0 0 0 0">
                     <Grid>
-
-
-
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="271*"/>
+                            <ColumnDefinition Width="429*"/>
+                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="55*"/>
                             <RowDefinition Height="611*"/>
                         </Grid.RowDefinitions>
+                        <TextBlock Text="Главная страница" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold" Grid.ColumnSpan="2" Margin="219,10" Height="36" Width="262" />
+                        <Border Grid.Row="1" Grid.Column="0" Background="#FF591C40" CornerRadius="10,10,0,10"/>
+
+
+                        <ListView Grid.Row="1" Grid.Column="0" SelectionMode="Single"  HorizontalAlignment="Center" Background="#FF591C40"  ItemsSource="{Binding TemaColl}" SelectedItem="{Binding SelectedTema}" >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Margin="-15,10,0,0" Background="White" Width="250" Height="100" >
+                                        <TextBlock Text="{Binding NameTema}" Foreground="Black" FontSize="30" FontWeight="Bold"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <Border Grid.Row="1" Grid.Column="1" Background="Transparent" BorderBrush="#FF591C40" BorderThickness="10,5,0,0" CornerRadius="10,0,10,0"/>
+                        <ListView Grid.Row="1" Grid.Column="1" ItemsSource="{Binding categories}" SelectedItem="{Binding SelectedCathegory}" SelectionChanged="ListTests_SelectionChanged" x:Name="ListTests" HorizontalAlignment="Center" SelectionMode="Extended"  >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="Blue" BorderThickness="3" CornerRadius="20" Width="300" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding CathegoryName}" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="25" FontWeight="DemiBold">
+                                                
+                                            </TextBlock>
+                                            <Image Source="{Binding ImageUrl}" Margin="0,-5,0,0" Height="80" Width="80" />
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
 
 
 
 
-                        <StackPanel Grid.Row="1" x:Name="stack" DataContext="{Binding }">
 
-                        </StackPanel>
-                        <StackPanel Grid.Row="0">
 
-                            <DockPanel VerticalAlignment="Top" >
-                                <Button VerticalAlignment="Top" Height="55" HorizontalAlignment="Left" Width="350" Content="WPF(C#)" Background="Transparent" BorderBrush="Black" Foreground="#FF6A72C5" FontWeight="DemiBold" Margin="0"  BorderThickness="0 0 0 4"/>
-                                <Button VerticalAlignment="Top" Height="55" HorizontalAlignment="Right" Width="350" Content="Xamarin.Forms" Background="Transparent" BorderBrush="Black" Foreground="Black" FontWeight="DemiBold"   BorderThickness="0 0 0 4" />
-                            </DockPanel>
-
-                        </StackPanel>
 
                     </Grid>
                 </Border>
@@ -126,6 +151,7 @@
                     </ListViewItem>
                 </ListView>
             </StackPanel>
+
         </Grid>
     </Grid>
 </Page>

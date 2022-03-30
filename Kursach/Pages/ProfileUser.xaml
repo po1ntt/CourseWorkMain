@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:Kursach.Pages"
       mc:Ignorable="d" 
       Height="700" Width="800"
-      Title="ProfileUser"  Initialized="Page_Initialized">
+      Title="ProfileUser"  >
     <Page.Resources>
         
         <Storyboard x:Key="MenuOpen">
@@ -50,10 +50,10 @@
                             <Border Background="#FFB8D8FF" CornerRadius="25 0 0 25">
                                 <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 90 0 0" Width="323" Height="350">
                                     <Button x:Name="unlockbutton"  Foreground="Black" BorderThickness="4" Click="UnlockRed" Background="Transparent" Content="Разрешить редактирование" HorizontalAlignment="Center" Width="250" Margin="20"/>
-                                    <Button x:Name="lockButton"  Foreground="Black" BorderThickness="4" Click="lockRed" Background="Transparent" Content="Запретить редактирование" HorizontalAlignment="Center" Width="250" Margin="20" Visibility="Visible" IsEnabled="False"/>
+                                    <Button x:Name="lockButton" Foreground="Black" BorderThickness="4" Click="lockRed"  Content="Запретить редактирование" HorizontalAlignment="Center" Width="250" Margin="20" Visibility="Visible" IsEnabled="False"/>
                                     <Button Background="Transparent" Foreground="Black"  BorderThickness="4" Content="Изменить пароль" HorizontalAlignment="Center" Width="250" Margin="20"/>
-                                    <Button Foreground="Black" Click="DeleteAccount" BorderThickness="4" Background="Transparent" Content="Удалить аккаунт" HorizontalAlignment="Center" Width="250" Margin="20"></Button>
-                                    <Button  x:Name="savebtn" BorderThickness="4" Foreground="Black" Content="Сохранить" Background="Transparent" HorizontalAlignment="Center" Margin="20" IsEnabled="False" Click="SaveData"/>
+                                    <Button Foreground="Black"  BorderThickness="4" Background="Transparent" Content="Удалить аккаунт" HorizontalAlignment="Center" Width="250" Margin="20"></Button>
+                                    <Button  x:Name="savebtn" BorderThickness="4" Foreground="Black" Content="Сохранить" Background="Transparent" HorizontalAlignment="Center" Margin="20" IsEnabled="False"/>
                                 </StackPanel>
                             </Border>
                         </Grid>
