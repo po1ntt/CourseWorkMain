@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Kursach.ViewModel;
 using Kursach.Model;
 using System.Text.RegularExpressions;
+using Kursach.services;
 
 namespace Kursach.Pages
 {
@@ -22,13 +23,22 @@ namespace Kursach.Pages
     /// </summary>
     public partial class EditUserWindowForAdmin : Window
     {
+        public static Users user { get; set; }
+        public AdminViewModel cvm { get; set; }
         public EditUserWindowForAdmin(Users usertoedit)
         {
              
 
             InitializeComponent();
-            DataContext = new AdminViewModel();
-           
+            AdminViewModel viewModel = new AdminViewModel();
+            cvm = new AdminViewModel();
+            DataContext = cvm;
+            txbName.Text = usertoedit.Name.ToString();
+            txbData.Text = usertoedit.BirtDay.ToString();
+            txbEmail.Text = usertoedit.Email.ToString();
+            txbPhone.Text = usertoedit.Phone.ToString();
+            txbSurName.Text = usertoedit.SurName.ToString();
+            user = usertoedit;
             
            
         }
@@ -37,6 +47,21 @@ namespace Kursach.Pages
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            UserService userService = new UserService();
+            bool result = await userService.UpdateUser(txbName.Text, cvm.SelectedRole.id_role, user.Login, txbData.Text, txbSurName.Text, Convert.ToInt32(txbPhone.Text), txbEmail.Text, user.Password);
+            if (result)
+            {
+                MessageBox.Show("Данные обновлены");
+                cvm.UpdateAllDatagrid();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка");
+            }
         }
     }
 }

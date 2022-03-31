@@ -10,6 +10,7 @@ using Kursach.ObjClas;
 using Kursach.Pages;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Kursach.services;
 
 namespace Kursach.ViewModel
 {
@@ -29,16 +30,51 @@ namespace Kursach.ViewModel
 
         #endregion
 
-     
 
 
-       
-   
-        public static Users SelectedUser { get; set; }
 
-      
+
+
+
+        private Users _SelectedUser;
+
+        public Users SelectedUser
+        {
+            get { return _SelectedUser; }
+            set { _SelectedUser = value;
+                OnPropertyChanged();
+            }
+        }
+        private Role _SelectedRole;
+
+        public Role SelectedRole
+        {
+            get { return _SelectedRole; }
+            set { _SelectedRole = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
+        public static List<Users> UserList { get; set; }
+
+        public static List<Role> RoleList { get; set; }
+        public async void GetRoleList()
+        {
+            UserService user = new UserService();
+            var roles = await user.Roles();
+            foreach(var item in roles)
+            {
+                RoleList.Add(item);
+            }
+        }
+
         public AdminViewModel()
         {
+            RoleList = new List<Role>();
+            UpdateAllDatagrid();
+            GetRoleList();
         }
       
         #region commands
@@ -84,11 +120,7 @@ namespace Kursach.ViewModel
         #endregion
 
         #region properties
-        private void SetRedBlockControll(Window wnd, string blockname)
-        {
-            Control block = wnd.FindName(blockname) as Control;
-            block.BorderBrush = Brushes.Red;
-        }
+       
         private void SetNullValuesToProperties()
         {
             Phone = null;
@@ -99,12 +131,14 @@ namespace Kursach.ViewModel
             Login = null;
             Birthday = DateTime.Now;
         }
-        private void UpdateAllDatagrid()
+        public async void UpdateAllDatagrid()
         {
-           // UserList = CommandsSqlClass.getallusers();
+            UserService userService = new UserService();
+            // UserList = CommandsSqlClass.getallusers();
+            UserList = await userService.SelectUsers();
             AdminInterface.UserListst.ItemsSource = null;
             AdminInterface.UserListst.Items.Clear();
-          //  AdminInterface.UserListst.ItemsSource = UserList;
+            AdminInterface.UserListst.ItemsSource = UserList;
             AdminInterface.UserListst.Items.Refresh();
         }
 
@@ -127,12 +161,10 @@ namespace Kursach.ViewModel
         #endregion windows
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string propertyname)
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
-            if(PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
-            }
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

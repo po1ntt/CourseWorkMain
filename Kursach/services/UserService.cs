@@ -65,6 +65,20 @@ namespace Kursach.services
                     .FirstOrDefault();
                 return (user != null);
             }
+        public async Task<List<Role>> Roles()
+        {
+            List<Role> roles = (await client.Child("Role").OnceAsync<Role>()).Select(c => new Role
+            {
+                id_role = c.Object.id_role,
+                NameRole = c.Object.NameRole
+            }).ToList();
+            return roles;
+        }
+        public async Task<Role> GetInfoAboutUser(int id_r)
+        {
+            var role = (await Roles()).Where(p => id_r == p.id_role).FirstOrDefault();
+            return role;
+        }
             public async Task<List<Users>> SelectUsers()
             {
                 var users = (await client.Child("Users").OnceAsync<Users>())
@@ -77,7 +91,8 @@ namespace Kursach.services
                         Name = c.Object.Name,
                         Phone = c.Object.Phone,
                         Email = c.Object.Email,
-                        RoleId = c.Object.RoleId
+                        RoleId = c.Object.RoleId,
+                        UserRole = c.Object.UserRole
 
 
                     }).ToList();

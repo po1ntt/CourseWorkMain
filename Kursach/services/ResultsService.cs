@@ -114,6 +114,7 @@ namespace Kursach.services
                     await client.Child("Results")
                         .Child(toUpdateResult.Key)
                         .PutAsync(s);
+                    scorepercent = 0;
                     return true;
                 }
                 else

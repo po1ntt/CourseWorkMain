@@ -15,25 +15,26 @@
         </Grid.RowDefinitions>
         <StackPanel VerticalAlignment="Center" Margin="46,47,46,87" Grid.Row="1" Height="430" >
             <TextBlock Text="Имя" HorizontalAlignment="Center" FontSize="18"/>
-            <TextBox  Margin="3" Text="{Binding Name}"/>
+            <TextBox x:Name="txbName"  Margin="3" />
             <TextBlock Text="Фамилия" HorizontalAlignment="Center" FontSize="18"/>
-            <TextBox  Margin="3" FontSize="18" Text="{Binding Surname}"/>
+            <TextBox x:Name="txbSurName" Margin="3" FontSize="18" />
             <TextBlock Text="Почта" HorizontalAlignment="Center" FontSize="18"/>
-            <TextBox  Margin="3" Text="{Binding Mail}" FontSize="18"/>
+            <TextBox x:Name="txbEmail" Margin="3"  FontSize="18"/>
             <TextBlock Text="Дата рождения" HorizontalAlignment="Center" FontSize="18"/>
-            <DatePicker Margin="3" FontSize="18" SelectedDate="{Binding Birthday, StringFormat=dd/MM/yyyy}"/>
+            <DatePicker x:Name="txbData" Margin="3" FontSize="18" />
             <TextBlock Text="Номер Телефона" HorizontalAlignment="Center" FontSize="18" />
-            <TextBox  Margin="3" FontSize="18" Text="{Binding Phone}" PreviewTextInput="TextBlock_PreviewTextInput"/>
+            <TextBox  x:Name="txbPhone" Margin="3" FontSize="18"  PreviewTextInput="TextBlock_PreviewTextInput"/>
             
             <TextBlock Text="Роль" HorizontalAlignment="Center" FontSize="18"/>
             <ComboBox Margin="3" FontSize="18" ItemsSource="{Binding RoleList}"
-                      SelectedItem="{Binding Id_role}"
-                      DisplayMemberPath="NameRole">
+                      SelectedItem="{Binding SelectedRole}"
+                      DisplayMemberPath="NameRole"
+                      x:Name="cmbRole">
 
             </ComboBox>
         </StackPanel>
-        <Button Grid.Row="2" Content="Потвердить редактирование" Margin="0,13" Height="Auto" Command="{Binding EditUser}"
-                CommandParameter="{Binding ElementName=EditUserWnd}"/>
+        <Button Grid.Row="2" Content="Потвердить редактирование" Margin="0,13" Height="Auto" Click="Button_Click"
+                />
         <TextBlock Grid.Row="0" Text="Редактирование пользователя" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" />
     </Grid>
 </Window>

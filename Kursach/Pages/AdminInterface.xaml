@@ -69,12 +69,15 @@
                                     </ContextMenu>
                                 </DataGrid.ContextMenu>
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Login" Width="100*" Binding="{Binding login, UpdateSourceTrigger=PropertyChanged}" />
-                                    <DataGridTextColumn Header="Email" Width="100*" Binding="{Binding mail, UpdateSourceTrigger=PropertyChanged}" />
-                                    <DataGridTextColumn Header="Phone" Width="100*" Binding="{Binding phone, UpdateSourceTrigger=PropertyChanged}" />
-                                    <DataGridTextColumn Header="Role" Width="100*" Binding="{Binding UserROLE.NameRole, UpdateSourceTrigger=PropertyChanged}" />
-                                    <DataGridTextColumn Header="Birthday" Width="100*"  Binding="{Binding birthday, StringFormat=dd.MM.yyyy, UpdateSourceTrigger=PropertyChanged}"/>
-                                    <DataGridTextColumn Header="Group(soon)" Width="100*" />
+                                    <DataGridTextColumn Header="Login" Width="100*" Binding="{Binding Login, UpdateSourceTrigger=PropertyChanged}" />
+                                    <DataGridTextColumn Header="Email" Width="100*" Binding="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
+                                    <DataGridTextColumn Header="Phone" Width="100*" Binding="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" />
+                                    <DataGridTextColumn Header="Role" Width="100*" Binding="{Binding RoleId, UpdateSourceTrigger=PropertyChanged}" />
+                                    <DataGridTextColumn Header="Birthday" Width="100*"  Binding="{Binding BirtDay, StringFormat=dd.MM.yyyy, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <DataGridTextColumn Header="Name" Width="100*"  Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <DataGridTextColumn Header="Surname" Width="100*"  Binding="{Binding SurName, UpdateSourceTrigger=PropertyChanged}"/>
+
+
                                 </DataGrid.Columns>
 
                             </DataGrid>
@@ -101,14 +104,7 @@
                         <materialDesign:PackIcon Foreground="#FF40142E" Kind="Menu" Width="30" Height="32" />
                     </Button>
                 </Grid>
-                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="White" PreviewMouseLeftButtonDown="Profile">
-                    <ListViewItem Height="60" PreviewMouseLeftButtonDown="Profile">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Account" Width="25" Height="25" VerticalAlignment="Center" Margin="5"/>
-                            <TextBlock Text="Профиль" VerticalAlignment="Center" Margin="20 10"/>
-                        </StackPanel>
-                    </ListViewItem>
-                </ListView>
+                
                 <ListView  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="#FF6A72C5">
                     <ListViewItem Height="60"  >
                         <StackPanel Orientation="Horizontal">

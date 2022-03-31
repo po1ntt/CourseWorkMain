@@ -40,7 +40,7 @@ namespace Kursach.Pages
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             UserService userService = new UserService();
-            if(txbLogin.Text != null || txbPassFirst.Text == psbPassSecond.Password || txbData.Text == null || txbPhone == null || txbEmail.Text == null || txbSurname.Text == null  )
+            if (txbLogin.Text != null && txbPassFirst.Text == psbPassSecond.Password && txbData.Text != null && txbPhone.Text != null && txbEmail.Text != null && txbSurname.Text != null  )
             {
                 bool result = await userService.RegisterUser(txbLogin.Text, txbPassFirst.Text, txbEmail.Text, txbData.Text, txbName.Text, txbSurname.Text, Convert.ToInt32(txbPhone.Text));
                 if (result)

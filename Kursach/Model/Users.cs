@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Kursach.services;
+using System;
+using System.Activities.Expressions;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +20,19 @@ namespace Kursach.Model
         public string Name { get; set; }
         public int Phone { get; set; }
         public int RoleId { get; set; }
+        [NotMapped]
+        public Role UserRole { get; set; }
+       
         
+        public async void getrole()
+        {
+            UserService user = new UserService();
+            UserRole = await user.GetInfoAboutUser(RoleId);
+           
+        }
+        public Users()
+        {
+            getrole();
+        }
     }
 }

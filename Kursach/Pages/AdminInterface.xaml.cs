@@ -35,6 +35,7 @@ namespace Kursach.Pages
           
           
         }
+        #region nav
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
 
@@ -64,8 +65,8 @@ namespace Kursach.Pages
 
         }
 
+        #endregion
 
 
-       
     }
 }

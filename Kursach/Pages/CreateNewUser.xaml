@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Kursach.Pages"
+        xmlns:local="clr-namespace:Kursach.Pages" xmlns:viewmodel="clr-namespace:Kursach.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AuthorizationViewModel}"
         mc:Ignorable="d"
        Title="CreateUser" Height="800" Width="400"
         Name="CreateUserWnd">
@@ -15,28 +15,28 @@
         </Grid.RowDefinitions>
         <StackPanel VerticalAlignment="Center" Margin="46,47,43,10" Grid.Row="1" Height="507" >
             <TextBlock Text="Login" HorizontalAlignment="Center" FontSize="18"/>
-            <TextBox  Margin="3" Text="{Binding Login}"/>
+            <TextBox  Margin="3" x:Name="txbLogin" />
             <TextBlock Text="Password" HorizontalAlignment="Center" FontSize="18"/>
-            <TextBox  Margin="3" Text="{Binding Password}"/>
+            <TextBox  Margin="3" x:Name="txbPassword"/>
             <TextBlock Text="Имя" HorizontalAlignment="Center" FontSize="18"/>
-            <TextBox  Margin="3" Text="{Binding Name}"/>
+            <TextBox  Margin="3" x:Name="txbName"/>
             <TextBlock Text="Фамилия" HorizontalAlignment="Center" FontSize="18"/>
-            <TextBox  Margin="3" FontSize="18" Text="{Binding Surname}"/>
+            <TextBox  Margin="3" x:Name="txbSurName" FontSize="18" />
             <TextBlock Text="Почта" HorizontalAlignment="Center" FontSize="18"/>
-            <TextBox  Margin="3" Text="{Binding Mail}" FontSize="18"/>
+            <TextBox  Margin="3" x:Name="txbEmail" FontSize="18"/>
             <TextBlock Text="Дата рождения" HorizontalAlignment="Center" FontSize="18"/>
-            <DatePicker Margin="3" FontSize="18" SelectedDate="{Binding Birthday, StringFormat=dd/MM/yyyy}"/>
+            <DatePicker Margin="3" x:Name="txbData" FontSize="18" />
             <TextBlock Text="Номер Телефона" HorizontalAlignment="Center" FontSize="18" />
-            <TextBox  Margin="3" FontSize="18" Text="{Binding Phone}" PreviewTextInput="TextBlock_PreviewTextInput"/>
+            <TextBox  Margin="3" FontSize="18" x:Name="txbPhone"  PreviewTextInput="TextBlock_PreviewTextInput"/>
 
             <TextBlock Text="Роль" HorizontalAlignment="Center" FontSize="18"/>
-            <ComboBox Margin="3" FontSize="18" ItemsSource="{Binding RoleList}"
-                      SelectedItem="{Binding Id_role}"
+            <ComboBox Margin="3" FontSize="18" x:Name="cmbRole" ItemsSource="{Binding RoleList}"
+                      SelectedItem="{Binding SelectedRole}"
                       DisplayMemberPath="NameRole">
 
             </ComboBox>
         </StackPanel>
-        <Button Grid.Row="2" Content="Потвердить добавление пользователя" Margin="0,13" Height="Auto" Command="{Binding AddNewUser}"
+        <Button Grid.Row="2" Content="Потвердить добавление пользователя" Margin="0,13" Height="Auto" Click="Button_Click"
                 CommandParameter="{Binding ElementName=CreateUserWnd}"/>
         <TextBlock Grid.Row="0" Text="Добавление нового пользователя" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" />
     </Grid>

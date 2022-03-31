@@ -24,6 +24,7 @@ namespace Kursach.Pages
     /// </summary>
     public partial class TestForm : Page
     {
+        #region not watch please
         public static int CountQuestions = 0;
         public static int currentPos = 0;
         public static int posforinte = 1;
@@ -40,6 +41,7 @@ namespace Kursach.Pages
             TestModel = SelectedTest;
             cvm = new TestFormVM(SelectedTest);
             this.DataContext = cvm;
+            scorepercent = 0;
 
         }
 
@@ -214,6 +216,8 @@ namespace Kursach.Pages
             {
 
                 MessageBox.Show("Результат сохранен! " + scorepercent + "%");
+                score = 0;
+
                 ObjClas.Frame.FrameOBJ.GoBack();
 
 
@@ -225,19 +229,26 @@ namespace Kursach.Pages
                 if (await resultservice.UpdateResult(TestModel.Name, TestModel.CategoryId, Login, scorepercent, TestModel.TestId, imageMedal))
                 {
                     MessageBox.Show("Результат обновлен! " + scorepercent + "%");
+                    score = 0;
+
                     ObjClas.Frame.FrameOBJ.GoBack();
 
                 }
                 else
                 {
                     MessageBox.Show("Процент правильных ответов не изменился, результат остался прежним");
+                    score = 0;
+
                     ObjClas.Frame.FrameOBJ.GoBack();
                 }
 
             }
             TestModel = null;
             TestFormVM.questions = null;
-
+            currentPos = 0;
+            posforinte = 1;
+            score = 0;
+            scorepercent = 0;
 
         }
 
@@ -312,6 +323,7 @@ namespace Kursach.Pages
                 ThirdAnswer.Background = Brushes.White;
                 FourAnswer.BorderBrush = Brushes.DarkBlue;
                 FourAnswer.Background = Brushes.White;
+                
             }
             else if (CountQuestions - 2 == currentPos)
             {
@@ -381,14 +393,21 @@ namespace Kursach.Pages
                 NextButton.Background = Brushes.Gray;
                 OverButton.Background = Brushes.Gray;
                 OverButton.Visibility = Visibility.Visible;
+                
             }
         }
 
         private void SaveButtons_Click(object sender, RoutedEventArgs e)
         {
-            ObjClas.Frame.FrameOBJ.GoBack();
             TestFormVM.questions = null;
+            currentPos = 0;
+            posforinte = 1;
+            scorepercent = 0;
+            ObjClas.Frame.FrameOBJ.GoBack();
+            
+            
 
         }
     }
+    #endregion
 }

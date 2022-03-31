@@ -37,6 +37,7 @@ namespace Kursach.ViewModel
             UserInterfaceViewModelcs vmuser = new UserInterfaceViewModelcs();
             QestionsBuTest = new ObservableCollection<Questions>();
             SelectedTest = SelectedTesta;
+            questions = null;
             GetQuestionsBuTest(SelectedTesta.TestId);
             GetQuestInfo(SelectedTesta.TestId);
             

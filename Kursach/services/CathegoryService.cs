@@ -11,12 +11,12 @@ namespace Kursach.services
 {
     public class СathegoryServices
     {
-        FirebaseClient client;
-        public СathegoryServices()
-        {
-            client = new FirebaseClient("https://victorinaproject-default-rtdb.firebaseio.com/");
+            FirebaseClient client;
+            public СathegoryServices()
+            {
+                client = new FirebaseClient("https://victorinaproject-default-rtdb.firebaseio.com/");
 
-        }
+            }
         public async Task<List<Category>> GetCathegoryAsync()
         {
             var categories = (await client.Child("Cathegories").OnceAsync<Category>())

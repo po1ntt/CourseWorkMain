@@ -58,15 +58,26 @@ namespace Kursach.Pages
         private async void Authorication_Click(object sender, RoutedEventArgs e)
         {
             var UserServices = new UserService();
+
             bool exists = await UserServices.LoginUser(txbLogin.Text, txbPassword.Password);
             if (exists == false)
             {
+                
                 MessageBox.Show("Данные не верны");
             }
             else
             {
-                
-                ObjClas.Frame.FrameOBJ.Navigate(new UserInterface());
+                var users = (await UserServices.SelectUsers()).Where(p => p.Login == txbLogin.Text).FirstOrDefault();
+               
+                if(users.RoleId == 1)
+                {
+                    ObjClas.Frame.FrameOBJ.Navigate(new UserInterface());
+
+                }
+                else
+                {
+                    ObjClas.Frame.FrameOBJ.Navigate(new AdminInterface());
+                }
             }
             
         }

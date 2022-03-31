@@ -7,6 +7,7 @@ using System.Windows;
 using Kursach.ViewModel;
 using Kursach.Model;
 using System.Text.RegularExpressions;
+using Kursach.services;
 
 namespace Kursach.Pages
 {
@@ -15,6 +16,7 @@ namespace Kursach.Pages
     /// </summary>
     public partial class CreateNewUser : Window
     {
+       
         public CreateNewUser()
         {
             InitializeComponent();
@@ -24,6 +26,20 @@ namespace Kursach.Pages
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            UserService userService = new UserService();
+            bool result = await userService.RegisterUser(txbLogin.Text, txbPassword.Text, txbEmail.Text, txbData.Text, txbName.Text, txbSurName.Text, Convert.ToInt32(txbPhone.Text));
+            if (result)
+            {
+                MessageBox.Show("Новый пользователь добавлен");
+            }
+            else
+            {
+                MessageBox.Show("Ошибка");
+            }
         }
     }
 }
