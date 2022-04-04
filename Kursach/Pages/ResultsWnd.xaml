@@ -1,0 +1,85 @@
+﻿<Window x:Class="Kursach.Pages.ResultsWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kursach.Pages"
+        mc:Ignorable="d"
+        Title="Окно результатов" Height="450" Width="400"
+        xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:vm="clr-namespace:Kursach.ViewModel"
+        ResizeMode="NoResize"
+        >
+    <Window.DataContext>
+        <vm:ResultsPageVm />
+    </Window.DataContext>
+    <Grid>
+        <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" x:Name="txbUserSelected" Height="35" Text="{Binding SelectedUser.Login}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" />
+                <StackPanel Grid.Row="1">
+                    <StackPanel Margin="10" >
+                        <ComboBox Height="40" 
+                                 materialdesign:HintAssist.Hint="Выберите тему"
+                                 HorizontalContentAlignment="Center"
+                                  HorizontalAlignment="Center"
+                                  FontSize="20" 
+                                SelectedItem="{Binding SelectedTemaForAdmin}"
+                                 ItemsSource="{Binding TemaList}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding NameTema}" Foreground="Black" />
+
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                        <ComboBox  Height="40" materialdesign:HintAssist.Hint="Выберите категорию"
+                       HorizontalContentAlignment="Center"
+                       FontSize="20"
+                       HorizontalAlignment="Center"
+                       SelectedItem="{Binding SelectedCathegoryForAdmin}"
+                       ItemsSource="{Binding Cathegories}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding CathegoryName }" Foreground="Black" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <Grid Grid.Row="2" Background="LightBlue" >
+                        <ListView   HorizontalAlignment="Center" ItemsSource="{Binding CathegoriesItems}"  >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Margin="10" BorderBrush="GreenYellow" BorderThickness="3" Width="300" CornerRadius="10" Background="GreenYellow">
+
+                                        <StackPanel Orientation="Horizontal"    >
+                                            <Image Source="{Binding MedalImage}" Height="32" Width="32" HorizontalAlignment="Left"   />
+                                            <TextBlock Text="{Binding NameTestDone}" HorizontalAlignment="Left" Margin="5,0,90,0" FontSize="20"  VerticalAlignment="Top" Foreground="Black"/>
+                                            <TextBlock Text="{Binding Scoreprecennt}"  FontSize="20"  VerticalAlignment="Top"   Foreground="DarkBlue" />
+                                            <TextBlock Text="%"  FontSize="20"   Foreground="DarkBlue" />
+
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                   
+                </StackPanel>
+            </Grid>
+            
+            
+        </StackPanel>
+    </Grid>
+</Window>

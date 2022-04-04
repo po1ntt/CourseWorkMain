@@ -65,7 +65,8 @@
                                     <ContextMenu>
                                         <MenuItem Header="Добавить нового пользователя" Command="{Binding OpenWndCreateUser}" />
                                         <MenuItem Header="Редактировать" Command="{Binding UpdateUserOpen}" />
-                                        <MenuItem Header="Удалить" Command="{Binding DeleteUser}"/>
+                                        <MenuItem Header="Удалить" Command="{Binding DeleteUser}" />
+                                        <MenuItem Header="Просмотр результатов" Command="{Binding OpenWndResults}"   />
                                     </ContextMenu>
                                 </DataGrid.ContextMenu>
                                 <DataGrid.Columns>

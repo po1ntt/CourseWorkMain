@@ -46,12 +46,15 @@ namespace Kursach.ViewModel
                 });
             }
         }
+       
+
         public RelayCommand Reg_Click { get; private set; }
         public void OpenRegistrationWindow()
         {
             RegistrationWindows neweditwindow = new RegistrationWindows();
             OpenCenterPosAndOpen(neweditwindow);
         }
+        
         private void SetRedBlockControll(Window wnd, string blockname)
         {
             Control block = wnd.FindName(blockname) as Control;

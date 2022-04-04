@@ -13,6 +13,9 @@ namespace Kursach.ViewModel
 {
    public class ResultsPageVm : INotifyPropertyChanged
     {
+
+        public static Users SelectedUser { get; set; }
+
         private Category _SelectedCathegory;
 
         public Category SelectedCathegory
@@ -45,6 +48,39 @@ namespace Kursach.ViewModel
                 OnPropertyChanged();
             }
         }
+        private Category _SelectedCathegoryForAdmin;
+
+        public Category SelectedCathegoryForAdmin
+        {
+            get { return _SelectedCathegoryForAdmin; }
+            set
+            {
+                _SelectedCathegoryForAdmin = value;
+                string login = SelectedUser.Login;
+                if (_SelectedCathegoryForAdmin != null)
+                {
+                    GetItemsForCathegory(_SelectedCathegoryForAdmin.CathegoryId, login);
+
+                }
+                OnPropertyChanged();
+            }
+        }
+        private Tema _SelectedTemaForAdmin;
+
+        public Tema SelectedTemaForAdmin
+        {
+            get { return _SelectedTema; }
+            set
+            {
+                _SelectedTemaForAdmin = value;
+                if (_SelectedTemaForAdmin != null)
+                {
+                    GetCategories(_SelectedTemaForAdmin.TemaID);
+                }
+                OnPropertyChanged();
+            }
+        }
+
 
         private async void GetTemaList()
         {
@@ -59,11 +95,12 @@ namespace Kursach.ViewModel
 
         public ResultsPageVm()
         {
-
+            AdminViewModel adminViewModel = new AdminViewModel();
             ResultsService resultsService = new ResultsService();
             Cathegories = new ObservableCollection<Category>();
             CathegoriesItems = new ObservableCollection<Results>();
             TemaList = new ObservableCollection<Tema>();
+           
             GetTemaList();
         }
         public ObservableCollection<Category> Cathegories { get; set; }

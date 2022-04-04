@@ -42,6 +42,10 @@ namespace Kursach.ViewModel
         {
             get { return _SelectedUser; }
             set { _SelectedUser = value;
+               if(_SelectedUser != null)
+                {
+                    ResultsPageVm.SelectedUser = _SelectedUser;
+                }
                 OnPropertyChanged();
             }
         }
@@ -76,11 +80,28 @@ namespace Kursach.ViewModel
             UpdateAllDatagrid();
             GetRoleList();
         }
-      
+
         #region commands
 
-       
-     
+        private RelayCommand _openwndResults;
+
+        public RelayCommand OpenWndResults
+        {
+            get
+            {
+                return _openwndResults ?? new RelayCommand(obj =>
+                {
+                    SetNullValuesToProperties();
+                    OpenResulstWindod();
+                });
+            }
+        }
+        public void OpenResulstWindod()
+        {
+            ResultsWnd resultsWnd = new ResultsWnd();
+            OpenCenterPosAndOpen(resultsWnd);
+        }
+
         private RelayCommand updateuserOpen;
         public RelayCommand UpdateUserOpen
         {

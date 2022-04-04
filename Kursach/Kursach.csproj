@@ -285,6 +285,9 @@
     <Compile Include="Pages\ResultPage.xaml.cs">
       <DependentUpon>ResultPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ResultsWnd.xaml.cs">
+      <DependentUpon>ResultsWnd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TestForm.xaml.cs">
       <DependentUpon>TestForm.xaml</DependentUpon>
     </Compile>
@@ -352,6 +355,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ResultPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ResultsWnd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
