@@ -34,7 +34,7 @@ namespace Kursach.services
             }
             return UserBylogin;
         }
-        public async Task<bool> RegisterUser(string login, string password, string email, string birthday, string name, string surname, int phone)
+        public async Task<bool> RegisterUser(string login, string password, string email, string birthday, string name, string surname, string phone)
             {
                 if (await IsUserExists(login) == false)
                 {
@@ -99,7 +99,7 @@ namespace Kursach.services
                 return users;
 
             }
-        public async Task<bool> UpdateUser(string name, int role_id, string login, string birthday, string surname, int phone, string email,string password)
+        public async Task<bool> UpdateUser(string name, int role_id, string login, string birthday, string surname, string phone, string email,string password)
         {
             var toUpdateUser = (await client.Child("Users")
                 .OnceAsync<Users>())

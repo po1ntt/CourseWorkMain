@@ -18,7 +18,7 @@ namespace Kursach.Model
         public DateTime BirtDay { get; set; }
         public string SurName { get; set; }
         public string Name { get; set; }
-        public int Phone { get; set; }
+        public string Phone { get; set; }
         public int RoleId { get; set; }
         [NotMapped]
         public Role UserRole { get; set; }

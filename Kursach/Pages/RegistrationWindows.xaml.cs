@@ -42,7 +42,7 @@ namespace Kursach.Pages
             UserService userService = new UserService();
             if (txbLogin.Text != null && txbPassFirst.Text == psbPassSecond.Password && txbData.Text != null && txbPhone.Text != null && txbEmail.Text != null && txbSurname.Text != null  )
             {
-                bool result = await userService.RegisterUser(txbLogin.Text, txbPassFirst.Text, txbEmail.Text, txbData.Text, txbName.Text, txbSurname.Text, Convert.ToInt32(txbPhone.Text));
+                bool result = await userService.RegisterUser(txbLogin.Text, txbPassFirst.Text, txbEmail.Text, txbData.Text, txbName.Text, txbSurname.Text, txbPhone.Text);
                 if (result)
                 {
                     MessageBox.Show("Регистрация прошла успешка");

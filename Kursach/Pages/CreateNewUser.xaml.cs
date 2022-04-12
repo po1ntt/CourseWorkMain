@@ -31,7 +31,7 @@ namespace Kursach.Pages
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             UserService userService = new UserService();
-            bool result = await userService.RegisterUser(txbLogin.Text, txbPassword.Text, txbEmail.Text, txbData.Text, txbName.Text, txbSurName.Text, Convert.ToInt32(txbPhone.Text));
+            bool result = await userService.RegisterUser(txbLogin.Text, txbPassword.Text, txbEmail.Text, txbData.Text, txbName.Text, txbSurName.Text,txbPhone.Text);
             if (result)
             {
                 MessageBox.Show("Новый пользователь добавлен");

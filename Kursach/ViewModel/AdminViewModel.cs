@@ -157,10 +157,14 @@ namespace Kursach.ViewModel
             UserService userService = new UserService();
             // UserList = CommandsSqlClass.getallusers();
             UserList = await userService.SelectUsers();
-            AdminInterface.UserListst.ItemsSource = null;
-            AdminInterface.UserListst.Items.Clear();
-            AdminInterface.UserListst.ItemsSource = UserList;
-            AdminInterface.UserListst.Items.Refresh();
+            if(AdminInterface.UserListst != null)
+            {
+                AdminInterface.UserListst.ItemsSource = null;
+                AdminInterface.UserListst.Items.Clear();
+                AdminInterface.UserListst.ItemsSource = UserList;
+                AdminInterface.UserListst.Items.Refresh();
+            }
+            
         }
 
         public void OpenEditRolePosWindow(Users user)

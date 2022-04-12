@@ -122,7 +122,7 @@ namespace Kursach.Pages
         {
 
             UserService userService = new UserService();
-            bool result = await userService.UpdateUser(Name.Text, thisuser.RoleId, thisuser.Login, Birthday.Text, Surname.Text,Convert.ToInt32(Phone.Text), EMail.Text, thisuser.Password);
+            bool result = await userService.UpdateUser(Name.Text, thisuser.RoleId, thisuser.Login, Birthday.Text, Surname.Text,Phone.Text, EMail.Text, thisuser.Password);
             if (result)
             {
                 MessageBox.Show("Данные обновлены");

@@ -52,7 +52,7 @@ namespace Kursach.Pages
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             UserService userService = new UserService();
-            bool result = await userService.UpdateUser(txbName.Text, cvm.SelectedRole.id_role, user.Login, txbData.Text, txbSurName.Text, Convert.ToInt32(txbPhone.Text), txbEmail.Text, user.Password);
+            bool result = await userService.UpdateUser(txbName.Text, cvm.SelectedRole.id_role, user.Login, txbData.Text, txbSurName.Text, txbPhone.Text, txbEmail.Text, user.Password);
             if (result)
             {
                 MessageBox.Show("Данные обновлены");
