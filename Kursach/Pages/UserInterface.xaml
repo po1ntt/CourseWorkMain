@@ -51,7 +51,7 @@
                 <Border Height="auto" Background="White" CornerRadius="25" Margin="0 0 0 0">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="271*"/>
+                            <ColumnDefinition Width="450*"/>
                             <ColumnDefinition Width="429*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -65,8 +65,8 @@
                         <ListView Grid.Row="1" Grid.Column="0" SelectionMode="Single"  HorizontalAlignment="Center" Background="#FF591C40"  ItemsSource="{Binding TemaColl}" SelectedItem="{Binding SelectedTema}" >
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Margin="-15,10,0,0" Background="White" Width="250" Height="100" >
-                                        <TextBlock Text="{Binding NameTema}" Foreground="Black" FontSize="30" FontWeight="Bold"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <Border Margin="-6,10,0,0" Background="White" Height="100" CornerRadius="10" >
+                                        <TextBlock Text="{Binding NameTema}" Margin="10" Foreground="Black" FontSize="30" FontWeight="Bold"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
